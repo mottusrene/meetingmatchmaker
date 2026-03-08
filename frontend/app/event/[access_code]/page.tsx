@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -129,8 +129,8 @@ export default function EventAccess() {
               {event.start_date && event.end_date && (
                 <span className="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> {
                   (() => {
-                    const s = new Date(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
-                    const e = new Date(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                    const s = parseDate(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                    const e = parseDate(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
                     return s === e ? s : `${s} - ${e}`;
                   })()
                 }</span>
@@ -210,9 +210,9 @@ export default function EventAccess() {
                   <label className="block text-sm font-bold text-gray-800 mb-3">{t('eventJoin.timeslotsLabel')}</label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 max-h-64 overflow-y-auto pr-2">
                     {timeslots.map((slot) => {
-                      const dateObj = new Date(slot.start_time);
+                      const dateObj = parseDate(slot.start_time);
                       const dateStr = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
-                      const timeStr = `${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${new Date(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                      const timeStr = `${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${parseDate(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
                       const isSelected = availableTimeslots.includes(slot.id);
                       return (
                         <label 

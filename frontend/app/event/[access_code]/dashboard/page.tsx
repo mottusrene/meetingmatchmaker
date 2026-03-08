@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -75,7 +75,7 @@ export default function AttendeeDashboard() {
           
           const unreadMsgs = msgs.filter((msg: any) => 
             msg.sender_id !== parseInt(userId) && 
-            new Date(msg.timestamp).getTime() > lastSeenAt
+            parseDate(msg.timestamp).getTime() > lastSeenAt
           );
           newCounts[m.id] = unreadMsgs.length;
         }
@@ -359,8 +359,8 @@ export default function AttendeeDashboard() {
                   {event.start_date && event.end_date && (
                     <span className="flex items-center"><Calendar size={14} className="mr-1" /> {
                       (() => {
-                        const s = new Date(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
-                        const e = new Date(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                        const s = parseDate(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                        const e = parseDate(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
                         return s === e ? s : `${s} - ${e}`;
                       })()
                     }</span>
@@ -376,8 +376,8 @@ export default function AttendeeDashboard() {
                       {t('attendeeDashboard.header.editProfileBtn')}
                   </button>
                   <button
-                    onClick={() => {
-                      navigator.clipboard.writeText(`${window.location.origin}/event/${accessCode}?token=${me.session_token}`);
+                    onClick={async () => {
+                      try { await copyToClipboard(`${window.location.origin}/event/${accessCode}?token=${me.session_token}`); } catch {}
                       setCopiedMagicLink(true);
                       setTimeout(() => setCopiedMagicLink(false), 2000);
                     }}
@@ -437,7 +437,7 @@ export default function AttendeeDashboard() {
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
                       <div className="flex items-center"><MapPin size={14} className="mr-2" /> {m.location.name}</div>
                       <div className="flex items-center"><Clock size={14} className="mr-2" /> 
-                        {new Date(m.timeslot.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {new Date(m.timeslot.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        {parseDate(m.timeslot.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {parseDate(m.timeslot.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                       </div>
                     </div>
 
@@ -662,9 +662,9 @@ export default function AttendeeDashboard() {
                   <label className="block text-sm font-bold text-gray-800 mb-2">{t('attendeeDashboard.editModal.availabilityLabel')}</label>
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 max-h-60 overflow-y-auto pr-2 border rounded-lg p-3 bg-gray-50">
                     {timeslots.map((slot) => {
-                      const dateObj = new Date(slot.start_time);
+                      const dateObj = parseDate(slot.start_time);
                       const dateStr = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric', year: 'numeric' });
-                      const timeStr = `${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${new Date(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                      const timeStr = `${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} - ${parseDate(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
                       const isSelected = editAvailableTimeslots.includes(slot.id);
                       return (
                         <label 
@@ -770,7 +770,7 @@ export default function AttendeeDashboard() {
                                 {msg.content}
                             </div>
                             <span className="text-[10px] text-gray-400 mt-1 px-1">
-                                {new Date(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                                {parseDate(msg.timestamp).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                             </span>
                         </div>
                     );
