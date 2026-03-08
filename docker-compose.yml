@@ -19,10 +19,13 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        # /api-proxy is a relative path — the browser calls the same host:port as the
+        # frontend, and Next.js rewrites those requests to http://backend:8000 internally.
+        # This means the app works on any server without knowing its IP at build time.
+        - NEXT_PUBLIC_API_URL=/api-proxy
     ports:
       - "3000:3000"
-    environment:
-      - NEXT_PUBLIC_API_URL=http://localhost:8000 # Default to localhost for local browser access
     depends_on:
       - backend
     restart: always

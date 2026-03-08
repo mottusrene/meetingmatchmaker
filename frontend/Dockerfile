@@ -9,8 +9,12 @@ RUN npm ci
 # Copy the rest of the application
 COPY . .
 
-# Build the application
-# We need NEXT_PUBLIC_API_URL during the build if any static generation depends on it, but typical client-side fetches use it at runtime. It's safe to supply it or let Next.js inline it.
+# NEXT_PUBLIC_* variables are inlined at build time, not runtime.
+# We use /api-proxy so the browser always calls the same origin — Next.js
+# then proxies those requests to the backend container via the rewrite rule.
+ARG NEXT_PUBLIC_API_URL=/api-proxy
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
 RUN npm run build
 
 # Production image
