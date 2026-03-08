@@ -60,7 +60,7 @@ async def cleanup_expired_events():
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origin_regex=r"https?://.*",  # Allow any HTTP/HTTPS origin
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

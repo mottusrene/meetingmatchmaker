@@ -1,5 +1,7 @@
 "use client";
 
+import { getApiUrl } from '@/lib/api';
+
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
@@ -63,7 +65,7 @@ export default function AttendeeDashboard() {
     const pollUnread = async () => {
       const newCounts = { ...unreadCounts };
       await Promise.all(acceptedMeetings.map(async m => {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/meetings/${m.id}/messages`, {
+        const res = await fetch(`${getApiUrl()}/meetings/${m.id}/messages`, {
           headers: { "Authorization": token }
         });
         if (res.ok) {
@@ -93,7 +95,7 @@ export default function AttendeeDashboard() {
       return;
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/me`, {
+    fetch(`${getApiUrl()}/users/me`, {
       headers: { "Authorization": token }
     })
     .then(r => {
@@ -109,11 +111,11 @@ export default function AttendeeDashboard() {
       setMe(userData);
       
       Promise.all([
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}`).then(r => r.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/`).then(r => r.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/locations/`).then(r => r.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/timeslots/`).then(r => r.json()),
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${userData.id}/meetings/`).then(r => r.json())
+        fetch(`${getApiUrl()}/events/${accessCode}`).then(r => r.json()),
+        fetch(`${getApiUrl()}/users/`).then(r => r.json()),
+        fetch(`${getApiUrl()}/events/${accessCode}/locations/`).then(r => r.json()),
+        fetch(`${getApiUrl()}/events/${accessCode}/timeslots/`).then(r => r.json()),
+        fetch(`${getApiUrl()}/users/${userData.id}/meetings/`).then(r => r.json())
       ]).then(([evtData, usersData, locsData, slotsData, mtgsData]) => {
         setEvent(evtData);
         setUsers(usersData.filter((u: any) => u.id !== userData.id && !u.is_host && !u.is_suspended));
@@ -132,7 +134,7 @@ export default function AttendeeDashboard() {
     }
     
     setRequestStatus(t('attendeeDashboard.requestModal.sendingBtn'));
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/meetings/?requester_id=${userId}`, {
+    const res = await fetch(`${getApiUrl()}/events/${accessCode}/meetings/?requester_id=${userId}`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
@@ -148,7 +150,7 @@ export default function AttendeeDashboard() {
         setSelectedUser(null);
         setRequestStatus("");
         // Refresh meetings
-        fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${userId}/meetings/`)
+        fetch(`${getApiUrl()}/users/${userId}/meetings/`)
           .then(r => r.json())
           .then(setMeetings);
       }, 1500);
@@ -160,12 +162,12 @@ export default function AttendeeDashboard() {
 
   const updateMeeting = async (meetingId: number, status: string) => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/meetings/${meetingId}/status?status=${status}`, {
+    const res = await fetch(`${getApiUrl()}/meetings/${meetingId}/status?status=${status}`, {
       method: "PUT",
       headers: { "Authorization": token || "" }
     });
     if (res.ok) {
-      fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${userId}/meetings/`)
+      fetch(`${getApiUrl()}/users/${userId}/meetings/`)
           .then(r => r.json())
           .then(setMeetings);
     } else {
@@ -187,7 +189,7 @@ export default function AttendeeDashboard() {
     if (!token) return;
 
     try {
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${userId}`, {
+        const res = await fetch(`${getApiUrl()}/users/${userId}`, {
             method: "PUT",
             headers: { 
                 "Content-Type": "application/json",
@@ -232,7 +234,7 @@ export default function AttendeeDashboard() {
   const handleDeleteProfile = async () => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     if (!token) return;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${userId}`, {
+    const res = await fetch(`${getApiUrl()}/users/${userId}`, {
       method: "DELETE",
       headers: { "Authorization": token }
     });
@@ -248,7 +250,7 @@ export default function AttendeeDashboard() {
   const fetchChatMessages = async (meetingId: number) => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     if (!token) return;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/meetings/${meetingId}/messages`, {
+    const res = await fetch(`${getApiUrl()}/meetings/${meetingId}/messages`, {
         headers: { "Authorization": token }
     });
     if (res.ok) {
@@ -286,7 +288,7 @@ export default function AttendeeDashboard() {
       if (!newChatMessage.trim() || !activeChatMeeting) return;
       
       const token = localStorage.getItem(`session_token_${accessCode}`);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/meetings/${activeChatMeeting.id}/messages`, {
+      const res = await fetch(`${getApiUrl()}/meetings/${activeChatMeeting.id}/messages`, {
           method: "POST",
           headers: { 
               "Content-Type": "application/json",
@@ -303,7 +305,7 @@ export default function AttendeeDashboard() {
   const reportUser = async (targetUserId: number) => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     if (!token) return;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/${targetUserId}/report`, {
+    const res = await fetch(`${getApiUrl()}/users/${targetUserId}/report`, {
       method: "POST",
       headers: { "Authorization": token }
     });
@@ -462,7 +464,7 @@ export default function AttendeeDashboard() {
                             </span>
                           )}
                         </button>
-                        <a href={`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/meetings/${m.id}/calendar`} download className="text-sm text-blue-600 hover:text-blue-800 font-medium py-1 px-3 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
+                        <a href={`${getApiUrl()}/meetings/${m.id}/calendar`} download className="text-sm text-blue-600 hover:text-blue-800 font-medium py-1 px-3 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
                           <Calendar size={14} className="mr-1" /> {t('attendeeDashboard.myMeetings.addCalendarBtn')}
                         </a>
                         <button onClick={() => updateMeeting(m.id, 'cancelled')} className="text-sm text-red-600 hover:text-red-800 font-medium py-1 px-3 border border-red-200 rounded-lg hover:bg-red-50 transition-colors flex items-center">
