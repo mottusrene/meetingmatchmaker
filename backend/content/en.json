@@ -1,0 +1,46 @@
+{
+  "emails": {
+    "hostWelcome": {
+      "subject": "Your Admin Link for {event_title}",
+      "body": "Hello Host! Keep this link safe. You can manage and delete your event '{event_title}' using this admin portal:\n👉 {admin_link}"
+    },
+    "attendeeMagicLink": {
+      "subject": "Your Secure Access Link for {event_title}",
+      "body": "Hi {name}, welcome to the matchmaking portal for {event_title}! You can securely log back in to your dashboard anytime using this link:\n👉 {magic_link}"
+    },
+    "removedUser": {
+      "subject": "Access Revoked for {event_title}",
+      "body": "Hi {name},\n\nYour access to '{event_title}' has been revoked by the event host."
+    },
+    "suspendedUser": {
+      "subject": "Your Access to {event_title} Has Been Suspended",
+      "body": "Hi {name},\n\nYour access to '{event_title}' has been temporarily suspended by the event host. You will not be able to view or interact with other attendees, and any pending or accepted meetings have been cancelled.\n\nIf you believe this is a mistake, please contact the event organiser."
+    },
+    "reinstatedUser": {
+      "subject": "Your Access to {event_title} Has Been Reinstated",
+      "body": "Hi {name},\n\nYour suspension from '{event_title}' has been lifted by the event host. You can now log back in and interact with other attendees as normal."
+    },
+    "meeting": {
+      "request": {
+        "subject": "New Meeting Request from {requester_name}",
+        "body": "Hi {receiver_name},\n\n{requester_name} has requested a meeting with you for the event '{event_title}'. Please log in to accept or decline."
+      },
+      "accepted": {
+        "subject": "Meeting Accepted by {receiver_name}",
+        "body": "Hi {requester_name},\n\nYour meeting request for the event '{event_title}' was accepted by {receiver_name}."
+      },
+      "declined": {
+        "subject": "Meeting Declined by {receiver_name}",
+        "body": "Hi {requester_name},\n\nYour meeting request for the event '{event_title}' was declined by {receiver_name}."
+      },
+      "cancelled": {
+        "subject": "Meeting Cancelled",
+        "body": "Hi {name},\n\nA scheduled meeting for the event '{event_title}' was cancelled."
+      },
+      "message": {
+        "subject": "New Message from {sender_name}",
+        "body": "Hi {receiver_name},\n\nYou have a new message from {sender_name} regarding your upcoming meeting at '{event_title}':\n\n\"{content}\"\n\nPlease log in to the dashboard to reply."
+      }
+    }
+  }
+}
