@@ -1,5 +1,7 @@
 "use client";
 
+import { getApiUrl } from '@/lib/api';
+
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
@@ -40,7 +42,7 @@ export default function EventAccess() {
       router.push(`/event/${accessCode}/dashboard`);
     }
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}`)
+    fetch(`${getApiUrl()}/events/${accessCode}`)
       .then(res => {
         if (!res.ok) throw new Error("Event not found");
         return res.json();
@@ -48,7 +50,7 @@ export default function EventAccess() {
       .then(data => setEvent(data))
       .catch(err => setError(err.message));
 
-    fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/timeslots/`)
+    fetch(`${getApiUrl()}/events/${accessCode}/timeslots/`)
       .then(res => {
         if (res.ok) return res.json();
         return [];
@@ -62,7 +64,7 @@ export default function EventAccess() {
     setError("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/users/`, {
+      const res = await fetch(`${getApiUrl()}/events/${accessCode}/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 

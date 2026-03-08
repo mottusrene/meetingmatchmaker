@@ -9,7 +9,6 @@ services:
       - "8000:8000"
     volumes:
       - matchmaking_db:/app/data
-    # Bind mount or modify database.py to save db to /app/data so it persists!
     environment:
       - PYTHONUNBUFFERED=1
       - DATABASE_URL=sqlite:///./data/matchmaking.db
@@ -19,12 +18,6 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-      args:
-        - NEXT_PUBLIC_API_URL=/api-proxy
-    environment:
-      # Server-side only — tells Next.js where to forward /api-proxy/* requests.
-      # Uses Docker's internal service name, so the browser never needs to know the backend's address.
-      - BACKEND_URL=http://backend:8000
     ports:
       - "3000:3000"
     depends_on:

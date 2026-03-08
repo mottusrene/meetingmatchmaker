@@ -1,5 +1,7 @@
 "use client";
 
+import { getApiUrl } from '@/lib/api';
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
@@ -26,7 +28,7 @@ export default function CreateEvent() {
     setError("");
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/`, {
+      const res = await fetch(`${getApiUrl()}/events/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ 
