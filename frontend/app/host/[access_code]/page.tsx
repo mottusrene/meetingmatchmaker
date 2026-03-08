@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
@@ -77,11 +77,11 @@ export default function HostDashboard() {
         setEditLogoUrl(data.logo_url || "");
         // Format date correctly for the input type="date" (YYYY-MM-DD)
         if (data.start_date) {
-            const dateObj = new Date(data.start_date);
+            const dateObj = parseDate(data.start_date);
             setEditStartDate(new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000).toISOString().slice(0, 10));
         }
         if (data.end_date) {
-            const dateObj = new Date(data.end_date);
+            const dateObj = parseDate(data.end_date);
             setEditEndDate(new Date(dateObj.getTime() - dateObj.getTimezoneOffset() * 60000).toISOString().slice(0, 10));
         }
       }
@@ -148,9 +148,9 @@ export default function HostDashboard() {
     }
 
     if (event.start_date && event.end_date) {
-        const eventStart = new Date(event.start_date);
+        const eventStart = parseDate(event.start_date);
         eventStart.setHours(0, 0, 0, 0);
-        const eventEnd = new Date(event.end_date);
+        const eventEnd = parseDate(event.end_date);
         eventEnd.setHours(23, 59, 59, 999);
 
         if (start < eventStart || end > eventEnd) {
@@ -187,16 +187,16 @@ export default function HostDashboard() {
     fetchTimeslots();
   };
 
-  const copyLink = () => {
+  const copyLink = async () => {
     const url = `${window.location.origin}/event/${accessCode}`;
-    navigator.clipboard.writeText(url);
+    try { await copyToClipboard(url); } catch {}
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const copyAdminLink = () => {
+  const copyAdminLink = async () => {
     const url = window.location.href;
-    navigator.clipboard.writeText(url);
+    try { await copyToClipboard(url); } catch {}
     setCopiedAdmin(true);
     setTimeout(() => setCopiedAdmin(false), 2000);
   };
@@ -293,8 +293,8 @@ export default function HostDashboard() {
                 {event.start_date && event.end_date && (
                   <span className="flex items-center"><Clock size={14} className="mr-1" /> {
                     (() => {
-                      const s = new Date(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
-                      const e = new Date(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                      const s = parseDate(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                      const e = parseDate(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
                       return s === e ? s : `${s} to ${e}`;
                     })()
                   }</span>
@@ -485,9 +485,9 @@ export default function HostDashboard() {
                   <div key={slot.id} className="flex justify-between items-center p-4 bg-gray-50 border border-gray-100 rounded-lg border-l-4 border-l-purple-400">
                     <div className="flex flex-col">
                       <span className="text-sm text-gray-500">{t('hostDashboard.timeslots.starts')}</span>
-                      <span className="font-medium text-gray-900">{new Date(slot.start_time).toLocaleString()}</span>
+                      <span className="font-medium text-gray-900">{parseDate(slot.start_time).toLocaleString()}</span>
                       <span className="text-sm text-gray-500 mt-2">{t('hostDashboard.timeslots.ends')}</span>
-                      <span className="font-medium text-gray-900">{new Date(slot.end_time).toLocaleString()}</span>
+                      <span className="font-medium text-gray-900">{parseDate(slot.end_time).toLocaleString()}</span>
                     </div>
                     <div className="flex items-center gap-4">
                       <span className="text-xs font-bold text-gray-500 bg-gray-200 px-2 py-1 rounded-full whitespace-nowrap hidden sm:inline-block">
@@ -602,8 +602,8 @@ export default function HostDashboard() {
               <p className="text-sm text-indigo-600 font-medium mt-1 mb-6">
                 {
                   (() => {
-                    const s = new Date(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
-                    const e = new Date(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                    const s = parseDate(event.start_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
+                    const e = parseDate(event.end_date).toLocaleDateString([], { year: 'numeric', month: 'short', day: 'numeric', timeZone: 'UTC' });
                     return s === e ? s : `${s} – ${e}`;
                   })()
                 }
