@@ -13,20 +13,23 @@ FROM_EMAIL = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
 def _send(to: str, subject: str, body: str):
     """Send an email via Resend, or fall back to console if no API key is set."""
     if RESEND_API_KEY:
-        resend.api_key = RESEND_API_KEY
-        resend.Emails.send({
-            "from": FROM_EMAIL,
-            "to": to,
-            "subject": subject,
-            "text": body,
-        })
-    else:
-        print("\n" + "="*50)
-        print(f"📧 EMAIL (no RESEND_API_KEY set — console only)")
-        print(f"To: {to}")
-        print(f"Subject: {subject}")
-        print(f"Body:\n{body}")
-        print("="*50 + "\n")
+        try:
+            resend.api_key = RESEND_API_KEY
+            resend.Emails.send({
+                "from": FROM_EMAIL,
+                "to": to,
+                "subject": subject,
+                "text": body,
+            })
+            return
+        except Exception as e:
+            print(f"⚠️  Resend failed ({e}), falling back to console.")
+    print("\n" + "="*50)
+    print(f"📧 EMAIL (console fallback)")
+    print(f"To: {to}")
+    print(f"Subject: {subject}")
+    print(f"Body:\n{body}")
+    print("="*50 + "\n")
 
 def send_host_welcome_email(host_email: str, event_title: str, admin_link: str):
     template = text_dict["hostWelcome"]
