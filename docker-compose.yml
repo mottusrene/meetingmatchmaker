@@ -12,6 +12,8 @@ services:
     environment:
       - PYTHONUNBUFFERED=1
       - DATABASE_URL=sqlite:///./data/matchmaking.db
+      - RESEND_API_KEY=your_resend_api_key_here
+      - FROM_EMAIL=you@yourdomain.com
     restart: always
 
   frontend:
