@@ -1,0 +1,255 @@
+{
+  "global": {
+    "loading": "Loading..."
+  },
+  "landing": {
+    "heroTitle": "Connect at your next",
+    "heroHighlight": "Event",
+    "heroSubtitle": "The simplest way for event attendees to discover each other, manage their time, and request 1-on-1 meetings.",
+    "createEventBtn": "Create Event",
+    "eventCodePlaceholder": "Event Code",
+    "joinBtn": "Join",
+    "features": {
+      "secure": {
+        "title": "Seamless & Secure",
+        "desc": "No passwords required. Magic links ensure rapid onboarding, and all event data is strictly auto-deleted 24 hours after conclusion for your privacy."
+      },
+      "time": {
+        "title": "Time & Space Control",
+        "desc": "Define specific schedules and locations to ensure attendees only match when and where it physically makes sense, preventing all double-booking."
+      },
+      "network": {
+        "title": "Frictionless Networking",
+        "desc": "Attendees browse profiles and send direct 1-on-1 meeting requests with just a few clicks from any device."
+      }
+    },
+    "footer": {
+      "copyright": "© 2026 MatchMaker App MVP. All rights reserved.",
+      "privacy": "Privacy Policy",
+      "hostGuidelines": "Host Guidelines"
+    }
+  },
+  "createEvent": {
+    "backToHome": "Back to Home",
+    "formTitle": "Create New Event",
+    "formSubtitle": "Set up your matchmaking event in seconds.",
+    "eventTitleLabel": "Event Title",
+    "eventTitlePlaceholder": "e.g., Annual Tech Summit 2024",
+    "descriptionLabel": "Description (Optional)",
+    "descriptionPlaceholder": "A brief description of your event...",
+    "locationLabel": "Location (Optional)",
+    "locationPlaceholder": "e.g., Grand Hyatt, NYC / Online via Zoom",
+    "passcodeLabel": "Host Passcode",
+    "passcodeDesc": "You will need this to access the host dashboard.",
+    "passcodePlaceholder": "Create a secure passcode",
+    "hostEmailLabel": "Host Email (Optional)",
+    "hostEmailDesc": "Provide an email to receive your secret admin link to manage this event later.",
+    "hostEmailPlaceholder": "host@example.com",
+    "startDateLabel": "Event Start Date",
+    "endDateLabel": "Event End Date",
+    "consentCheckbox": "I agree to the ",
+    "privacyPolicy": "Privacy Policy",
+    "consentSuffix": " and consent to the collection of my provided information to facilitate this event. I understand all data will be automatically deleted 24 hours after the event concludes.",
+    "retentionNote": "Note: Event data will be auto-deleted 24 hours after the End Date.",
+    "submitButton": "Create Event",
+    "submittingButton": "Creating...",
+    "errorSuffix": "Failed to create event. Please try again."
+  },
+  "hostDashboard": {
+    "title": "Host Dashboard",
+    "exitDashboardBtn": "Exit Dashboard",
+    "editEventBtn": "Edit Event",
+    "quickActions": {
+      "attendeeTitle": "For Attendees",
+      "copyAttendeeLink": "Copy Attendee Link",
+      "previewAttendee": "Preview as Attendee",
+      "attendeeDesc": "Share the attendee link so people can register and join your event.",
+      "hostTitle": "For You (Host)",
+      "copyAdminLink": "Copy My Admin Link",
+      "adminDesc": "Keep this link safe. Bookmark it to return to this dashboard and manage your event.",
+      "copied": "Link copied!",
+      "adminCopied": "Admin link copied!"
+    },
+    "meetingAreas": {
+      "title": "Meeting Areas",
+      "inputPlaceholder": "Meeting Area (e.g., Main Hall)",
+      "inputTooltip": "A room or confined area where one or more meetings can take place",
+      "tablesPlaceholder": "No. of Tables",
+      "tablesTooltip": "Number of concurrent meetings allowed",
+      "addButton": "Add Area",
+      "empty": "No locations added yet.",
+      "tablesLabel": "Tables:",
+      "removeTitle": "Remove Area"
+    },
+    "timeslots": {
+      "title": "Available Time Slots",
+      "startLabel": "Start Time",
+      "endLabel": "End Time",
+      "endTooltip": "End Time (on same date as Start Time)",
+      "durationLabel": "Duration (min)",
+      "generateButton": "Generate",
+      "empty": "No time slots added yet.",
+      "starts": "Starts",
+      "ends": "Ends",
+      "totalTables": "Total Tables:",
+      "removeTitle": "Remove Slot"
+    },
+    "dangerZone": {
+      "title": "Danger Zone",
+      "deleteTitle": "Delete this Event",
+      "deleteDesc": "Once you delete an event, there is no going back. Please be certain. All locations, timeslots, attendees, and meetings will be permanently deleted.",
+      "deleteButton": "Delete Event"
+    },
+    "editModal": {
+      "title": "Edit Event Details",
+      "eventTitleLabel": "Event Title",
+      "descriptionLabel": "Description",
+      "locationLabel": "Location",
+      "logoUrlLabel": "Logo URL",
+      "startDateLabel": "Start Date",
+      "endDateLabel": "End Date",
+      "cancelBtn": "Cancel",
+      "saveBtn": "Save Changes",
+      "savingBtn": "Saving..."
+    },
+    "deleteModal": {
+      "title": "Delete Event?",
+      "confirmQuestion": "Are you sure you want to permanently delete",
+      "undoneWarning": "This action cannot be undone.",
+      "attendeesWarningPrefix": "⚠️ Warning: There are already",
+      "attendeesWarningSuffix": "attendees attached to this event. Deleting this event will also immediately cancel all their meetings and delete their profiles permanently.",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Yes, Delete It"
+    },
+    "attendees": {
+      "title": "Attendees",
+      "searchPlaceholder": "Search by name or email...",
+      "flagTooltip": "Reported by an attendee",
+      "suspendedBadge": "Suspended",
+      "flaggedBadge": "Reported",
+      "suspendBtn": "Suspend",
+      "unsuspendBtn": "Reinstate",
+      "suspendModal": {
+        "title": "Suspend Attendee",
+        "description": "Are you sure you want to suspend {{name}}? Their pending and accepted meetings will be cancelled, and they will receive an email notification. You can reinstate them at any time.",
+        "cancelBtn": "Cancel",
+        "confirmBtn": "Yes, Suspend",
+        "success": "Attendee suspended"
+      },
+      "unsuspendModal": {
+        "title": "Reinstate Attendee",
+        "description": "Reinstate {{name}}? They will be able to view and interact with other attendees again.",
+        "cancelBtn": "Cancel",
+        "confirmBtn": "Yes, Reinstate",
+        "success": "Attendee reinstated"
+      }
+    }
+  },
+  "eventJoin": {
+    "errorTitle": "Event Not Found",
+    "errorDesc": "The event code \"{{accessCode}}\" is invalid or has expired.",
+    "goHomeBtn": "Go Home",
+    "loading": "Loading event details...",
+    "backToHome": "Back to Home",
+    "formTitle": "Register for Event",
+    "emailLabel": "Email Address",
+    "emailPlaceholder": "you@company.com",
+    "nameLabel": "Full Name",
+    "namePlaceholder": "Jane Doe",
+    "companyLabel": "Company (Optional)",
+    "companyPlaceholder": "Acme Corp",
+    "profileLinkLabel": "Profile/Website Link (Optional)",
+    "profileLinkPlaceholder": "https://linkedin.com/in/...",
+    "bioLabel": "Short Bio",
+    "bioPlaceholder": "I'm interested in...",
+    "timeslotsLabel": "Which timeslots are you available to meet?",
+    "consentCheckbox": "I agree to the ",
+    "privacyPolicy": "Privacy Policy",
+    "consentSuffix": " and consent to my profile being visible to other attendees of this event. I understand all data is automatically deleted 24 hours after this event concludes.",
+    "processingBtn": "Processing...",
+    "submitBtn": "Register & Enter Dashboard",
+    "loginHint": "If you have already registered, check your email for your secure login link.",
+    "alreadyRegisteredError": "You are already registered for this event. Please check your email for your Magic Link to log in!",
+    "registrationFailedError": "Registration failed"
+  },
+  "attendeeDashboard": {
+    "loading": "Loading dashboard...",
+    "invalidToken": "Invalid token",
+    "suspended": {
+      "title": "Your account has been suspended",
+      "message": "The event host has temporarily suspended your access. You cannot view or interact with other attendees, and your meetings have been cancelled. If you believe this is a mistake, please contact the event organiser.",
+      "logoutBtn": "Log out"
+    },
+    "header": {
+      "welcomeUser": "Welcome, {{name}}",
+      "editProfileBtn": "Edit Profile",
+      "copiedLink": "Copied!",
+      "myLoginLink": "My login link",
+      "logoutBtn": "Logout"
+    },
+    "myMeetings": {
+      "title": "My Meetings",
+      "subtitle": "Manage your schedule",
+      "empty": "You have no meeting requests.",
+      "acceptBtn": "Accept",
+      "declineBtn": "Decline",
+      "waitingResponse": "Waiting for response",
+      "chatBtn": "Chat",
+      "addCalendarBtn": "Add to Calendar",
+      "cancelBtn": "Cancel"
+    },
+    "directory": {
+      "title": "Attendee Directory",
+      "searchPlaceholder": "Search by name...",
+      "empty": "No attendees found.",
+      "requestMeetingBtn": "Request Meeting",
+      "reportBtn": "Report User",
+      "reportedSuccess": "User reported"
+    },
+    "requestModal": {
+      "title": "Request Meeting",
+      "withPrefix": "with",
+      "selectLocation": "Select Location",
+      "chooseLocation": "-- Choose Location --",
+      "selectTime": "Select Time Slot",
+      "chooseTime": "-- Choose Time --",
+      "noOverlapError": "You two have no overlapping available timeslots.",
+      "cancelBtn": "Cancel",
+      "sendBtn": "Send Request",
+      "sendingBtn": "Sending...",
+      "sentBtn": "Sent!",
+      "errorMissing": "Error: Must select location and time."
+    },
+    "editModal": {
+      "title": "Edit Profile",
+      "nameLabel": "Full Name",
+      "companyLabel": "Company",
+      "bioLabel": "Short Bio",
+      "profileLinkLabel": "Profile Link",
+      "avatarLabel": "Upload Profile Picture (Optional)",
+      "availabilityLabel": "My Availability",
+      "cancelBtn": "Cancel",
+      "saveBtn": "Save Changes",
+      "savingBtn": "Saving...",
+      "removeProfileBtn": "Remove my profile from this event",
+      "removeConfirmWarning": "This will permanently remove your profile and all your meetings. Are you sure?",
+      "keepProfileBtn": "Keep my profile",
+      "confirmRemoveBtn": "Yes, remove me"
+    },
+    "chatModal": {
+      "titlePrefix": "Chat with",
+      "empty": "No messages yet. Say hi!",
+      "inputPlaceholder": "Type a message...",
+      "sendBtn": "Send"
+    }
+  },
+  "cookieBanner": {
+    "message": "We use HTML5 Local Storage solely to keep you securely logged into your event profile. We do not use third-party tracking, advertising, or non-essential cookies. By continuing to use this site, you consent to this functional storage.",
+    "strongPrefix": "Essential Cookies Only:",
+    "privacyLink": "Read our Privacy Policy.",
+    "acceptBtn": "Accept & Close"
+  },
+  "privacyPage": {
+    "backToHome": "← Back to Home"
+  }
+}

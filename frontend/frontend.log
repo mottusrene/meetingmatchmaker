@@ -1,0 +1,517 @@
+
+> frontend@0.1.0 dev
+> next dev
+
+  ▲ Next.js 14.2.3
+  - Local:        http://localhost:3000
+
+ ✓ Starting...
+
+   We detected TypeScript in your project and reconfigured your tsconfig.json file for you. Strict-mode is set to false by default.
+   The following mandatory changes were made to your tsconfig.json:
+
+   	- jsx was set to preserve (next.js implements its own optimized jsx transform)
+
+ ✓ Ready in 1587ms
+ ○ Compiling / ...
+ ⨯ app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ ⨯ app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ ⨯ app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ GET / 500 in 4865ms
+ ⨯ app/layout.tsx
+`next/font` error:
+Unknown font `Geist`
+ GET / 500 in 27ms
+ GET / 500 in 14ms
+ ✓ Compiled /favicon.ico in 690ms (758 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 404 in 224ms
+ GET / 200 in 61ms
+ ○ Compiling /host/create ...
+ ✓ Compiled /host/create in 2.2s (778 modules)
+ GET /host/dashboard/160ded69 404 in 278ms
+ ○ Compiling /host/[access_code] ...
+ ✓ Compiled /host/[access_code] in 1581ms (796 modules)
+ GET /host/160ded69 200 in 3059ms
+ ○ Compiling /event/[access_code] ...
+ ✓ Compiled /event/[access_code] in 1532ms (799 modules)
+ GET /event/160ded69 200 in 3037ms
+ GET /event/160ded69 200 in 123ms
+ GET / 200 in 33ms
+ GET /host/d70e6d30 200 in 161ms
+ GET /host/d70e6d30 200 in 113ms
+ GET /event/d70e6d30 200 in 111ms
+ GET / 200 in 24ms
+ GET /host/d70e6d30 200 in 133ms
+ GET /host/160ded69 200 in 97ms
+ GET /event/d70e6d30 200 in 136ms
+ GET / 200 in 26ms
+ GET /event/ef601884 200 in 183ms
+ ○ Compiling /event/[access_code]/dashboard ...
+ ✓ Compiled /event/[access_code]/dashboard in 2.2s (809 modules)
+ GET /event/ef601884 200 in 89ms
+ GET /event/7f3465f3 200 in 37ms
+ GET /event/7f3465f3/dashboard?user_id=1 200 in 33ms
+ GET /event/7f3465f3/dashboard?user_id=4 200 in 32ms
+ GET /event/7f3465f3/dashboard?user_id=2 200 in 30ms
+ GET /event/7f3465f3/dashboard?user_id=1 200 in 31ms
+ GET /event/7f3465f3/dashboard?user_id=4 200 in 32ms
+ ✓ Compiled in 1291ms (823 modules)
+ GET /event/7f3465f3/dashboard?user_id=4 200 in 96ms
+ ✓ Compiled in 532ms (823 modules)
+ GET /event/7f3465f3/dashboard?user_id=4 200 in 82ms
+ GET / 200 in 31ms
+ ✓ Compiled /favicon.ico in 352ms (388 modules)
+ GET /favicon.ico 200 in 456ms
+ ✓ Compiled in 581ms (823 modules)
+ ✓ Compiled in 323ms (825 modules)
+ GET / 200 in 80ms
+ GET /event/7f3465f3/dashboard?user_id=4 200 in 82ms
+ ✓ Compiled in 548ms (825 modules)
+ ✓ Compiled in 819ms (825 modules)
+ ✓ Compiled in 454ms (825 modules)
+ ✓ Compiled in 563ms (825 modules)
+ ✓ Compiled in 761ms (825 modules)
+ GET / 200 in 123ms
+ GET / 200 in 55ms
+ GET / 200 in 55ms
+ GET / 200 in 71ms
+ GET /host/02ffb3d5?token=host/a6d089dc-6feb-454c-bc7f-50216352f535 200 in 148ms
+ ✓ Compiled in 648ms (825 modules)
+ ⨯ ./app/event/[access_code]/dashboard/page.tsx
+Error: 
+  [31mx[0m the name `editLoading` is defined multiple times
+    ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/event/[access_code]/dashboard/page.tsx[0m:32:1]
+ [2m32[0m |   const [editProfileLink, setEditProfileLink] = useState("");
+ [2m33[0m |   const [editAvatarUrl, setEditAvatarUrl] = useState("");
+ [2m34[0m |   const [editAvailableTimeslots, setEditAvailableTimeslots] = useState<number[]>([]);
+ [2m35[0m |   const [editLoading, setEditLoading] = useState(false);
+    : [31;1m         ^^^^^|^^^^^[0m
+    :               [31;1m`-- [31;1mprevious definition of `editLoading` here[0m[0m
+ [2m36[0m |   const [editLoading, setEditLoading] = useState(false);
+    : [33;1m         ^^^^^|^^^^^[0m
+    :               [33;1m`-- [33;1m`editLoading` redefined here[0m[0m
+ [2m37[0m |   const [editError, setEditError] = useState("");
+ [2m38[0m | 
+ [2m39[0m |   // Chat State
+    `----
+
+  [31mx[0m the name `setEditLoading` is defined multiple times
+    ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/event/[access_code]/dashboard/page.tsx[0m:32:1]
+ [2m32[0m |   const [editProfileLink, setEditProfileLink] = useState("");
+ [2m33[0m |   const [editAvatarUrl, setEditAvatarUrl] = useState("");
+ [2m34[0m |   const [editAvailableTimeslots, setEditAvailableTimeslots] = useState<number[]>([]);
+ [2m35[0m |   const [editLoading, setEditLoading] = useState(false);
+    : [31;1m                      ^^^^^^^|^^^^^^[0m
+    :                              [31;1m`-- [31;1mprevious definition of `setEditLoading` here[0m[0m
+ [2m36[0m |   const [editLoading, setEditLoading] = useState(false);
+    : [33;1m                      ^^^^^^^|^^^^^^[0m
+    :                              [33;1m`-- [33;1m`setEditLoading` redefined here[0m[0m
+ [2m37[0m |   const [editError, setEditError] = useState("");
+ [2m38[0m | 
+ [2m39[0m |   // Chat State
+    `----
+
+Import trace for requested module:
+./app/event/[access_code]/dashboard/page.tsx
+ GET / 500 in 31ms
+ GET /event/02ffb3d5/dashboard 500 in 56ms
+ GET / 500 in 35ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 864ms (818 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /event/02ffb3d5/dashboard 200 in 280ms
+ GET / 200 in 285ms
+ GET / 200 in 252ms
+ GET / 200 in 42ms
+ GET / 200 in 48ms
+ GET /host/1cdedc3d?token=host/24923287-5650-42ce-aea8-c4c61a3df132 200 in 60ms
+ GET /event/1cdedc3d 200 in 75ms
+ GET /host/1cdedc3d?token=host/24923287-5650-42ce-aea8-c4c61a3df132 200 in 77ms
+ GET /event/1cdedc3d/dashboard 200 in 48ms
+ GET / 200 in 60ms
+ GET / 200 in 41ms
+ GET /host/eb557354?token=host/eaeb43b6-9699-4f5c-b284-e62f070d1d3e 200 in 71ms
+ GET / 200 in 46ms
+ GET /host/f0a460ac?token=host/ca94a9b5-5f45-47f8-b98d-501a4682c5cf 200 in 83ms
+ GET / 200 in 63ms
+ GET / 200 in 46ms
+ GET /event/f0aca6d4 200 in 64ms
+ GET /f0aca6d4/dashboard 404 in 35ms
+ GET /event/f0aca6d4/dashboard 200 in 57ms
+ ✓ Compiled in 798ms (829 modules)
+ GET / 200 in 196ms
+ GET /event/d832b8b8 200 in 54ms
+ GET /event/d832b8b8 200 in 50ms
+ GET /event/d832b8b8 200 in 37ms
+ GET /event/d832b8b8 200 in 45ms
+ GET /event/d832b8b8/dashboard 200 in 42ms
+ GET /event/d832b8b8/dashboard 200 in 36ms
+ ⨯ ./app/host/[access_code]/page.tsx
+Error: 
+  [31mx[0m the name `newSlotDuration` is defined multiple times
+    ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/host/[access_code]/page.tsx[0m:19:1]
+ [2m19[0m |   const [newCapacity, setNewCapacity] = useState("1");
+ [2m20[0m |   const [newStartTime, setNewStartTime] = useState("");
+ [2m21[0m |   const [newEndTime, setNewEndTime] = useState("");
+ [2m22[0m |   const [newSlotDuration, setNewSlotDuration] = useState("15");
+    : [31;1m         ^^^^^^^|^^^^^^^[0m
+    :                 [31;1m`-- [31;1mprevious definition of `newSlotDuration` here[0m[0m
+ [2m23[0m |   const [newSlotDuration, setNewSlotDuration] = useState("15");
+    : [33;1m         ^^^^^^^|^^^^^^^[0m
+    :                 [33;1m`-- [33;1m`newSlotDuration` redefined here[0m[0m
+ [2m24[0m |   const [copied, setCopied] = useState(false);
+ [2m25[0m |   const [copiedAdmin, setCopiedAdmin] = useState(false);
+    `----
+
+  [31mx[0m the name `setNewSlotDuration` is defined multiple times
+    ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/host/[access_code]/page.tsx[0m:19:1]
+ [2m19[0m |   const [newCapacity, setNewCapacity] = useState("1");
+ [2m20[0m |   const [newStartTime, setNewStartTime] = useState("");
+ [2m21[0m |   const [newEndTime, setNewEndTime] = useState("");
+ [2m22[0m |   const [newSlotDuration, setNewSlotDuration] = useState("15");
+    : [31;1m                          ^^^^^^^^^|^^^^^^^^[0m
+    :                                    [31;1m`-- [31;1mprevious definition of `setNewSlotDuration` here[0m[0m
+ [2m23[0m |   const [newSlotDuration, setNewSlotDuration] = useState("15");
+    : [33;1m                          ^^^^^^^^^|^^^^^^^^[0m
+    :                                    [33;1m`-- [33;1m`setNewSlotDuration` redefined here[0m[0m
+ [2m24[0m |   const [copied, setCopied] = useState(false);
+ [2m25[0m |   const [copiedAdmin, setCopiedAdmin] = useState(false);
+    `----
+
+Import trace for requested module:
+./app/host/[access_code]/page.tsx
+ GET /host/create 500 in 61ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 57ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 500 in 59ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 500 in 58ms
+ GET /event/1cdedc3d/dashboard 500 in 74ms
+ GET /event/d832b8b8/dashboard 500 in 71ms
+ GET / 500 in 84ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 500 in 88ms
+ GET /event/d832b8b8/dashboard 500 in 79ms
+ GET /event/d832b8b8/dashboard 500 in 59ms
+ ✓ Compiled /_not-found in 449ms (818 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /event/d832b8b8/dashboard 200 in 345ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 456ms
+ GET /host/create 200 in 489ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 404 in 981ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 200 in 514ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 513ms
+ GET /event/1cdedc3d/dashboard 200 in 496ms
+ GET /event/d832b8b8/dashboard 200 in 478ms
+ GET / 200 in 490ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 200 in 482ms
+ GET /event/d832b8b8/dashboard 200 in 394ms
+ GET /event/d832b8b8/dashboard 200 in 106ms
+ ⨯ ./app/event/[access_code]/dashboard/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/event/[access_code]/dashboard/page.tsx[0m:237:1]
+ [2m237[0m |   if (!event || !me) return <div className="p-12 text-center">Loading dashboard...</div>;
+ [2m238[0m | 
+ [2m239[0m |   return (
+ [2m240[0m |     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+     : [31;1m     ^^^[0m
+ [2m241[0m |       <header className="bg-blue-700 text-white shadow-md py-6 px-8">
+ [2m242[0m |         <div className="max-w-6xl mx-auto flex justify-between items-center">
+ [2m243[0m |           <div className="flex items-center gap-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/event/[access_code]/dashboard/page.tsx
+ GET /host/create 500 in 72ms
+ GET /event/1cdedc3d 500 in 71ms
+ GET /event/d832b8b8 500 in 71ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 500 in 64ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 500 in 64ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 78ms
+ GET / 500 in 33ms
+ GET /event/d832b8b8 500 in 66ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 500 in 80ms
+ GET /event/d832b8b8 500 in 73ms
+ ○ Compiling /_not-found ...
+ ✓ Compiled /_not-found in 659ms (818 modules)
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 404 in 992ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 350ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /event/d832b8b8 200 in 464ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 452ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 404 in 1161ms
+ GET /host/create 200 in 514ms
+ GET /event/1cdedc3d 200 in 516ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 200 in 526ms
+ GET /event/d832b8b8 200 in 318ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 200 in 414ms
+ GET / 200 in 526ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 188ms
+ GET /event/d832b8b8 200 in 159ms
+ ✓ Compiled in 460ms (832 modules)
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 80ms
+ ✓ Compiled in 366ms (829 modules)
+ ✓ Compiled in 392ms (829 modules)
+ ✓ Compiled in 417ms (829 modules)
+ GET /event/d832b8b8/dashboard 200 in 95ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 43ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 57ms
+ ✓ Compiled /favicon.ico in 252ms (391 modules)
+ GET /favicon.ico 200 in 319ms
+ GET /event/23742ca1 200 in 106ms
+ GET /event/23742ca1?token=a97e600a-dc65-4297-9275-f336ab40d62f 200 in 44ms
+ GET /event/23742ca1 200 in 61ms
+ GET /event/23742ca1 200 in 66ms
+ GET /favicon.ico 200 in 14ms
+ GET /favicon.ico 200 in 15ms
+ GET /event/23742ca1/dashboard 200 in 46ms
+ GET /event/23742ca1/dashboard 200 in 72ms
+ GET /favicon.ico 200 in 13ms
+ ⨯ ./app/host/[access_code]/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/host/[access_code]/page.tsx[0m:166:1]
+ [2m166[0m |   if (!event) return <div className="p-12 text-center">Loading event dashboard...</div>;
+ [2m167[0m | 
+ [2m168[0m |   return (
+ [2m169[0m |     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+     : [31;1m     ^^^[0m
+ [2m170[0m |       <header className="bg-indigo-900 text-white shadow-md py-6 px-8 relative">
+ [2m171[0m |         <div className="max-w-6xl mx-auto flex justify-between items-center">
+ [2m172[0m |           <div className="flex items-center gap-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/host/[access_code]/page.tsx
+ GET /host/create 500 in 63ms
+ GET /event/1cdedc3d 500 in 76ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 500 in 79ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 500 in 77ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 77ms
+ GET /event/23742ca1/dashboard 500 in 71ms
+ GET / 500 in 70ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 91ms
+ GET /event/d832b8b8 500 in 70ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 500 in 102ms
+ GET /event/23742ca1/dashboard 500 in 66ms
+ GET /event/d832b8b8 500 in 63ms
+ ⨯ ./app/host/[access_code]/page.tsx
+Error: 
+  [31mx[0m Unexpected token `div`. Expected jsx identifier
+     ,-[[36;1;4m/home/renemottus/Downloads/matchMaking/frontend/app/host/[access_code]/page.tsx[0m:166:1]
+ [2m166[0m |   if (!event) return <div className="p-12 text-center">Loading event dashboard...</div>;
+ [2m167[0m | 
+ [2m168[0m |   return (
+ [2m169[0m |     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
+     : [31;1m     ^^^[0m
+ [2m170[0m |       <header className="bg-indigo-900 text-white shadow-md py-6 px-8 relative">
+ [2m171[0m |         <div className="max-w-6xl mx-auto flex justify-between items-center">
+ [2m172[0m |           <div className="flex items-center gap-4">
+     `----
+
+Caused by:
+    Syntax Error
+
+Import trace for requested module:
+./app/host/[access_code]/page.tsx
+ ○ Compiling /_not-found ...
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 524ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 474ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 353ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /favicon.ico 200 in 553ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 46ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 44ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 43ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /favicon.ico 500 in 84ms
+ GET /event/1cdedc3d 500 in 104ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 49ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /event/23742ca1/dashboard 500 in 114ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 58ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 43ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 43ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 42ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/create 500 in 124ms
+ GET /event/23742ca1/dashboard 500 in 109ms
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 500 in 50ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 132ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 500 in 128ms
+ GET / 500 in 118ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 500 in 101ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 500 in 70ms
+ GET /event/d832b8b8 500 in 89ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 500 in 87ms
+ GET /event/d832b8b8 500 in 52ms
+ GET /favicon.ico 500 in 20ms
+ ✓ Compiled /_not-found in 473ms (848 modules)
+ ⨯ SyntaxError: Unexpected end of JSON input
+    at JSON.parse (<anonymous>)
+    at loadManifest (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/load-manifest.js:35:27)
+    at DevServer.getNextFontManifest (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/next-server.js:745:47)
+    at DevServer.findPageComponents (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/dev/next-dev-server.js:571:43)
+    at async DevServer.renderPageComponent (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/base-server.js:1910:24)
+    at async DevServer.renderToResponseImpl (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/base-server.js:920:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/base-server.js:816:17)
+    at async /home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/lib/router-server.js:174:21)
+    at async handleRequest (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/lib/router-server.js:353:24)
+    at async requestHandlerImpl (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/lib/router-server.js:377:13)
+    at async Server.requestListener (/home/renemottus/Downloads/matchMaking/frontend/node_modules/next/dist/server/lib/start-server.js:141:13) {
+  page: '/host/create'
+}
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/create 500 in 429ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /_next/static/webpack/3e8946e25d5392af.webpack.hot-update.json 404 in 904ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 495ms
+ GET /host/f0a460ac?token=host%2Fca94a9b5-5f45-47f8-b98d-501a4682c5cf 200 in 480ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 495ms
+ GET /event/1cdedc3d 200 in 512ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 517ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 200 in 422ms
+ GET /event/23742ca1/dashboard 200 in 604ms
+ GET /event/23742ca1/dashboard 200 in 270ms
+ GET /event/d832b8b8 200 in 336ms
+ GET / 200 in 620ms
+ GET /event/d832b8b8 200 in 343ms
+ GET /favicon.ico 200 in 149ms
+ GET /host/23742ca1?token=host%2Fe894802b-43ed-4740-ad78-cdaf51191f78 200 in 46ms
+ GET / 200 in 39ms
+ GET /host/create 200 in 30ms
+ GET /event/23742ca1/dashboard 200 in 49ms
+ GET /favicon.ico 200 in 16ms
+ ⚠ Fast Refresh had to perform a full reload due to a runtime error.
+ ✓ Compiled in 634ms (829 modules)
+ ✓ Compiled in 1ms (361 modules)
+ ✓ Compiled in 0ms (361 modules)
+ ✓ Compiled in 0ms (361 modules)
+ GET /host/create 200 in 371ms
+ ✓ Compiled in 358ms (829 modules)
+ HEAD / 200 in 55ms
+ HEAD / 200 in 30ms
+ GET / 200 in 37ms
+ GET /host/create 200 in 56ms
+ ✓ Compiled /favicon.ico in 254ms (391 modules)
+ GET /favicon.ico 200 in 336ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 136ms
+ HEAD / 200 in 48ms
+ GET / 200 in 39ms
+ GET /host/create 200 in 38ms
+ GET /host/create 200 in 43ms
+ GET /host/88d8ea66?token=host%2Fc68051e2-d4b0-4b9e-8eb2-e6f752295200 200 in 70ms
+ HEAD / 200 in 26ms
+ GET / 200 in 32ms
+ GET /event/7544d8ac 200 in 51ms
+ GET / 200 in 60ms
+ GET /favicon.ico 200 in 14ms
+ ✓ Compiled in 572ms (859 modules)
+ ✓ Compiled in 440ms (859 modules)
+ ✓ Compiled in 425ms (829 modules)
+ GET / 200 in 125ms
+ GET / 200 in 39ms
+ ✓ Compiled in 380ms (828 modules)
+ ✓ Compiled in 436ms (828 modules)
+ ✓ Compiled in 320ms (828 modules)
+ GET / 200 in 117ms
+ ✓ Compiled in 440ms (828 modules)
+ ✓ Compiled in 327ms (828 modules)
+ ✓ Compiled in 346ms (828 modules)
+ ✓ Compiled in 333ms (828 modules)
+ GET / 200 in 95ms
+ GET /host/create 200 in 54ms
+ GET /host/create 200 in 41ms
+ GET /host/create 200 in 36ms
+ ✓ Compiled in 581ms (828 modules)
+ GET /host/create 200 in 75ms
+ ✓ Compiled in 426ms (828 modules)
+ ✓ Compiled in 384ms (828 modules)
+ GET /event/6673be71 200 in 86ms
+ GET /event/6673be71?token=da2962f8-7429-454f-999f-f7d8de15ada1 200 in 49ms
+ GET /event/6673be71?token=da2962f8-7429-454f-999f-f7d8de15ada1 200 in 47ms
+ ✓ Compiled /favicon.ico in 220ms (390 modules)
+ GET /favicon.ico 200 in 291ms
+ GET /event/6673be71?token=da2962f8-7429-454f-999f-f7d8de15ada1 200 in 78ms
+ GET /event/6673be71?token=da2962f8-7429-454f-999f-f7d8de15ada1 200 in 48ms
+ GET /event/6673be71 200 in 59ms
+ GET /favicon.ico 200 in 13ms
+ GET /favicon.ico 200 in 26ms
+ GET /event/6673be71/dashboard 200 in 53ms
+ GET /event/6673be71/dashboard 200 in 55ms
+ ✓ Compiled in 518ms (828 modules)
+ GET /host/6673be71?token=host/753d5cf6-02c4-467d-aa2d-037bd385883c 200 in 94ms
+ GET / 200 in 41ms
+ GET /event/6673be71/dashboard 200 in 52ms
+ ✓ Compiled in 253ms (468 modules)
+ ✓ Compiled in 786ms (835 modules)
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /event/d832b8b8 200 in 193ms
+ GET / 200 in 204ms
+ GET /event/6673be71/dashboard 200 in 198ms
+ GET /host/d832b8b8?token=host%2F6a1288b9-8dfe-4aa7-acbf-44acacd0b58f 200 in 200ms
+ GET / 200 in 129ms
+ ✓ Compiled in 375ms (835 modules)
+ ✓ Compiled in 304ms (835 modules)
+ GET / 200 in 84ms
+ ○ Compiling /privacy ...
+ ✓ Compiled /privacy in 1255ms (1003 modules)
+ GET /host/create 200 in 126ms
+ GET /event/160ded69 200 in 79ms
+ GET /host/create 200 in 55ms
+ GET /host/create 200 in 52ms
+ GET /event/6673be71/dashboard 200 in 71ms
+ ✓ Compiled in 575ms (836 modules)
+ ✓ Compiled in 302ms (836 modules)
+ ✓ Compiled in 390ms (836 modules)
+ GET /event/6673be71/dashboard 200 in 89ms
+ GET /event/25a43d05 200 in 85ms
+ GET / 200 in 45ms
+ GET /event/6673be71/dashboard 200 in 83ms
+ GET /event/6673be71/dashboard 200 in 84ms
+ GET /event/6673be71/dashboard 200 in 66ms
+ GET /host/d9f5c703?token=host/6e67e415-fed2-4938-9525-77996b843415 200 in 60ms
+ GET /event/d9f5c703 200 in 58ms
+[?25h

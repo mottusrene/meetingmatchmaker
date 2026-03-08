@@ -1,0 +1,2219 @@
+INFO:     Will watch for changes in these directories: ['/home/renemottus/Downloads/matchMaking/backend']
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     Started reloader process [153021] using StatReload
+INFO:     Started server process [153034]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:33596 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33596 - "GET /favicon.ico HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:51022 - "OPTIONS /events/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:52166 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52166 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43508 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50830 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50840 - "GET /events/160ded69/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50850 - "GET /events/160ded69/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50830 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50850 - "GET /events/160ded69/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50840 - "GET /events/160ded69/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35876 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35876 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59790 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59790 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53456 - "OPTIONS /events/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:57392 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45034 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45050 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45044 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45034 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45044 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45050 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40538 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40508 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40524 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40538 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40508 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40524 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41810 - "POST /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47710 - "POST /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45556 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45556 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59672 - "OPTIONS /events/ HTTP/1.1" 405 Method Not Allowed
+INFO:     127.0.0.1:50370 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50380 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50388 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50370 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50380 - "GET /events/d70e6d30/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50388 - "GET /events/d70e6d30/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50046 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50046 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59998 - "GET /events/160ded69/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59972 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59982 - "GET /events/160ded69/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59998 - "GET /events/160ded69/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59972 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59982 - "GET /events/160ded69/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33998 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33998 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [153034]
+INFO:     Started server process [175144]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:36760 - "OPTIONS /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36766 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36766 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36760 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36760 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36782 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36766 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36790 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39324 - "OPTIONS /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39328 - "POST /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39328 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42036 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42036 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34438 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41610 - "OPTIONS /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41626 - "POST /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41626 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41626 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48450 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48462 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41610 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48472 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41626 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48468 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48472 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48462 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:41610 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48450 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:48468 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45278 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45288 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56236 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40824 - "POST /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40824 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40856 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40842 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40832 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40826 - "GET /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40824 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40868 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40826 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40868 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40856 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40824 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40832 - "GET /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40842 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33142 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33142 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56924 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50256 - "POST /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50256 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50256 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50264 - "GET /users/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50274 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50302 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50316 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50256 - "GET /events/ef601884 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50288 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50264 - "GET /users/3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50274 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50302 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50288 - "GET /events/ef601884/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50316 - "GET /events/ef601884/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51452 - "OPTIONS /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51468 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51468 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51452 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51470 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51468 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51470 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51452 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51480 - "OPTIONS /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45844 - "POST /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45844 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45844 - "OPTIONS /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51480 - "POST /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51480 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36322 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36322 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45938 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53354 - "OPTIONS /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53366 - "POST /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53366 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53366 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53354 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53382 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53388 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53366 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53400 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53416 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53382 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53354 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53388 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53400 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53416 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38834 - "OPTIONS /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38836 - "POST /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:38836 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33422 - "POST /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33422 - "POST /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33422 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33422 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59972 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59976 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59992 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60006 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60008 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59972 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60014 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60008 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60006 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59992 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59976 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60014 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60020 - "OPTIONS /meetings/2/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60022 - "PUT /meetings/2/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60022 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50006 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50014 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50020 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50046 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50030 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50006 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50052 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50014 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50020 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50046 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50030 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50052 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50566 - "POST /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50566 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40754 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40764 - "GET /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40770 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40780 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40808 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40754 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40770 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40764 - "GET /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40780 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40808 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40808 - "OPTIONS /meetings/1/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "PUT /meetings/1/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40808 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34178 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34184 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40808 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40796 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34168 - "GET /users/1 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34178 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34172 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34184 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34186 - "OPTIONS /meetings/4/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34194 - "PUT /meetings/4/status?status=accepted HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34194 - "GET /users/1/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34194 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34186 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60938 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60944 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34186 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:34194 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60958 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60964 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60938 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60944 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60958 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60964 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [175144]
+INFO:     Started server process [181112]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:43474 - "POST /events/ef601884/meetings/?requester_id=2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43476 - "POST /events/ef601884/meetings/?requester_id=2 HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:52778 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52786 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52808 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52824 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52786 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52778 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52794 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52830 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52808 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52824 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52830 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37648 - "POST /events/7f3465f3/meetings/?requester_id=4 HTTP/1.1" 400 Bad Request
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [181112]
+INFO:     Started server process [182495]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:42470 - "POST /events/ef601884/meetings/?requester_id=2 HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:42474 - "PUT /meetings/2/status?status=accepted HTTP/1.1" 400 Bad Request
+INFO:     127.0.0.1:42488 - "PUT /meetings/2/status?status=cancelled HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39296 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39330 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39310 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39344 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39318 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39296 - "GET /events/7f3465f3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39354 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39318 - "GET /users/4 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39310 - "GET /events/7f3465f3/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39344 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39330 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39354 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39354 - "OPTIONS /meetings/1/status?status=cancelled HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39330 - "PUT /meetings/1/status?status=cancelled HTTP/1.1" 200 OK
+INFO:     127.0.0.1:39330 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56106 - "OPTIONS /meetings/4/status?status=cancelled HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56120 - "PUT /meetings/4/status?status=cancelled HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56120 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'models.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [182495]
+INFO:     Started server process [185089]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [185089]
+INFO:     Started server process [185127]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:40092 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40106 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40106 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40106 - "GET /events/d70e6d30 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40106 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40092 - "GET /events/160ded69 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60638 - "POST /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60648 - "GET /users/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [185127]
+INFO:     Started server process [185863]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:46308 - "GET /users/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'models.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [185863]
+INFO:     Started server process [193557]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [193557]
+INFO:     Started server process [193561]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [193561]
+INFO:     Started server process [193680]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:40722 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40724 - "GET /events/7f3465f3/locations/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40726 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40706 - "GET /users/4 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40696 - "GET /events/7f3465f3 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40732 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40722 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40724 - "GET /events/7f3465f3/locations/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40726 - "GET /events/7f3465f3/timeslots/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40706 - "GET /users/4 HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:40732 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:40696 - "GET /events/7f3465f3 HTTP/1.1" 404 Not Found
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [193680]
+INFO:     Started server process [454554]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [454554]
+INFO:     Started server process [454560]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [454560]
+INFO:     Started server process [454704]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [454704]
+INFO:     Started server process [454718]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [454718]
+INFO:     Started server process [456043]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+
+==================================================
+📧 EMAIL SENT TO HOST: host@test.com
+Subject: Your Admin Link for Test Auth Event
+Body: Hello Host! Keep this link safe. You can manage and delete your event 'Test Auth Event' using this admin portal:
+👉 http://localhost:3000/event/b504f78a/admin?token=host/f3a99a99-cb43-48d3-a067-e9479bca8003
+==================================================
+
+INFO:     127.0.0.1:43546 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33104 - "POST /events/b504f78a/timeslots/ HTTP/1.1" 200 OK
+
+==================================================
+📧 EMAIL SENT TO ATTENDEE: alice@test.com
+Subject: Your Secure Access Link for Test Auth Event
+Body: Hi Alice, welcome to the matchmaking portal for Test Auth Event! You can securely log back in to your dashboard anytime using this link:
+👉 http://localhost:3000/event/b504f78a?token=f9678b13-7ce2-4151-8c46-dc2824289974
+==================================================
+
+INFO:     127.0.0.1:35234 - "POST /events/b504f78a/users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42540 - "OPTIONS /events/ HTTP/1.1" 200 OK
+
+==================================================
+📧 EMAIL SENT TO HOST: test@test.com
+Subject: Your Admin Link for Test Demo Event
+Body: Hello Host! Keep this link safe. You can manage and delete your event 'Test Demo Event' using this admin portal:
+👉 http://localhost:3000/event/02ffb3d5/admin?token=host/a6d089dc-6feb-454c-bc7f-50216352f535
+==================================================
+
+INFO:     127.0.0.1:42546 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42546 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42540 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42546 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42560 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42540 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:42560 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45954 - "OPTIONS /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45956 - "POST /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:45956 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43910 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43916 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43910 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43916 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44244 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44266 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44256 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44244 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44256 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:44266 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46018 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46034 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46034 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:46018 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47280 - "OPTIONS /events/02ffb3d5/users/ HTTP/1.1" 200 OK
+
+==================================================
+📧 EMAIL SENT TO ATTENDEE: alice@test.com
+Subject: Your Secure Access Link for Test Demo Event
+Body: Hi Alice Tester, welcome to the matchmaking portal for Test Demo Event! You can securely log back in to your dashboard anytime using this link:
+👉 http://localhost:3000/event/02ffb3d5?token=fa08adbc-b791-46c7-93c5-baee116ddda5
+==================================================
+
+INFO:     127.0.0.1:47292 - "POST /events/02ffb3d5/users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47292 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47280 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47280 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47292 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47296 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47306 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47324 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47280 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47306 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47324 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47312 - "GET /users/2/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47296 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43576 - "OPTIONS /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43580 - "PUT /users/2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47444 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47446 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47444 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47446 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+
+==================================================
+📧 EMAIL SENT TO ATTENDEE: bob@test.com
+Subject: Your Secure Access Link for Test Demo Event
+Body: Hi Bob, welcome to the matchmaking portal for Test Demo Event! You can securely log back in to your dashboard anytime using this link:
+👉 http://localhost:3000/event/02ffb3d5?token=196da76b-6913-4a4b-b668-54f77c5734b8
+==================================================
+
+INFO:     127.0.0.1:60504 - "POST /events/02ffb3d5/users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60504 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60504 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60520 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60550 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60538 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60522 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60504 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60548 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60550 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60538 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60522 - "GET /users/ HTTP/1.1" 200 OK
+WARNING:  StatReload detected changes in 'models.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [456043]
+INFO:     Started server process [482049]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'schemas.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [482049]
+INFO:     Started server process [482085]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+WARNING:  StatReload detected changes in 'main.py'. Reloading...
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [482085]
+INFO:     Started server process [483705]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     127.0.0.1:49800 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49816 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49816 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49800 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49838 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49832 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (2,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:49848 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49828 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49816 - "GET /events/02ffb3d5/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49854 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49848 - "GET /users/3/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49838 - "GET /events/02ffb3d5 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49828 - "GET /events/02ffb3d5/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (2,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:49864 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "OPTIONS /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54726 - "POST /events/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54726 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54738 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54718 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:54726 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54742 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:54738 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37632 - "OPTIONS /events/1cdedc3d/locations/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:37646 - "POST /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: table locations has no column named capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 106, in create_location
+    db.commit()
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2030, in commit
+    trans.commit(_to_root=True)
+  File "<string>", line 2, in commit
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1311, in commit
+    self._prepare_impl()
+  File "<string>", line 2, in _prepare_impl
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/state_changes.py", line 137, in _go
+    ret_value = fn(self, *arg, **kw)
+                ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 1286, in _prepare_impl
+    self.session.flush()
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4331, in flush
+    self._flush(objects)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4466, in _flush
+    with util.safe_reraise():
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/util/langhelpers.py", line 121, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 4427, in _flush
+    flush_context.execute()
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/persistence.py", line 1233, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) table locations has no column named capacity
+[SQL: INSERT INTO locations (event_id, name, capacity) VALUES (?, ?, ?)]
+[parameters: (3, 'Main Hall', 11)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:50148 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50152 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:50156 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50148 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50164 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:50156 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33670 - "GET /docs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33670 - "GET /openapi.json HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57660 - "POST /events/1cdedc3d/locations/ HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:40506 - "POST /events/1cdedc3d/locations/ HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:56376 - "POST /events/1cdedc3d/locations/ HTTP/1.1" 422 Unprocessable Entity
+INFO:     127.0.0.1:36318 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36330 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36318 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:36330 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33852 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33854 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:33852 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33870 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:33872 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:33870 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58052 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58066 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58066 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58052 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43190 - "OPTIONS /events/1cdedc3d/users/ HTTP/1.1" 200 OK
+
+==================================================
+📧 EMAIL SENT TO ATTENDEE: alice@example.com
+Subject: Your Secure Access Link for Tech Conference V3
+Body: Hi Alice Doe, welcome to the matchmaking portal for Tech Conference V3! You can securely log back in to your dashboard anytime using this link:
+👉 http://localhost:3000/event/1cdedc3d?token=4b7b1f28-ad8d-4289-a3b4-19c58ca6a664
+==================================================
+
+INFO:     127.0.0.1:43206 - "POST /events/1cdedc3d/users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43206 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43190 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43190 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43248 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43206 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43264 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43222 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43236 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:43274 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43248 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43222 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:43264 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:43190 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:47872 - "POST /events/xyz/locations/ HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:35316 - "OPTIONS /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35332 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35332 - "GET /users/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35316 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35360 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35346 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:35356 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35334 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35374 - "GET /users/4/meetings/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35360 - "GET /events/1cdedc3d/timeslots/ HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35356 - "GET /events/1cdedc3d/locations/ HTTP/1.1" 500 Internal Server Error
+ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: locations.capacity
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/protocols/http/h11_impl.py", line 410, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/uvicorn/middleware/proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/applications.py", line 1160, in __call__
+    await super().__call__(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/applications.py", line 107, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 186, in __call__
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/errors.py", line 164, in __call__
+    await self.app(scope, receive, _send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 95, in __call__
+    await self.simple_response(scope, receive, send, request_headers=headers)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/cors.py", line 153, in simple_response
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/middleware/exceptions.py", line 63, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/middleware/asyncexitstack.py", line 18, in __call__
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 716, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 736, in app
+    await route.handle(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/routing.py", line 290, in handle
+    await self.app(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 130, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 116, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 670, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/fastapi/routing.py", line 326, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/starlette/concurrency.py", line 32, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 2502, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/anyio/_backends/_asyncio.py", line 986, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/main.py", line 126, in list_locations
+    return db_event.locations
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 569, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1096, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/attributes.py", line 1131, in _fire_loader_callables
+    return self.callable_(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 978, in _load_for_state
+    return self._emit_lazyload(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/strategies.py", line 1141, in _emit_lazyload
+    result = session.execute(
+             ^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2351, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/session.py", line 2249, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/orm/context.py", line 306, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1419, in execute
+    return meth(
+           ^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/sql/elements.py", line 527, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1641, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2363, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/home/renemottus/Downloads/matchMaking/backend/venv/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 952, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: locations.capacity
+[SQL: SELECT locations.id AS locations_id, locations.event_id AS locations_event_id, locations.name AS locations_name, locations.capacity AS locations_capacity 
+FROM locations 
+WHERE ? = locations.event_id]
+[parameters: (3,)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+INFO:     127.0.0.1:35332 - "GET /events/1cdedc3d HTTP/1.1" 200 OK
+INFO:     127.0.0.1:35334 - "GET /users/ HTTP/1.1" 200 OK
+INFO:     Shutting down
+INFO:     Waiting for application shutdown.
+INFO:     Application shutdown complete.
+INFO:     Finished server process [483705]
+INFO:     Stopping reloader process [153021]
