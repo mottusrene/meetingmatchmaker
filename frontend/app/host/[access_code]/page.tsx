@@ -51,14 +51,14 @@ export default function HostDashboard() {
 
   const fetchEventAndUsers = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}`);
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}`);
       if (res.ok) {
         const data = await res.json();
         setEvent(data);
         
         // Also fetch users to check for attendee count
         try {
-          const uRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/users/`);
+          const uRes = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/users/`);
           if (uRes.ok) {
             const allUsers = await uRes.json();
             const attendees = allUsers.filter((u: any) => u.event_id === data.id && !u.is_host);
@@ -89,17 +89,17 @@ export default function HostDashboard() {
   };
 
   const fetchLocations = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/locations/`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/locations/`);
     if (res.ok) setLocations(await res.json());
   };
 
   const fetchTimeslots = async () => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/timeslots/`);
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/timeslots/`);
     if (res.ok) setTimeslots(await res.json());
   };
 
   const removeTimeslot = async (id: number) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/timeslots/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/timeslots/${id}`, {
       method: "DELETE"
     });
     if (res.ok) {
@@ -110,7 +110,7 @@ export default function HostDashboard() {
   const addLocation = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newLocation) return;
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/locations/`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/locations/`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ name: newLocation, capacity: parseInt(newCapacity) || 1 }),
@@ -123,7 +123,7 @@ export default function HostDashboard() {
   };
 
   const removeLocation = async (id: number) => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/locations/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/locations/${id}`, {
       method: "DELETE"
     });
     if (res.ok) {
@@ -169,7 +169,7 @@ export default function HostDashboard() {
     while (current + durationMs <= end.getTime()) {
         const slotEnd = current + durationMs;
         requests.push(
-            fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/timeslots/`, {
+            fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/timeslots/`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ start_time: new Date(current).toISOString(), end_time: new Date(slotEnd).toISOString() }),
@@ -208,7 +208,7 @@ export default function HostDashboard() {
     // But since the frontend URL token param *is* the admin code, we use it directly.
     const urlAdminCode = searchParams.get("token") || passcode;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}`, {
         method: "PUT",
         headers: { 
             "Content-Type": "application/json",
@@ -237,7 +237,7 @@ export default function HostDashboard() {
     setDeleteStatus("Deleting event...");
     const urlAdminCode = searchParams.get("token") || passcode;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}`, {
         method: "DELETE",
         headers: { 
             "Authorization": urlAdminCode || ""
@@ -260,7 +260,7 @@ export default function HostDashboard() {
     const urlAdminCode = searchParams.get("token") || passcode;
     const action = suspendModal.action;
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000'}/events/${accessCode}/users/${suspendModal.user.id}/${action}`,
+      `${process.env.NEXT_PUBLIC_API_URL || '/api-proxy'}/events/${accessCode}/users/${suspendModal.user.id}/${action}`,
       { method: "PUT", headers: { "Authorization": urlAdminCode || "" } }
     );
     if (res.ok) {
