@@ -79,6 +79,14 @@ def send_reinstated_notification(attendee_email: str, name: str, event_title: st
         template["body"].format(name=name, event_title=event_title),
     )
 
+def send_broadcast(attendee_email: str, name: str, event_title: str, message: str):
+    template = text_dict["broadcast"]
+    _send(
+        attendee_email,
+        template["subject"].format(event_title=event_title),
+        template["body"].format(name=name, event_title=event_title, message=message),
+    )
+
 def send_meeting_notification(to_email: str, template_type: str, **kwargs):
     template = text_dict["meeting"][template_type]
     _send(

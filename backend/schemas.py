@@ -128,6 +128,7 @@ class Meeting(MeetingBase):
     requester_id: int
     status: str
     request_message: Optional[str] = None
+    table_number: Optional[int] = None
     
     requester: User
     receiver: User

@@ -93,6 +93,21 @@ export default function AttendeeDashboard() {
     return () => clearInterval(interval);
   }, [meetings, userId, accessCode]);
 
+  // Auto-refresh meetings and directory every 30s
+  useEffect(() => {
+    if (!userId || !accessCode) return;
+    const interval = setInterval(() => {
+      const token = localStorage.getItem(`session_token_${accessCode}`);
+      if (!token) return;
+      fetch(`${getApiUrl()}/users/${userId}/meetings/`).then(r => r.json()).then(setMeetings).catch(() => {});
+      fetch(`${getApiUrl()}/users/`, { headers: { "Authorization": token } })
+        .then(r => r.json())
+        .then((data: any[]) => setUsers(data.filter((u: any) => u.id !== parseInt(userId) && !u.is_host && !u.is_suspended)))
+        .catch(() => {});
+    }, 30000);
+    return () => clearInterval(interval);
+  }, [userId, accessCode]);
+
   useEffect(() => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     if (!token) {
@@ -117,7 +132,7 @@ export default function AttendeeDashboard() {
       
       Promise.all([
         fetch(`${getApiUrl()}/events/${accessCode}`).then(r => r.json()),
-        fetch(`${getApiUrl()}/users/`).then(r => r.json()),
+        fetch(`${getApiUrl()}/users/`, { headers: { "Authorization": token } }).then(r => r.json()),
         fetch(`${getApiUrl()}/events/${accessCode}/locations/`).then(r => r.json()),
         fetch(`${getApiUrl()}/events/${accessCode}/timeslots/`).then(r => r.json()),
         fetch(`${getApiUrl()}/users/${userData.id}/meetings/`).then(r => r.json())
@@ -454,8 +469,15 @@ export default function AttendeeDashboard() {
                     </div>
                     
                     <div className="space-y-2 text-sm text-gray-600 mb-4">
-                      <div className="flex items-center"><MapPin size={14} className="mr-2" /> {m.location.name}</div>
-                      <div className="flex items-center"><Clock size={14} className="mr-2" /> 
+                      <div className="flex items-center">
+                        <MapPin size={14} className="mr-2" /> {m.location.name}
+                        {m.status === 'accepted' && m.table_number && (
+                          <span className="ml-2 bg-indigo-100 text-indigo-700 text-xs font-bold px-2 py-0.5 rounded-full">
+                            {t('attendeeDashboard.myMeetings.tableLabel')} {m.table_number}
+                          </span>
+                        )}
+                      </div>
+                      <div className="flex items-center"><Clock size={14} className="mr-2" />
                         {parseDate(m.timeslot.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {parseDate(m.timeslot.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                       </div>
                     </div>

@@ -49,10 +49,24 @@ export default function HostDashboard() {
   const [suspendModal, setSuspendModal] = useState<{ user: any; action: "suspend" | "unsuspend" } | null>(null);
   const [suspendStatus, setSuspendStatus] = useState("");
 
+  const [showBroadcast, setShowBroadcast] = useState(false);
+  const [broadcastMessage, setBroadcastMessage] = useState("");
+  const [broadcastConfirm, setBroadcastConfirm] = useState(false);
+  const [broadcastStatus, setBroadcastStatus] = useState("");
+  const [broadcastSuccess, setBroadcastSuccess] = useState(false);
+
   useEffect(() => {
     fetchEventAndUsers();
     fetchLocations();
     fetchTimeslots();
+  }, [accessCode]);
+
+  // Auto-refresh attendees every 30s
+  useEffect(() => {
+    const interval = setInterval(() => {
+      fetchEventAndUsers();
+    }, 30000);
+    return () => clearInterval(interval);
   }, [accessCode]);
 
   const fetchEventAndUsers = async () => {
@@ -62,14 +76,16 @@ export default function HostDashboard() {
         const data = await res.json();
         setEvent(data);
         
-        // Also fetch users to check for attendee count
+        // Fetch attendees using host admin token
         try {
-          const uRes = await fetch(`${getApiUrl()}/users/`);
+          const adminCode = searchParams.get("token") || passcode;
+          const uRes = await fetch(`${getApiUrl()}/events/${accessCode}/attendees/`, {
+            headers: { "Authorization": adminCode || "" }
+          });
           if (uRes.ok) {
-            const allUsers = await uRes.json();
-            const attendees = allUsers.filter((u: any) => u.event_id === data.id && !u.is_host);
-            setAttendeeCount(attendees.length);
-            setAttendees(attendees);
+            const fetchedAttendees = await uRes.json();
+            setAttendeeCount(fetchedAttendees.length);
+            setAttendees(fetchedAttendees);
           }
         } catch (e) {
           console.error(e);
@@ -298,6 +314,28 @@ export default function HostDashboard() {
     }
   };
 
+  const handleBroadcast = async () => {
+    setBroadcastStatus("");
+    const urlAdminCode = searchParams.get("token") || passcode;
+    const res = await fetch(`${getApiUrl()}/events/${accessCode}/broadcast`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Authorization": urlAdminCode || "" },
+      body: JSON.stringify({ message: broadcastMessage }),
+    });
+    if (res.ok) {
+      const data = await res.json();
+      setBroadcastSuccess(true);
+      setBroadcastStatus(`${t('hostDashboard.broadcast.successPrefix')} ${data.sent} ${t('hostDashboard.broadcast.successSuffix')}`);
+      setBroadcastMessage("");
+      setBroadcastConfirm(false);
+      setTimeout(() => { setShowBroadcast(false); setBroadcastStatus(""); setBroadcastSuccess(false); }, 3000);
+    } else {
+      setBroadcastSuccess(false);
+      setBroadcastStatus(t('hostDashboard.broadcast.error'));
+      setBroadcastConfirm(false);
+    }
+  };
+
   if (!event) return <div className="p-12 text-center">{t('global.loading')}</div>;
 
   return (
@@ -424,6 +462,65 @@ export default function HostDashboard() {
             </div>
           </section>
         </div>
+
+        {/* Broadcast Message */}
+        <section className="bg-white shadow-sm border border-gray-200 rounded-2xl overflow-hidden">
+          <div className="p-5 sm:p-6 flex items-center justify-between">
+            <div>
+              <h3 className="font-bold text-gray-800">{t('hostDashboard.broadcast.toggleBtn')}</h3>
+              <p className="text-sm text-gray-500 mt-0.5">Email all active attendees instantly</p>
+            </div>
+            <button
+              onClick={() => { setShowBroadcast(b => !b); setBroadcastConfirm(false); setBroadcastStatus(""); }}
+              className="flex items-center gap-2 font-medium py-2 px-4 rounded-xl border transition-colors bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-indigo-100"
+            >
+              {showBroadcast ? "Hide" : "Compose"}
+            </button>
+          </div>
+          {showBroadcast && (
+            <div className="border-t border-gray-100 p-5 sm:p-6 space-y-4">
+              {!broadcastConfirm ? (
+                <>
+                  <textarea
+                    value={broadcastMessage}
+                    onChange={e => setBroadcastMessage(e.target.value)}
+                    rows={3}
+                    className="w-full border border-gray-200 rounded-xl p-3 text-sm text-gray-800 focus:outline-none focus:ring-2 focus:ring-indigo-300 resize-none"
+                    placeholder={t('hostDashboard.broadcast.placeholder')}
+                  />
+                  <div className="flex justify-end">
+                    <button
+                      disabled={!broadcastMessage.trim()}
+                      onClick={() => setBroadcastConfirm(true)}
+                      className="bg-indigo-600 text-white font-medium py-2 px-5 rounded-xl hover:bg-indigo-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                    >
+                      {t('hostDashboard.broadcast.sendBtn')}
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <div className="bg-amber-50 border border-amber-200 rounded-xl p-5 space-y-3">
+                  <p className="font-semibold text-amber-900">{t('hostDashboard.broadcast.confirmTitle')}</p>
+                  <p className="text-sm text-amber-700">{t('hostDashboard.broadcast.confirmDesc')}</p>
+                  <p className="text-sm italic text-gray-600 bg-white border border-gray-200 rounded-lg p-3">"{broadcastMessage}"</p>
+                  <div className="flex gap-3 justify-end">
+                    <button onClick={() => setBroadcastConfirm(false)} className="py-2 px-4 rounded-xl border border-gray-200 text-gray-700 hover:bg-gray-50 font-medium transition-colors">
+                      {t('hostDashboard.broadcast.cancelBtn')}
+                    </button>
+                    <button onClick={handleBroadcast} className="py-2 px-4 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors">
+                      {t('hostDashboard.broadcast.confirmBtn')}
+                    </button>
+                  </div>
+                </div>
+              )}
+              {broadcastStatus && (
+                <p className={`text-sm font-medium text-center ${broadcastSuccess ? 'text-green-600' : 'text-red-600'}`}>
+                  {broadcastStatus}
+                </p>
+              )}
+            </div>
+          )}
+        </section>
 
         {/* Locations Manager */}
         <section className="bg-white shadow-sm border border-gray-200 rounded-2xl overflow-hidden flex flex-col">
