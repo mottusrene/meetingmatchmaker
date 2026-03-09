@@ -27,7 +27,7 @@
       },
       "accepted": {
         "subject": "Meeting Confirmed with {receiver_name} – {event_title}",
-        "body": "Hi {requester_name},\n\n{receiver_name} accepted your meeting request at '{event_title}'.\n\nWhen: {start_time} – {end_time}\nWhere: {location_name}\n\nLog in to chat or manage your schedule:\n{magic_link}"
+        "body": "Hi {requester_name},\n\n{receiver_name} accepted your meeting request at '{event_title}'.\n\nWhen: {start_time} – {end_time}\nWhere: {location_name}{table_str}\n\nLog in to chat or manage your schedule:\n{magic_link}"
       },
       "declined": {
         "subject": "Meeting Declined – {event_title}",
@@ -41,6 +41,10 @@
         "subject": "New Message from {sender_name}",
         "body": "Hi {receiver_name},\n\nYou have a new message from {sender_name} regarding your upcoming meeting at '{event_title}':\n\n\"{content}\"\n\nPlease log in to the dashboard to reply."
       }
+    },
+    "broadcast": {
+      "subject": "Message from the host – {event_title}",
+      "body": "Hi {name},\n\nThe organiser of '{event_title}' has sent you the following message:\n\n{message}\n\n---\nYou received this because you registered for '{event_title}'."
     }
   }
 }

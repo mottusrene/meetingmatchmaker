@@ -96,6 +96,18 @@
       "totalTables": "Total Tables:",
       "removeTitle": "Remove Slot"
     },
+    "broadcast": {
+      "toggleBtn": "Send Broadcast",
+      "placeholder": "Type a message to all attendees...",
+      "sendBtn": "Send to All Attendees",
+      "confirmTitle": "Send broadcast message?",
+      "confirmDesc": "This will send an email to all active attendees of this event. Are you sure?",
+      "cancelBtn": "Cancel",
+      "confirmBtn": "Yes, Send",
+      "successPrefix": "Sent to",
+      "successSuffix": "attendees.",
+      "error": "Failed to send broadcast."
+    },
     "dangerZone": {
       "title": "Danger Zone",
       "deleteTitle": "Delete this Event",
@@ -201,7 +213,8 @@
       "waitingResponse": "Waiting for response",
       "chatBtn": "Chat",
       "addCalendarBtn": "Add to Calendar",
-      "cancelBtn": "Cancel"
+      "cancelBtn": "Cancel",
+      "tableLabel": "Table"
     },
     "metPeople": {
       "title": "People I've Met",

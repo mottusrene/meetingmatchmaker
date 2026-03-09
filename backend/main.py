@@ -25,7 +25,7 @@ FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 import models
 import schemas
 from database import SessionLocal, engine
-from email_service import send_host_welcome_email, send_attendee_magic_link, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification
+from email_service import send_host_welcome_email, send_attendee_magic_link, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification, send_broadcast
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -44,6 +44,7 @@ async def startup_event():
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
             "ALTER TABLE events ADD COLUMN website TEXT",
             "ALTER TABLE meetings ADD COLUMN request_message TEXT",
+            "ALTER TABLE meetings ADD COLUMN table_number INTEGER",
         ]:
             try:
                 db.execute(text(migration))
@@ -312,12 +313,22 @@ def get_current_user(authorization: str = Header(None), db: Session = Depends(ge
     return db_user
 
 @app.get("/users/", response_model=List[schemas.User])
-def list_users(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return db.query(models.User).offset(skip).limit(limit).all()
+def list_users(authorization: str = Header(None), db: Session = Depends(get_db)):
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Missing token")
+    requester = db.query(models.User).filter(models.User.session_token == authorization).first()
+    if not requester:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    return db.query(models.User).filter(models.User.event_id == requester.event_id).all()
 
 @app.get("/users/{user_id}", response_model=schemas.User)
-def get_user(user_id: int, db: Session = Depends(get_db)):
-    db_user = db.query(models.User).filter(models.User.id == user_id).first()
+def get_user(user_id: int, authorization: str = Header(None), db: Session = Depends(get_db)):
+    if not authorization:
+        raise HTTPException(status_code=401, detail="Missing token")
+    requester = db.query(models.User).filter(models.User.session_token == authorization).first()
+    if not requester:
+        raise HTTPException(status_code=401, detail="Invalid token")
+    db_user = db.query(models.User).filter(models.User.id == user_id, models.User.event_id == requester.event_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
     return db_user
@@ -478,6 +489,35 @@ def host_unsuspend_user(access_code: str, user_id: int, authorization: str = Hea
 
 # Matchmaking (Meetings)
 
+@app.get("/events/{access_code}/attendees/", response_model=List[schemas.User])
+def get_event_attendees(access_code: str, authorization: str = Header(None), db: Session = Depends(get_db)):
+    db_event = db.query(models.Event).filter(models.Event.access_code == access_code).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    if not authorization or db_event.admin_code != authorization:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    return db.query(models.User).filter(models.User.event_id == db_event.id, models.User.is_host == False).all()
+
+class BroadcastBody(PydanticModel):
+    message: str
+
+@app.post("/events/{access_code}/broadcast")
+async def broadcast_message(access_code: str, body: BroadcastBody, authorization: str = Header(None), db: Session = Depends(get_db)):
+    db_event = db.query(models.Event).filter(models.Event.access_code == access_code).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    if not authorization or db_event.admin_code != authorization:
+        raise HTTPException(status_code=403, detail="Not authorized")
+    attendees = db.query(models.User).filter(
+        models.User.event_id == db_event.id,
+        models.User.is_host == False,
+        models.User.is_suspended == False,
+    ).all()
+    for attendee in attendees:
+        send_broadcast(attendee.email, attendee.name, db_event.title, body.message)
+        await asyncio.sleep(0.1)
+    return {"sent": len(attendees)}
+
 @app.post("/events/{access_code}/meetings/", response_model=schemas.Meeting)
 @limiter.limit("20/minute")
 def create_meeting(request: Request, access_code: str, requester_id: int, meeting: schemas.MeetingCreate, db: Session = Depends(get_db)):
@@ -607,6 +647,19 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
         if location_conflict_count >= location.capacity:
             raise HTTPException(status_code=400, detail="The location is already full at this time.")
 
+        # Assign next available table number at this location+timeslot
+        used_tables = db.query(models.Meeting.table_number).filter(
+            models.Meeting.timeslot_id == db_meeting.timeslot_id,
+            models.Meeting.location_id == db_meeting.location_id,
+            models.Meeting.status == "accepted",
+            models.Meeting.id != meeting_id,
+        ).all()
+        used = {row[0] for row in used_tables if row[0] is not None}
+        table_num = 1
+        while table_num in used:
+            table_num += 1
+        db_meeting.table_number = table_num
+
     db_meeting.status = status
     db.commit()
     db.refresh(db_meeting)
@@ -623,6 +676,7 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
         requester_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={requester.session_token}"
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
         if status in ["accepted", "declined"]:
+            table_str = f", Table {db_meeting.table_number}" if db_meeting.table_number else ""
             send_meeting_notification(
                 requester.email,
                 status,
@@ -632,6 +686,7 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
                 start_time=start_str,
                 end_time=end_str,
                 location_name=location_name,
+                table_str=table_str,
                 magic_link=requester_link,
             )
         elif status == "cancelled":

@@ -85,6 +85,7 @@ class Meeting(Base):
     timeslot_id = Column(Integer, ForeignKey("timeslots.id"))
     status = Column(String, default="pending")
     request_message = Column(String, nullable=True)
+    table_number = Column(Integer, nullable=True)
     
     event = relationship("Event", back_populates="meetings")
     requester = relationship("User", foreign_keys=[requester_id], back_populates="meetings_requested")
