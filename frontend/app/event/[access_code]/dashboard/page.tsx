@@ -44,6 +44,8 @@ export default function AttendeeDashboard() {
 
   // Report state
   const [reportedUserIds, setReportedUserIds] = useState<Set<number>>(new Set());
+  const [reportingUser, setReportingUser] = useState<any>(null);
+  const [reportComment, setReportComment] = useState("");
 
   // Chat State
   const [isChatOpen, setIsChatOpen] = useState(false);
@@ -302,15 +304,18 @@ export default function AttendeeDashboard() {
       }
   };
 
-  const reportUser = async (targetUserId: number) => {
+  const reportUser = async (targetUserId: number, comment: string) => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     if (!token) return;
     const res = await fetch(`${getApiUrl()}/users/${targetUserId}/report`, {
       method: "POST",
-      headers: { "Authorization": token }
+      headers: { "Authorization": token, "Content-Type": "application/json" },
+      body: JSON.stringify({ comment }),
     });
     if (res.ok) {
       setReportedUserIds(prev => new Set(prev).add(targetUserId));
+      setReportingUser(null);
+      setReportComment("");
     }
   };
 
@@ -492,10 +497,16 @@ export default function AttendeeDashboard() {
             />
           </div>
           <div className="grid sm:grid-cols-2 gap-6">
-            {users.filter(u => u.name.toLowerCase().includes(searchQuery.toLowerCase())).length === 0 ? (
+            {users.filter(u => {
+              const q = searchQuery.toLowerCase();
+              return u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q));
+            }).length === 0 ? (
               <p className="text-gray-500 italic p-6">{t('attendeeDashboard.directory.empty')}</p>
             ) : (
-              users.filter(u => u.name.toLowerCase().includes(searchQuery.toLowerCase())).map(user => (
+              users.filter(u => {
+              const q = searchQuery.toLowerCase();
+              return u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q));
+            }).map(user => (
                 <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-4 gap-4">
                     <div className="flex items-center gap-3 w-full">
@@ -527,9 +538,9 @@ export default function AttendeeDashboard() {
                     {t('attendeeDashboard.directory.requestMeetingBtn')}
                   </button>
                   <button
-                    onClick={() => reportUser(user.id)}
+                    onClick={() => { if (!reportedUserIds.has(user.id)) { setReportingUser(user); setReportComment(""); } }}
                     disabled={reportedUserIds.has(user.id)}
-                    className={`w-full mt-2 text-sm font-medium py-1.5 rounded-lg border transition-colors ${reportedUserIds.has(user.id) ? 'bg-gray-50 text-gray-400 border-gray-200 cursor-default' : 'bg-red-50 text-red-600 hover:bg-red-100 border-red-200'}`}
+                    className={`w-full mt-1 text-xs py-1 transition-colors rounded ${reportedUserIds.has(user.id) ? 'text-gray-300 cursor-default' : 'text-gray-400 hover:text-red-500'}`}
                   >
                     {reportedUserIds.has(user.id) ? t('attendeeDashboard.directory.reportedSuccess') : t('attendeeDashboard.directory.reportBtn')}
                   </button>
@@ -540,6 +551,41 @@ export default function AttendeeDashboard() {
         </section>
 
       </main>
+
+      {/* Report User Modal */}
+      {reportingUser && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('attendeeDashboard.directory.reportModal.title', { name: reportingUser.name })}</h3>
+            <p className="text-gray-500 text-sm mb-6">{t('attendeeDashboard.directory.reportModal.description')}</p>
+            <div className="mb-6">
+              <label className="block text-sm font-medium text-gray-700 mb-2">{t('attendeeDashboard.directory.reportModal.reasonLabel')}</label>
+              <textarea
+                value={reportComment}
+                onChange={e => setReportComment(e.target.value)}
+                rows={3}
+                placeholder={t('attendeeDashboard.directory.reportModal.reasonPlaceholder')}
+                className="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-red-400 focus:border-red-400 resize-none"
+              />
+            </div>
+            <div className="flex gap-3">
+              <button
+                onClick={() => { setReportingUser(null); setReportComment(""); }}
+                className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 font-bold rounded-xl hover:bg-gray-50"
+              >
+                {t('attendeeDashboard.directory.reportModal.cancelBtn')}
+              </button>
+              <button
+                onClick={() => reportUser(reportingUser.id, reportComment)}
+                disabled={!reportComment.trim()}
+                className="flex-1 px-4 py-3 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed shadow-md"
+              >
+                {t('attendeeDashboard.directory.reportModal.submitBtn')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Meeting Request Modal */}
       {selectedUser && (

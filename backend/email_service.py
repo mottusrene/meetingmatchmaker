@@ -1,29 +1,37 @@
 # backend/email_service.py
 import json
 import os
-
-import resend
+import smtplib
+import ssl
+from email.mime.text import MIMEText
 
 with open(os.path.join(os.path.dirname(__file__), "content", "en.json"), "r") as f:
     text_dict = json.load(f)["emails"]
 
-RESEND_API_KEY = os.environ.get("RESEND_API_KEY")
-FROM_EMAIL = os.environ.get("FROM_EMAIL", "onboarding@resend.dev")
+SMTP_HOST = os.environ.get("SMTP_HOST", "smtp.zone.eu")
+SMTP_PORT = int(os.environ.get("SMTP_PORT", "587"))
+SMTP_USER = os.environ.get("SMTP_USER")
+SMTP_PASS = os.environ.get("SMTP_PASS")
+FROM_EMAIL = os.environ.get("FROM_EMAIL", SMTP_USER)
 
 def _send(to: str, subject: str, body: str):
-    """Send an email via Resend, or fall back to console if no API key is set."""
-    if RESEND_API_KEY:
+    """Send an email via SMTP, or fall back to console if credentials are not set."""
+    if SMTP_USER and SMTP_PASS:
         try:
-            resend.api_key = RESEND_API_KEY
-            resend.Emails.send({
-                "from": FROM_EMAIL,
-                "to": to,
-                "subject": subject,
-                "text": body,
-            })
+            msg = MIMEText(body)
+            msg["Subject"] = subject
+            msg["From"] = FROM_EMAIL
+            msg["To"] = to
+            context = ssl.create_default_context()
+            with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
+                server.ehlo()
+                server.starttls(context=context)
+                server.ehlo()
+                server.login(SMTP_USER, SMTP_PASS)
+                server.sendmail(FROM_EMAIL, to, msg.as_string())
             return
         except Exception as e:
-            print(f"⚠️  Resend failed ({e}), falling back to console.")
+            print(f"⚠️  SMTP failed ({e}), falling back to console.")
     print("\n" + "="*50)
     print(f"📧 EMAIL (console fallback)")
     print(f"To: {to}")

@@ -553,11 +553,14 @@ export default function HostDashboard() {
                               <span className="text-xs font-bold text-orange-700 bg-orange-100 px-2 py-0.5 rounded-full">{t('hostDashboard.attendees.suspendedBadge')}</span>
                             )}
                             {attendee.is_flagged && (
-                              <span className="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded-full" title={t('hostDashboard.attendees.flagTooltip')}>{t('hostDashboard.attendees.flaggedBadge')}</span>
+                              <span className="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded-full">{t('hostDashboard.attendees.flaggedBadge')}</span>
                             )}
                           </div>
                           {attendee.company && <p className="text-sm text-gray-500 truncate">{attendee.company}</p>}
                           <p className="text-xs text-gray-400 truncate">{attendee.email}</p>
+                          {attendee.is_flagged && attendee.report_comment && (
+                            <p className="text-xs text-red-500 italic mt-0.5 truncate" title={attendee.report_comment}>"{attendee.report_comment}"</p>
+                          )}
                         </div>
                       </div>
                       <button
