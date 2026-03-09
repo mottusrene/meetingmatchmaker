@@ -6,8 +6,11 @@ from sqlalchemy.orm import Session
 from sqlalchemy import text
 from typing import List
 import uuid
+import os
 from datetime import datetime, timedelta
 import asyncio
+
+FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
 import models
 import schemas
@@ -105,7 +108,7 @@ def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
     db.refresh(db_event)
     
     if event.host_email:
-        admin_link = f"http://localhost:3000/event/{access_code}/admin?token={admin_code}"
+        admin_link = f"{FRONTEND_URL}/host/{access_code}?token={admin_code}"
         send_host_welcome_email(event.host_email, event.title, admin_link)
         
     return db_event
@@ -270,7 +273,7 @@ def create_user(access_code: str, user: schemas.UserCreate, db: Session = Depend
                  db_user.available_timeslots.append(ts)
         db.commit()
     
-    magic_link = f"http://localhost:3000/event/{access_code}?token={session_token}"
+    magic_link = f"{FRONTEND_URL}/event/{access_code}?token={session_token}"
     send_attendee_magic_link(user.email, user.name, db_event.title, magic_link)
     
     return db_user
