@@ -15,7 +15,7 @@ services:
       - SMTP_HOST=smtp.zone.eu
       - SMTP_PORT=587
       - SMTP_USER=meetings@personomist.com
-      - SMTP_PASS=q^2U}F.#i29jtCB
+      - SMTP_PASS=****
       - FROM_EMAIL=meetings@personomist.com
     restart: always
 
