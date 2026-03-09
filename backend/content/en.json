@@ -22,20 +22,20 @@
     },
     "meeting": {
       "request": {
-        "subject": "New Meeting Request from {requester_name}",
-        "body": "Hi {receiver_name},\n\n{requester_name} has requested a meeting with you for the event '{event_title}'. Please log in to accept or decline."
+        "subject": "New Meeting Request from {requester_name} – {event_title}",
+        "body": "Hi {receiver_name},\n\n{requester_name} has requested a 1:1 meeting with you at '{event_title}'.\n\nProposed time: {start_time} – {end_time}\nLocation: {location_name}{request_message_block}\n\nLog in to accept or decline:\n{magic_link}"
       },
       "accepted": {
-        "subject": "Meeting Accepted by {receiver_name}",
-        "body": "Hi {requester_name},\n\nYour meeting request for the event '{event_title}' was accepted by {receiver_name}."
+        "subject": "Meeting Confirmed with {receiver_name} – {event_title}",
+        "body": "Hi {requester_name},\n\n{receiver_name} accepted your meeting request at '{event_title}'.\n\nWhen: {start_time} – {end_time}\nWhere: {location_name}\n\nLog in to chat or manage your schedule:\n{magic_link}"
       },
       "declined": {
-        "subject": "Meeting Declined by {receiver_name}",
-        "body": "Hi {requester_name},\n\nYour meeting request for the event '{event_title}' was declined by {receiver_name}."
+        "subject": "Meeting Declined – {event_title}",
+        "body": "Hi {requester_name},\n\n{receiver_name} declined your meeting request at '{event_title}'. You can log in to send a request to another attendee:\n{magic_link}"
       },
       "cancelled": {
-        "subject": "Meeting Cancelled",
-        "body": "Hi {name},\n\nA scheduled meeting for the event '{event_title}' was cancelled."
+        "subject": "Meeting Cancelled – {event_title}",
+        "body": "Hi {name},\n\nA scheduled meeting at '{event_title}' has been cancelled.\n\nLog in to manage your schedule:\n{magic_link}"
       },
       "message": {
         "subject": "New Message from {sender_name}",

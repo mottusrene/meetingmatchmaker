@@ -29,6 +29,7 @@ export default function AttendeeDashboard() {
   const [selectedUser, setSelectedUser] = useState<any>(null);
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedTimeslot, setSelectedTimeslot] = useState("");
+  const [requestMessage, setRequestMessage] = useState("");
   const [requestStatus, setRequestStatus] = useState("");
 
   // Edit Profile State
@@ -144,7 +145,8 @@ export default function AttendeeDashboard() {
       body: JSON.stringify({
         receiver_id: selectedUser.id,
         location_id: parseInt(selectedLocation),
-        timeslot_id: parseInt(selectedTimeslot)
+        timeslot_id: parseInt(selectedTimeslot),
+        request_message: requestMessage.trim() || null,
       }),
     });
     
@@ -153,6 +155,7 @@ export default function AttendeeDashboard() {
       setTimeout(() => {
         setSelectedUser(null);
         setRequestStatus("");
+        setRequestMessage("");
         // Refresh meetings
         fetch(`${getApiUrl()}/users/${userId}/meetings/`)
           .then(r => r.json())
@@ -379,6 +382,11 @@ export default function AttendeeDashboard() {
                   {event.location && (
                     <span className="flex items-center"><MapPin size={14} className="mr-1" /> {event.location}</span>
                   )}
+                  {event.website && (
+                    <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+                      <ExternalLink size={14} className="mr-1" /> {event.website.replace(/^https?:\/\//, '')}
+                    </a>
+                  )}
                 </div>
                 <p className="text-blue-100 mt-2 text-sm max-w-xl">{event.description}</p>
                 <div className="flex items-center gap-2 mt-3 flex-wrap">
@@ -452,6 +460,9 @@ export default function AttendeeDashboard() {
                       </div>
                     </div>
 
+                    {isReceiver && m.status === 'pending' && m.request_message && (
+                      <p className="text-xs text-gray-500 italic bg-gray-50 rounded-lg px-3 py-2 mb-3 border border-gray-100">"{m.request_message}"</p>
+                    )}
                     {isReceiver && m.status === 'pending' && (
                       <div className="flex gap-2">
                         <button onClick={() => updateMeeting(m.id, 'accepted')} className="flex-1 bg-green-50 text-green-700 border border-green-200 hover:bg-green-100 font-medium py-2 rounded-lg transition-colors flex justify-center items-center">
@@ -541,7 +552,7 @@ export default function AttendeeDashboard() {
                   <p className="text-gray-600 text-sm mb-6 line-clamp-3">{user.bio}</p>
 
                   <button
-                    onClick={() => { setSelectedUser(user); setSelectedLocation(""); setSelectedTimeslot(""); setRequestStatus(""); }}
+                    onClick={() => { setSelectedUser(user); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
                     className="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 font-bold py-2 rounded-lg border border-blue-200 transition-colors"
                   >
                     {t('attendeeDashboard.directory.requestMeetingBtn')}
@@ -581,6 +592,41 @@ export default function AttendeeDashboard() {
           </>);
           })()}
         </section>
+
+        {/* People I've Met */}
+        {meetings.filter(m => m.status === 'accepted').length > 0 && (
+          <section className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+            <div className="border-b border-gray-100 pb-4 mb-6">
+              <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.metPeople.title')}</h2>
+              <p className="text-sm text-gray-500 mt-1">{t('attendeeDashboard.metPeople.subtitle')}</p>
+            </div>
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              {meetings.filter(m => m.status === 'accepted').map(m => {
+                const other = m.receiver_id === parseInt(userId || '0') ? m.requester : m.receiver;
+                return (
+                  <div key={m.id} className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-gray-100 transition-colors">
+                    {other.avatar_url ? (
+                      <img src={other.avatar_url} alt={other.name} className="w-12 h-12 rounded-full object-cover flex-shrink-0 border border-gray-200" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-lg flex-shrink-0">
+                        {other.name.charAt(0).toUpperCase()}
+                      </div>
+                    )}
+                    <div className="min-w-0">
+                      <p className="font-semibold text-gray-900 truncate">{other.name}</p>
+                      {other.company && <p className="text-sm text-gray-500 truncate">{other.company}</p>}
+                      {other.profile_link && (
+                        <a href={other.profile_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:text-blue-700 flex items-center gap-1 mt-0.5">
+                          <ExternalLink size={11} /> Profile
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </section>
+        )}
 
       </main>
 
@@ -660,6 +706,17 @@ export default function AttendeeDashboard() {
                 }).length === 0 && (
                   <p className="text-xs text-red-500 mt-2 font-medium">{t('attendeeDashboard.requestModal.noOverlapError')}</p>
                 )}
+              </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('attendeeDashboard.requestModal.messageLabel')}</label>
+                <textarea
+                  value={requestMessage}
+                  onChange={e => setRequestMessage(e.target.value)}
+                  rows={2}
+                  maxLength={300}
+                  placeholder={t('attendeeDashboard.requestModal.messagePlaceholder')}
+                  className="w-full border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-400 resize-none"
+                />
               </div>
               {requestStatus && <div className={`text-sm font-bold ${requestStatus.includes('Error') ? 'text-red-500' : 'text-green-600'}`}>{requestStatus}</div>}
             </div>

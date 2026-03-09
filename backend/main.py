@@ -1,14 +1,24 @@
-from fastapi import FastAPI, Depends, HTTPException, status, Header
+from fastapi import FastAPI, Depends, HTTPException, status, Header, Request
 from pydantic import BaseModel as PydanticModel
 from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text
+from slowapi import Limiter, _rate_limit_exceeded_handler
+from slowapi.errors import RateLimitExceeded
 from typing import List
 import uuid
 import os
 from datetime import datetime, timedelta
 import asyncio
+
+def get_real_ip(request: Request) -> str:
+    forwarded_for = request.headers.get("X-Forwarded-For")
+    if forwarded_for:
+        return forwarded_for.split(",")[0].strip()
+    return request.client.host if request.client else "unknown"
+
+limiter = Limiter(key_func=get_real_ip)
 
 FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 
@@ -20,6 +30,8 @@ from email_service import send_host_welcome_email, send_attendee_magic_link, sen
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Matchmaking Application MVP")
+app.state.limiter = limiter
+app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
 @app.on_event("startup")
 async def startup_event():
@@ -30,6 +42,8 @@ async def startup_event():
             "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
             "ALTER TABLE users ADD COLUMN report_comment TEXT",
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
+            "ALTER TABLE events ADD COLUMN website TEXT",
+            "ALTER TABLE meetings ADD COLUMN request_message TEXT",
         ]:
             try:
                 db.execute(text(migration))
@@ -90,7 +104,11 @@ def read_root():
 # Host Endpoints
 
 @app.post("/events/", response_model=schemas.Event)
-def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
+@limiter.limit("10/hour")
+def create_event(request: Request, event: schemas.EventCreate, db: Session = Depends(get_db)):
+    existing = db.query(models.Event).filter(models.Event.host_email == event.host_email).count()
+    if existing >= 3:
+        raise HTTPException(status_code=429, detail="Maximum of 3 events per email address reached.")
     access_code = str(uuid.uuid4())[:8].upper() # Simple short code for MVP
     admin_code = f"host/{str(uuid.uuid4())}"
     db_event = models.Event(
@@ -143,6 +161,8 @@ def update_event(
         db_event.logo_url = event_update.logo_url
     if event_update.banner_url is not None:
         db_event.banner_url = event_update.banner_url
+    if event_update.website is not None:
+        db_event.website = event_update.website
     if event_update.location is not None:
         db_event.location = event_update.location
     if event_update.start_date is not None:
@@ -240,7 +260,8 @@ def delete_timeslot(access_code: str, timeslot_id: int, db: Session = Depends(ge
 # Attendee Endpoints
 
 @app.post("/events/{access_code}/users/", response_model=schemas.UserPrivate)
-def create_user(access_code: str, user: schemas.UserCreate, db: Session = Depends(get_db)):
+@limiter.limit("10/minute")
+def create_user(request: Request, access_code: str, user: schemas.UserCreate, db: Session = Depends(get_db)):
     db_event = get_event(access_code, db)
     
     # We removed global unique email constraint so users can join multiple events with the same email.
@@ -357,7 +378,8 @@ class ReportBody(PydanticModel):
     comment: str = ""
 
 @app.post("/users/{user_id}/report")
-def report_user(user_id: int, body: ReportBody, authorization: str = Header(None), db: Session = Depends(get_db)):
+@limiter.limit("5/minute")
+def report_user(request: Request, user_id: int, body: ReportBody, authorization: str = Header(None), db: Session = Depends(get_db)):
     # Verify the reporter is a valid user
     reporter = db.query(models.User).filter(models.User.session_token == authorization).first()
     if not reporter:
@@ -457,7 +479,8 @@ def host_unsuspend_user(access_code: str, user_id: int, authorization: str = Hea
 # Matchmaking (Meetings)
 
 @app.post("/events/{access_code}/meetings/", response_model=schemas.Meeting)
-def create_meeting(access_code: str, requester_id: int, meeting: schemas.MeetingCreate, db: Session = Depends(get_db)):
+@limiter.limit("20/minute")
+def create_meeting(request: Request, access_code: str, requester_id: int, meeting: schemas.MeetingCreate, db: Session = Depends(get_db)):
     db_event = get_event(access_code, db)
 
     # Check suspension status
@@ -505,7 +528,8 @@ def create_meeting(access_code: str, requester_id: int, meeting: schemas.Meeting
         receiver_id=meeting.receiver_id,
         location_id=meeting.location_id,
         timeslot_id=meeting.timeslot_id,
-        status="pending"
+        status="pending",
+        request_message=meeting.request_message or None,
     )
     db.add(db_meeting)
     db.commit()
@@ -514,14 +538,26 @@ def create_meeting(access_code: str, requester_id: int, meeting: schemas.Meeting
     requester = db.query(models.User).filter(models.User.id == requester_id).first()
     receiver = db.query(models.User).filter(models.User.id == meeting.receiver_id).first()
     if requester and receiver:
+        timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
+        location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
+        start_str = timeslot.start_time.strftime("%d %b %Y, %H:%M") if timeslot else "TBD"
+        end_str = timeslot.end_time.strftime("%H:%M") if timeslot else "TBD"
+        location_name = location.name if location else "TBD"
+        receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
+        msg_block = f"\n\nMessage from {requester.name}:\n\"{db_meeting.request_message}\"" if db_meeting.request_message else ""
         send_meeting_notification(
             receiver.email,
             "request",
             requester_name=requester.name,
             receiver_name=receiver.name,
-            event_title=db_event.title
+            event_title=db_event.title,
+            start_time=start_str,
+            end_time=end_str,
+            location_name=location_name,
+            magic_link=receiver_link,
+            request_message_block=msg_block,
         )
-    
+
     return db_meeting
 
 @app.get("/users/{user_id}/meetings/", response_model=List[schemas.Meeting])
@@ -579,26 +615,39 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
     receiver = db.query(models.User).filter(models.User.id == db_meeting.receiver_id).first()
     if requester and receiver:
         db_event = db.query(models.Event).filter(models.Event.id == db_meeting.event_id).first()
+        timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
+        location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
+        start_str = timeslot.start_time.strftime("%d %b %Y, %H:%M") if timeslot else "TBD"
+        end_str = timeslot.end_time.strftime("%H:%M") if timeslot else "TBD"
+        location_name = location.name if location else "TBD"
+        requester_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={requester.session_token}"
+        receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
         if status in ["accepted", "declined"]:
             send_meeting_notification(
-                requester.email, 
+                requester.email,
                 status,
                 requester_name=requester.name,
                 receiver_name=receiver.name,
-                event_title=db_event.title
+                event_title=db_event.title,
+                start_time=start_str,
+                end_time=end_str,
+                location_name=location_name,
+                magic_link=requester_link,
             )
         elif status == "cancelled":
             send_meeting_notification(
-                requester.email, 
+                requester.email,
                 "cancelled",
                 name=requester.name,
-                event_title=db_event.title
+                event_title=db_event.title,
+                magic_link=requester_link,
             )
             send_meeting_notification(
-                receiver.email, 
+                receiver.email,
                 "cancelled",
                 name=receiver.name,
-                event_title=db_event.title
+                event_title=db_event.title,
+                magic_link=receiver_link,
             )
             
     return db_meeting
