@@ -22,15 +22,16 @@ app = FastAPI(title="Matchmaking Application MVP")
 async def startup_event():
     # Run lightweight SQLite column migrations for any new fields
     db = SessionLocal()
-    for migration in [
-        "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
-        "ALTER TABLE users ADD COLUMN report_comment TEXT",
-    ]:
-        try:
-            db.execute(text(migration))
-            db.commit()
-        except Exception:
-            pass  # Column already exists
+    try:
+        for migration in [
+            "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
+            "ALTER TABLE users ADD COLUMN report_comment TEXT",
+        ]:
+            try:
+                db.execute(text(migration))
+                db.commit()
+            except Exception:
+                pass  # Column already exists
     finally:
         db.close()
     asyncio.create_task(cleanup_expired_events())
