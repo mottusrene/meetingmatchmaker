@@ -24,6 +24,7 @@ export default function HostDashboard() {
   const [editDescription, setEditDescription] = useState("");
   const [editLocation, setEditLocation] = useState("");
   const [editLogoUrl, setEditLogoUrl] = useState("");
+  const [editBannerUrl, setEditBannerUrl] = useState("");
   const [editStartDate, setEditStartDate] = useState("");
   const [editEndDate, setEditEndDate] = useState("");
   const [editEventStatus, setEditEventStatus] = useState("");
@@ -75,6 +76,7 @@ export default function HostDashboard() {
         setEditDescription(data.description || "");
         setEditLocation(data.location || "");
         setEditLogoUrl(data.logo_url || "");
+        setEditBannerUrl(data.banner_url || "");
         // Format date correctly for the input type="date" (YYYY-MM-DD)
         if (data.start_date) {
             const dateObj = parseDate(data.start_date);
@@ -221,6 +223,7 @@ export default function HostDashboard() {
             description: editDescription,
             location: editLocation || null,
             logo_url: editLogoUrl,
+            banner_url: editBannerUrl || null,
             start_date: editStartDate ? new Date(editStartDate).toISOString() : null,
             end_date: editEndDate ? new Date(editEndDate).toISOString() : null
         })
@@ -281,8 +284,12 @@ export default function HostDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      <header className="bg-indigo-900 text-white shadow-md py-4 sm:py-6 px-4 sm:px-8 relative">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
+      <header
+        className="text-white shadow-md py-4 sm:py-6 px-4 sm:px-8 relative"
+        style={event.banner_url ? { backgroundImage: `url(${event.banner_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : { backgroundColor: '#1e1b4b' }}
+      >
+        {event.banner_url && <div className="absolute inset-0 bg-indigo-900/75" />}
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 relative z-10">
           <div className="flex items-center gap-4">
             {event.logo_url && (
               <img src={event.logo_url} alt="Event Logo" className="w-16 h-16 rounded-lg object-contain bg-white/10 p-1" />
@@ -303,7 +310,7 @@ export default function HostDashboard() {
                   <span className="flex items-center"><MapPin size={14} className="mr-1" /> {event.location}</span>
                 )}
               </div>
-              <p className="text-indigo-100 mt-2">{t('hostDashboard.title')} &bull; {event.description}</p>
+              <p className="text-indigo-200 mt-1 text-sm">{t('hostDashboard.title')}</p>
             </div>
           </div>
           <div className="flex gap-4">
@@ -677,6 +684,31 @@ export default function HostDashboard() {
                     <img src={editLogoUrl} alt="Preview" className="w-10 h-10 rounded-lg border border-gray-200 object-contain flex-shrink-0" />
                   )}
                 </div>
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.bannerUrlLabel')}</label>
+                <div className="flex gap-2 items-center">
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) {
+                        const reader = new FileReader();
+                        reader.onloadend = () => { setEditBannerUrl(reader.result as string); };
+                        reader.readAsDataURL(file);
+                      }
+                    }}
+                    className="w-full border border-gray-300 rounded-lg focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                  />
+                  {editBannerUrl && (
+                    <img src={editBannerUrl} alt="Preview" className="w-16 h-10 rounded-lg border border-gray-200 object-cover flex-shrink-0" />
+                  )}
+                </div>
+                {editBannerUrl && (
+                  <button type="button" onClick={() => setEditBannerUrl("")} className="text-xs text-red-500 hover:text-red-700 mt-1">Remove banner</button>
+                )}
               </div>
 
               {editEventStatus && <div className={`text-sm font-bold mt-2 ${editEventStatus.includes('Error') ? 'text-red-500' : 'text-green-600'}`}>{editEventStatus}</div>}

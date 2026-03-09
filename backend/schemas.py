@@ -56,6 +56,7 @@ class EventBase(BaseModel):
     description: Optional[str] = None
     host_email: Optional[str] = None
     logo_url: Optional[str] = None
+    banner_url: Optional[str] = None
     location: Optional[str] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
@@ -64,6 +65,7 @@ class EventUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     logo_url: Optional[str] = None
+    banner_url: Optional[str] = None
     location: Optional[str] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
