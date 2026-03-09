@@ -41,6 +41,7 @@ class Event(Base):
     title = Column(String)
     description = Column(String)
     logo_url = Column(String, nullable=True)
+    banner_url = Column(String, nullable=True)
     location = Column(String, nullable=True) # Overall event location (e.g., "Grand Hotel")
     start_date = Column(DateTime, nullable=True) # Explicit start date
     end_date = Column(DateTime, nullable=True) # Explicit end date for cleanup

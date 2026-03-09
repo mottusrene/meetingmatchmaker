@@ -29,6 +29,7 @@ async def startup_event():
         for migration in [
             "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
             "ALTER TABLE users ADD COLUMN report_comment TEXT",
+            "ALTER TABLE events ADD COLUMN banner_url TEXT",
         ]:
             try:
                 db.execute(text(migration))
@@ -90,7 +91,7 @@ def read_root():
 
 @app.post("/events/", response_model=schemas.Event)
 def create_event(event: schemas.EventCreate, db: Session = Depends(get_db)):
-    access_code = str(uuid.uuid4())[:8] # Simple short code for MVP
+    access_code = str(uuid.uuid4())[:8].upper() # Simple short code for MVP
     admin_code = f"host/{str(uuid.uuid4())}"
     db_event = models.Event(
         title=event.title,
@@ -140,6 +141,8 @@ def update_event(
         db_event.description = event_update.description
     if event_update.logo_url is not None:
         db_event.logo_url = event_update.logo_url
+    if event_update.banner_url is not None:
+        db_event.banner_url = event_update.banner_url
     if event_update.location is not None:
         db_event.location = event_update.location
     if event_update.start_date is not None:

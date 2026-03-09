@@ -22,6 +22,8 @@ export default function AttendeeDashboard() {
   const [timeslots, setTimeslots] = useState<any[]>([]);
   const [meetings, setMeetings] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const PAGE_SIZE = 12;
   
   // Selection state for meeting request modal
   const [selectedUser, setSelectedUser] = useState<any>(null);
@@ -346,8 +348,12 @@ export default function AttendeeDashboard() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col font-sans">
-      <header className="bg-blue-700 text-white shadow-md py-4 sm:py-6 px-4 sm:px-8">
-        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4">
+      <header
+        className="text-white shadow-md py-4 sm:py-6 px-4 sm:px-8 relative"
+        style={event.banner_url ? { backgroundImage: `url(${event.banner_url})`, backgroundSize: 'cover', backgroundPosition: 'center' } : { backgroundColor: '#1d4ed8' }}
+      >
+        {event.banner_url && <div className="absolute inset-0 bg-blue-900/70" />}
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 relative z-10">
           
           <div className="flex flex-col gap-4 flex-grow">
             <div className="flex items-center gap-4">
@@ -492,21 +498,24 @@ export default function AttendeeDashboard() {
               type="text"
               placeholder={t('attendeeDashboard.directory.searchPlaceholder')}
               value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
               className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
             />
           </div>
+          {(() => {
+            const q = searchQuery.toLowerCase();
+            const filtered = users.filter(u =>
+              u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q))
+            );
+            const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+            const safePage = Math.min(currentPage, totalPages);
+            const paged = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
+            return (<>
           <div className="grid sm:grid-cols-2 gap-6">
-            {users.filter(u => {
-              const q = searchQuery.toLowerCase();
-              return u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q));
-            }).length === 0 ? (
+            {filtered.length === 0 ? (
               <p className="text-gray-500 italic p-6">{t('attendeeDashboard.directory.empty')}</p>
             ) : (
-              users.filter(u => {
-              const q = searchQuery.toLowerCase();
-              return u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q));
-            }).map(user => (
+              paged.map(user => (
                 <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
                   <div className="flex justify-between items-start mb-4 gap-4">
                     <div className="flex items-center gap-3 w-full">
@@ -548,6 +557,29 @@ export default function AttendeeDashboard() {
               ))
             )}
           </div>
+          {totalPages > 1 && (
+            <div className="flex items-center justify-between mt-6 pt-4 border-t border-gray-100">
+              <button
+                onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+                disabled={safePage === 1}
+                className="px-4 py-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                ← Previous
+              </button>
+              <span className="text-sm text-gray-500">
+                Page {safePage} of {totalPages} <span className="text-gray-400">({filtered.length} attendees)</span>
+              </span>
+              <button
+                onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+                disabled={safePage === totalPages}
+                className="px-4 py-2 text-sm font-medium rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-40 disabled:cursor-not-allowed"
+              >
+                Next →
+              </button>
+            </div>
+          )}
+          </>);
+          })()}
         </section>
 
       </main>
