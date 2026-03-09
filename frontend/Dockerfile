@@ -1,10 +1,10 @@
-FROM node:18-alpine AS builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 # Install dependencies
 COPY package.json package-lock.json* ./
-RUN npm ci
+RUN npm install
 
 # Copy the rest of the application
 COPY . .
@@ -13,7 +13,7 @@ COPY . .
 RUN npm run build
 
 # Production image
-FROM node:18-alpine AS runner
+FROM node:20-alpine AS runner
 
 WORKDIR /app
 ENV NODE_ENV production
