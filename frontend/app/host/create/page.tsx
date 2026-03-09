@@ -14,7 +14,6 @@ export default function CreateEvent() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
-  const [passcode, setPasscode] = useState("");
   const [hostEmail, setHostEmail] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -31,11 +30,10 @@ export default function CreateEvent() {
       const res = await fetch(`${getApiUrl()}/events/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          title, 
-          description, 
+        body: JSON.stringify({
+          title,
+          description,
           location: location || null,
-          passcode, 
           host_email: hostEmail || null,
           start_date: startDate ? new Date(startDate).toISOString() : null,
           end_date: endDate ? new Date(endDate).toISOString() : null
@@ -107,20 +105,6 @@ export default function CreateEvent() {
                 onChange={(e) => setLocation(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                 placeholder={t('createEvent.locationPlaceholder')}
-              />
-            </div>
-
-            <div>
-              <label htmlFor="passcode" className="block text-sm font-medium text-gray-700 mb-2">{t('createEvent.passcodeLabel')}</label>
-              <p className="text-sm text-gray-500 mb-2">{t('createEvent.passcodeDesc')}</p>
-              <input
-                id="passcode"
-                type="password"
-                required
-                value={passcode}
-                onChange={(e) => setPasscode(e.target.value)}
-                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
-                placeholder={t('createEvent.passcodePlaceholder')}
               />
             </div>
 

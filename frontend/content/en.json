@@ -39,9 +39,6 @@
     "descriptionPlaceholder": "A brief description of your event...",
     "locationLabel": "Location (Optional)",
     "locationPlaceholder": "e.g., Grand Hyatt, NYC / Online via Zoom",
-    "passcodeLabel": "Host Passcode",
-    "passcodeDesc": "You will need this to access the host dashboard.",
-    "passcodePlaceholder": "Create a secure passcode",
     "hostEmailLabel": "Host Email (Optional)",
     "hostEmailDesc": "Provide an email to receive your secret admin link to manage this event later.",
     "hostEmailPlaceholder": "host@example.com",
@@ -203,8 +200,16 @@
       "searchPlaceholder": "Search by name...",
       "empty": "No attendees found.",
       "requestMeetingBtn": "Request Meeting",
-      "reportBtn": "Report User",
-      "reportedSuccess": "User reported"
+      "reportBtn": "Report...",
+      "reportedSuccess": "Reported",
+      "reportModal": {
+        "title": "Report {{name}}",
+        "description": "Let the host know what happened. They'll review your report.",
+        "reasonLabel": "Reason",
+        "reasonPlaceholder": "Briefly describe the issue...",
+        "cancelBtn": "Cancel",
+        "submitBtn": "Submit Report"
+      }
     },
     "requestModal": {
       "title": "Request Meeting",

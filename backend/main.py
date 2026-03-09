@@ -1,4 +1,5 @@
 from fastapi import FastAPI, Depends, HTTPException, status, Header
+from pydantic import BaseModel as PydanticModel
 from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
@@ -21,11 +22,15 @@ app = FastAPI(title="Matchmaking Application MVP")
 async def startup_event():
     # Run lightweight SQLite column migrations for any new fields
     db = SessionLocal()
-    try:
-        db.execute(text("ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0"))
-        db.commit()
-    except Exception:
-        pass  # Column already exists
+    for migration in [
+        "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
+        "ALTER TABLE users ADD COLUMN report_comment TEXT",
+    ]:
+        try:
+            db.execute(text(migration))
+            db.commit()
+        except Exception:
+            pass  # Column already exists
     finally:
         db.close()
     asyncio.create_task(cleanup_expired_events())
@@ -341,18 +346,23 @@ def delete_user(user_id: int, authorization: str = Header(None), db: Session = D
     db.commit()
     return {"message": "User deleted successfully"}
 
+class ReportBody(PydanticModel):
+    comment: str = ""
+
 @app.post("/users/{user_id}/report")
-def report_user(user_id: int, authorization: str = Header(None), db: Session = Depends(get_db)):
+def report_user(user_id: int, body: ReportBody, authorization: str = Header(None), db: Session = Depends(get_db)):
     # Verify the reporter is a valid user
     reporter = db.query(models.User).filter(models.User.session_token == authorization).first()
     if not reporter:
         raise HTTPException(status_code=401, detail="Unauthorized")
-        
+
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
-        
+
     db_user.is_flagged = True
+    if body.comment:
+        db_user.report_comment = body.comment
     db.commit()
     return {"message": "User reported successfully"}
 

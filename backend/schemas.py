@@ -42,6 +42,7 @@ class User(UserBase):
     is_host: bool
     is_flagged: bool = False
     is_suspended: bool = False
+    report_comment: Optional[str] = None
     available_timeslots: List[TimeSlot] = []
 
     class Config:
@@ -68,7 +69,7 @@ class EventUpdate(BaseModel):
     end_date: Optional[datetime] = None
 
 class EventCreate(EventBase):
-    passcode: str
+    passcode: Optional[str] = None
 
 class Event(EventBase):
     id: int
