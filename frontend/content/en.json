@@ -39,8 +39,10 @@
     "descriptionPlaceholder": "A brief description of your event...",
     "locationLabel": "Location (Optional)",
     "locationPlaceholder": "e.g., Grand Hyatt, NYC / Online via Zoom",
-    "hostEmailLabel": "Host Email (Optional)",
-    "hostEmailDesc": "Provide an email to receive your secret admin link to manage this event later.",
+    "hostEmailLabel": "Host Email",
+    "hostEmailDesc": "Required. Your admin link will be emailed here so you can always return to manage this event.",
+    "websiteLabel": "Event Website (Optional)",
+    "websitePlaceholder": "https://myevent.com",
     "hostEmailPlaceholder": "host@example.com",
     "startDateLabel": "Event Start Date",
     "endDateLabel": "Event End Date",
@@ -65,7 +67,10 @@
       "copyAdminLink": "Copy My Admin Link",
       "adminDesc": "Keep this link safe. Bookmark it to return to this dashboard and manage your event.",
       "copied": "Link copied!",
-      "adminCopied": "Admin link copied!"
+      "adminCopied": "Admin link copied!",
+      "qrCodeBtn": "Show QR Code",
+      "qrDesc": "Print or display this QR code at your event so attendees can register instantly.",
+      "qrDownloadBtn": "Download QR (SVG)"
     },
     "meetingAreas": {
       "title": "Meeting Areas",
@@ -104,6 +109,8 @@
       "locationLabel": "Location",
       "logoUrlLabel": "Event Logo",
       "bannerUrlLabel": "Header Background Image",
+      "websiteLabel": "Event Website",
+      "websitePlaceholder": "https://myevent.com",
       "startDateLabel": "Start Date",
       "endDateLabel": "End Date",
       "cancelBtn": "Cancel",
@@ -196,6 +203,10 @@
       "addCalendarBtn": "Add to Calendar",
       "cancelBtn": "Cancel"
     },
+    "metPeople": {
+      "title": "People I've Met",
+      "subtitle": "Your confirmed connections at this event"
+    },
     "directory": {
       "title": "Attendee Directory",
       "searchPlaceholder": "Search by name...",
@@ -220,6 +231,8 @@
       "selectTime": "Select Time Slot",
       "chooseTime": "-- Choose Time --",
       "noOverlapError": "You two have no overlapping available timeslots.",
+      "messageLabel": "Add a note (optional)",
+      "messagePlaceholder": "I'd love to discuss...",
       "cancelBtn": "Cancel",
       "sendBtn": "Send Request",
       "sendingBtn": "Sending...",

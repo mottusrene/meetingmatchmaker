@@ -5,7 +5,8 @@ import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { MapPin, Clock, Copy, Users, CheckCircle } from "lucide-react";
+import { MapPin, Clock, Copy, Users, CheckCircle, ExternalLink, QrCode } from "lucide-react";
+import QRCode from "react-qr-code";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function HostDashboard() {
@@ -25,6 +26,7 @@ export default function HostDashboard() {
   const [editLocation, setEditLocation] = useState("");
   const [editLogoUrl, setEditLogoUrl] = useState("");
   const [editBannerUrl, setEditBannerUrl] = useState("");
+  const [editWebsite, setEditWebsite] = useState("");
   const [editStartDate, setEditStartDate] = useState("");
   const [editEndDate, setEditEndDate] = useState("");
   const [editEventStatus, setEditEventStatus] = useState("");
@@ -36,6 +38,7 @@ export default function HostDashboard() {
   const [newSlotDuration, setNewSlotDuration] = useState("15");
   const [copied, setCopied] = useState(false);
   const [copiedAdmin, setCopiedAdmin] = useState(false);
+  const [showQr, setShowQr] = useState(false);
   
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [deleteStatus, setDeleteStatus] = useState("");
@@ -77,6 +80,7 @@ export default function HostDashboard() {
         setEditLocation(data.location || "");
         setEditLogoUrl(data.logo_url || "");
         setEditBannerUrl(data.banner_url || "");
+        setEditWebsite(data.website || "");
         // Format date correctly for the input type="date" (YYYY-MM-DD)
         if (data.start_date) {
             const dateObj = parseDate(data.start_date);
@@ -196,6 +200,19 @@ export default function HostDashboard() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const downloadQr = () => {
+    const svg = document.getElementById("attendee-qr");
+    if (!svg) return;
+    const svgData = new XMLSerializer().serializeToString(svg);
+    const blob = new Blob([svgData], { type: "image/svg+xml" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `${accessCode}-qr.svg`;
+    a.click();
+    URL.revokeObjectURL(url);
+  };
+
   const copyAdminLink = async () => {
     const url = window.location.href;
     try { await copyToClipboard(url); } catch {}
@@ -224,6 +241,7 @@ export default function HostDashboard() {
             location: editLocation || null,
             logo_url: editLogoUrl,
             banner_url: editBannerUrl || null,
+            website: editWebsite || null,
             start_date: editStartDate ? new Date(editStartDate).toISOString() : null,
             end_date: editEndDate ? new Date(editEndDate).toISOString() : null
         })
@@ -309,6 +327,11 @@ export default function HostDashboard() {
                 {event.location && (
                   <span className="flex items-center"><MapPin size={14} className="mr-1" /> {event.location}</span>
                 )}
+                {event.website && (
+                  <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+                    <ExternalLink size={14} className="mr-1" /> {event.website.replace(/^https?:\/\//, '')}
+                  </a>
+                )}
               </div>
               <p className="text-indigo-200 mt-1 text-sm">{t('hostDashboard.title')}</p>
             </div>
@@ -352,7 +375,34 @@ export default function HostDashboard() {
               <p className="text-sm text-gray-500 mt-2 sm:mt-0 sm:ml-4 flex-1 text-center sm:text-left">
                 {t('hostDashboard.quickActions.attendeeDesc')}
               </p>
+              <button
+                onClick={() => setShowQr(q => !q)}
+                className="flex-1 sm:flex-none flex items-center justify-center gap-2 font-medium py-3 px-6 rounded-xl border border-gray-200 text-gray-700 bg-gray-50 hover:bg-gray-100 transition-colors"
+              >
+                <QrCode size={18} />
+                {t('hostDashboard.quickActions.qrCodeBtn')}
+              </button>
             </div>
+            {showQr && (
+              <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center gap-6">
+                <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
+                  <QRCode
+                    id="attendee-qr"
+                    value={typeof window !== 'undefined' ? `${window.location.origin}/event/${accessCode}` : ''}
+                    size={160}
+                  />
+                </div>
+                <div>
+                  <p className="text-sm text-gray-600 mb-3">{t('hostDashboard.quickActions.qrDesc')}</p>
+                  <button
+                    onClick={downloadQr}
+                    className="flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 border border-indigo-200 bg-indigo-50 hover:bg-indigo-100 px-4 py-2 rounded-lg transition-colors"
+                  >
+                    {t('hostDashboard.quickActions.qrDownloadBtn')}
+                  </button>
+                </div>
+              </div>
+            )}
           </section>
 
           {/* Admin Info Card */}
@@ -637,6 +687,11 @@ export default function HostDashboard() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.locationLabel')}</label>
                 <input type="text" value={editLocation} onChange={e => setEditLocation(e.target.value)} placeholder="e.g. Grand Hotel" className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.websiteLabel')}</label>
+                <input type="url" value={editWebsite} onChange={e => setEditWebsite(e.target.value)} placeholder={t('hostDashboard.editModal.websitePlaceholder')} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" />
               </div>
 
               <div className="grid grid-cols-2 gap-4">

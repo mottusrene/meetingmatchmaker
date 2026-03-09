@@ -54,9 +54,10 @@ class UserPrivate(User):
 class EventBase(BaseModel):
     title: str
     description: Optional[str] = None
-    host_email: Optional[str] = None
+    host_email: str
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
+    website: Optional[str] = None
     location: Optional[str] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
@@ -66,6 +67,7 @@ class EventUpdate(BaseModel):
     description: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
+    website: Optional[str] = None
     location: Optional[str] = None
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
@@ -118,13 +120,14 @@ class MeetingBase(BaseModel):
     receiver_id: int
 
 class MeetingCreate(MeetingBase):
-    pass
+    request_message: Optional[str] = None
 
 class Meeting(MeetingBase):
     id: int
     event_id: int
     requester_id: int
     status: str
+    request_message: Optional[str] = None
     
     requester: User
     receiver: User

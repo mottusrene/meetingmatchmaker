@@ -42,6 +42,7 @@ class Event(Base):
     description = Column(String)
     logo_url = Column(String, nullable=True)
     banner_url = Column(String, nullable=True)
+    website = Column(String, nullable=True)
     location = Column(String, nullable=True) # Overall event location (e.g., "Grand Hotel")
     start_date = Column(DateTime, nullable=True) # Explicit start date
     end_date = Column(DateTime, nullable=True) # Explicit end date for cleanup
@@ -83,6 +84,7 @@ class Meeting(Base):
     location_id = Column(Integer, ForeignKey("locations.id"))
     timeslot_id = Column(Integer, ForeignKey("timeslots.id"))
     status = Column(String, default="pending")
+    request_message = Column(String, nullable=True)
     
     event = relationship("Event", back_populates="meetings")
     requester = relationship("User", foreign_keys=[requester_id], back_populates="meetings_requested")

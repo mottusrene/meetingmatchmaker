@@ -15,6 +15,7 @@ export default function CreateEvent() {
   const [description, setDescription] = useState("");
   const [location, setLocation] = useState("");
   const [hostEmail, setHostEmail] = useState("");
+  const [website, setWebsite] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
   const [consent, setConsent] = useState(false);
@@ -34,7 +35,8 @@ export default function CreateEvent() {
           title,
           description,
           location: location || null,
-          host_email: hostEmail || null,
+          host_email: hostEmail,
+          website: website || null,
           start_date: startDate ? new Date(startDate).toISOString() : null,
           end_date: endDate ? new Date(endDate).toISOString() : null
         }),
@@ -114,10 +116,23 @@ export default function CreateEvent() {
               <input
                 id="hostEmail"
                 type="email"
+                required
                 value={hostEmail}
                 onChange={(e) => setHostEmail(e.target.value)}
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                 placeholder={t('createEvent.hostEmailPlaceholder')}
+              />
+            </div>
+
+            <div>
+              <label htmlFor="website" className="block text-sm font-medium text-gray-700 mb-2">{t('createEvent.websiteLabel')}</label>
+              <input
+                id="website"
+                type="url"
+                value={website}
+                onChange={(e) => setWebsite(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
+                placeholder={t('createEvent.websitePlaceholder')}
               />
             </div>
 
