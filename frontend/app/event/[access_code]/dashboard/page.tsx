@@ -577,8 +577,8 @@ export default function AttendeeDashboard() {
             ) : (
               paged.map(user => (
                 <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => setProfileUser(user)}>
-                  <div className="flex justify-between items-start mb-4 gap-4">
-                    <div className="flex items-center gap-3 w-full">
+                  <div className="flex items-start mb-4 gap-3">
+                    <div className="flex-shrink-0">
                       {user.avatar_url ? (
                         <img src={user.avatar_url} alt={user.name} className="w-12 h-12 rounded-full shadow-sm border border-gray-100 object-cover" />
                       ) : (
@@ -586,10 +586,10 @@ export default function AttendeeDashboard() {
                           {user.name.charAt(0).toUpperCase()}
                         </div>
                       )}
-                      <div className="overflow-hidden">
-                        <h3 className="text-xl font-bold text-gray-900 truncate">{user.name}</h3>
-                        {user.company && <p className="text-sm font-medium text-blue-600 truncate">{user.company}</p>}
-                      </div>
+                    </div>
+                    <div className="flex-1 min-w-0 overflow-hidden">
+                      <h3 className="text-xl font-bold text-gray-900 truncate">{user.name}</h3>
+                      {user.company && <p className="text-sm font-medium text-blue-600 truncate">{user.company}</p>}
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0" onClick={e => e.stopPropagation()}>
                       {user.profile_link && (
