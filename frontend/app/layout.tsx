@@ -1,10 +1,24 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import CookieBanner from "../components/CookieBanner";
+import content from "../content/en.json";
+
+const { title, description, siteName } = content.metadata;
 
 export const metadata: Metadata = {
-  title: "Matchmaking MVP",
-  description: "Simplest way to connect at events",
+  title,
+  description,
+  openGraph: {
+    title,
+    description,
+    type: "website",
+    siteName,
+  },
+  twitter: {
+    card: "summary",
+    title,
+    description,
+  },
 };
 
 export default function RootLayout({
