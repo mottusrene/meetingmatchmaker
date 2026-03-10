@@ -29,7 +29,7 @@ from email_service import send_host_welcome_email, send_attendee_magic_link, sen
 
 models.Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Matchmaking Application MVP")
+app = FastAPI(title="MeetingMatches")
 app.state.limiter = limiter
 app.add_exception_handler(RateLimitExceeded, _rate_limit_exceeded_handler)
 
@@ -39,6 +39,7 @@ async def startup_event():
     db = SessionLocal()
     try:
         for migration in [
+            "ALTER TABLE users ADD COLUMN is_flagged BOOLEAN DEFAULT 0",
             "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
             "ALTER TABLE users ADD COLUMN report_comment TEXT",
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
@@ -110,7 +111,7 @@ def create_event(request: Request, event: schemas.EventCreate, db: Session = Dep
     existing = db.query(models.Event).filter(models.Event.host_email == event.host_email).count()
     if existing >= 3:
         raise HTTPException(status_code=429, detail="Maximum of 3 events per email address reached.")
-    access_code = str(uuid.uuid4())[:8].upper() # Simple short code for MVP
+    access_code = str(uuid.uuid4())[:8].upper()
     admin_code = f"host/{str(uuid.uuid4())}"
     db_event = models.Event(
         title=event.title,

@@ -5,7 +5,7 @@ import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { CheckCircle, XCircle, Clock, MapPin, ExternalLink, MessageSquare, Calendar, Copy } from "lucide-react";
+import { CheckCircle, XCircle, Clock, MapPin, ExternalLink, MessageSquare, Calendar, Copy, Heart } from "lucide-react";
 import { useTranslation } from "@/hooks/useTranslation";
 
 export default function AttendeeDashboard() {
@@ -23,6 +23,8 @@ export default function AttendeeDashboard() {
   const [meetings, setMeetings] = useState<any[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
+  const [favourites, setFavourites] = useState<Set<number>>(new Set());
+  const [showFavouritesOnly, setShowFavouritesOnly] = useState(false);
   const PAGE_SIZE = 12;
   
   // Selection state for meeting request modal
@@ -129,7 +131,10 @@ export default function AttendeeDashboard() {
     .then(userData => {
       setUserId(userData.id.toString());
       setMe(userData);
-      
+
+      const savedFavs = localStorage.getItem(`favourites_${accessCode}`);
+      if (savedFavs) setFavourites(new Set(JSON.parse(savedFavs)));
+
       Promise.all([
         fetch(`${getApiUrl()}/events/${accessCode}`).then(r => r.json()),
         fetch(`${getApiUrl()}/users/`, { headers: { "Authorization": token } }).then(r => r.json()),
@@ -339,6 +344,16 @@ export default function AttendeeDashboard() {
     }
   };
 
+  const toggleFavourite = (favUserId: number) => {
+    setFavourites(prev => {
+      const next = new Set(prev);
+      if (next.has(favUserId)) next.delete(favUserId);
+      else next.add(favUserId);
+      localStorage.setItem(`favourites_${accessCode}`, JSON.stringify([...next]));
+      return next;
+    });
+  };
+
   if (!event || !me) return <div className="p-12 text-center">{t('attendeeDashboard.loading')}</div>;
 
   if (me.is_suspended) {
@@ -527,18 +542,29 @@ export default function AttendeeDashboard() {
         <section className="lg:col-span-2 lg:col-start-1 lg:row-start-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4 border-b border-gray-100 pb-4">
             <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.directory.title')}</h2>
-            <input
-              type="text"
-              placeholder={t('attendeeDashboard.directory.searchPlaceholder')}
-              value={searchQuery}
-              onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
-              className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 w-full sm:w-64"
-            />
+            <div className="flex gap-2 w-full sm:w-auto">
+              <input
+                type="text"
+                placeholder={t('attendeeDashboard.directory.searchPlaceholder')}
+                value={searchQuery}
+                onChange={(e) => { setSearchQuery(e.target.value); setCurrentPage(1); }}
+                className="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-blue-500 flex-1 sm:w-56"
+              />
+              <button
+                onClick={() => { setShowFavouritesOnly(f => !f); setCurrentPage(1); }}
+                title={t('attendeeDashboard.directory.favouritesBtn')}
+                className={`flex items-center gap-1.5 px-3 py-2 rounded-lg border text-sm font-medium transition-colors flex-shrink-0 ${showFavouritesOnly ? 'bg-pink-50 border-pink-300 text-pink-600' : 'border-gray-300 text-gray-400 hover:bg-gray-50 hover:text-gray-600'}`}
+              >
+                <Heart size={15} className={showFavouritesOnly ? 'fill-pink-500 text-pink-500' : ''} />
+                <span className="hidden sm:inline">{t('attendeeDashboard.directory.favouritesBtn')}</span>
+              </button>
+            </div>
           </div>
           {(() => {
             const q = searchQuery.toLowerCase();
             const filtered = users.filter(u =>
-              u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q))
+              (u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q))) &&
+              (!showFavouritesOnly || favourites.has(u.id))
             );
             const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
             const safePage = Math.min(currentPage, totalPages);
@@ -546,7 +572,7 @@ export default function AttendeeDashboard() {
             return (<>
           <div className="grid sm:grid-cols-2 gap-6">
             {filtered.length === 0 ? (
-              <p className="text-gray-500 italic p-6">{t('attendeeDashboard.directory.empty')}</p>
+              <p className="text-gray-500 italic p-6">{showFavouritesOnly ? t('attendeeDashboard.directory.emptyFavourites') : t('attendeeDashboard.directory.empty')}</p>
             ) : (
               paged.map(user => (
                 <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
@@ -564,11 +590,20 @@ export default function AttendeeDashboard() {
                         {user.company && <p className="text-sm font-medium text-blue-600 truncate">{user.company}</p>}
                       </div>
                     </div>
-                    {user.profile_link && (
-                      <a href={user.profile_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700 flex-shrink-0" title="View Profile">
-                        <ExternalLink size={20} />
-                      </a>
-                    )}
+                    <div className="flex items-center gap-2 flex-shrink-0">
+                      {user.profile_link && (
+                        <a href={user.profile_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" title="View Profile">
+                          <ExternalLink size={18} />
+                        </a>
+                      )}
+                      <button
+                        onClick={() => toggleFavourite(user.id)}
+                        title={favourites.has(user.id) ? t('attendeeDashboard.directory.unfavouriteTitle') : t('attendeeDashboard.directory.favouriteTitle')}
+                        className="text-gray-300 hover:text-pink-400 transition-colors"
+                      >
+                        <Heart size={18} className={favourites.has(user.id) ? 'fill-pink-400 text-pink-400' : ''} />
+                      </button>
+                    </div>
                   </div>
 
                   <p className="text-gray-600 text-sm mb-6 line-clamp-3">{user.bio}</p>

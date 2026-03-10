@@ -1,4 +1,9 @@
 {
+  "metadata": {
+    "title": "MeetingMatches – Event Networking Made Simple",
+    "description": "The simplest way for event attendees to discover each other, schedule 1-on-1 meetings, and make the most of every event.",
+    "siteName": "MeetingMatches"
+  },
   "global": {
     "loading": "Loading..."
   },
@@ -24,7 +29,7 @@
       }
     },
     "footer": {
-      "copyright": "© 2026 MatchMaker App MVP. All rights reserved.",
+      "copyright": "© 2026 MeetingMatches. All rights reserved.",
       "privacy": "Privacy Policy",
       "hostGuidelines": "Host Guidelines"
     }
@@ -223,7 +228,11 @@
     "directory": {
       "title": "Attendee Directory",
       "searchPlaceholder": "Search by name...",
+      "favouritesBtn": "Favourites",
+      "favouriteTitle": "Add to favourites",
+      "unfavouriteTitle": "Remove from favourites",
       "empty": "No attendees found.",
+      "emptyFavourites": "No favourited attendees yet. Tap the heart on any profile to save them here.",
       "requestMeetingBtn": "Request Meeting",
       "reportBtn": "Report...",
       "reportedSuccess": "Reported",
