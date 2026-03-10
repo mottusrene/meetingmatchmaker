@@ -25,6 +25,7 @@ export default function AttendeeDashboard() {
   const [currentPage, setCurrentPage] = useState(1);
   const [favourites, setFavourites] = useState<Set<number>>(new Set());
   const [showFavouritesOnly, setShowFavouritesOnly] = useState(false);
+  const [profileUser, setProfileUser] = useState<any>(null);
   const PAGE_SIZE = 12;
   
   // Selection state for meeting request modal
@@ -575,7 +576,7 @@ export default function AttendeeDashboard() {
               <p className="text-gray-500 italic p-6">{showFavouritesOnly ? t('attendeeDashboard.directory.emptyFavourites') : t('attendeeDashboard.directory.empty')}</p>
             ) : (
               paged.map(user => (
-                <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow">
+                <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => setProfileUser(user)}>
                   <div className="flex justify-between items-start mb-4 gap-4">
                     <div className="flex items-center gap-3 w-full">
                       {user.avatar_url ? (
@@ -590,7 +591,7 @@ export default function AttendeeDashboard() {
                         {user.company && <p className="text-sm font-medium text-blue-600 truncate">{user.company}</p>}
                       </div>
                     </div>
-                    <div className="flex items-center gap-2 flex-shrink-0">
+                    <div className="flex items-center gap-2 flex-shrink-0" onClick={e => e.stopPropagation()}>
                       {user.profile_link && (
                         <a href={user.profile_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" title="View Profile">
                           <ExternalLink size={18} />
@@ -609,13 +610,13 @@ export default function AttendeeDashboard() {
                   <p className="text-gray-600 text-sm mb-6 line-clamp-3">{user.bio}</p>
 
                   <button
-                    onClick={() => { setSelectedUser(user); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
+                    onClick={(e) => { e.stopPropagation(); setSelectedUser(user); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
                     className="w-full bg-blue-50 text-blue-700 hover:bg-blue-100 hover:text-blue-800 font-bold py-2 rounded-lg border border-blue-200 transition-colors"
                   >
                     {t('attendeeDashboard.directory.requestMeetingBtn')}
                   </button>
                   <button
-                    onClick={() => { if (!reportedUserIds.has(user.id)) { setReportingUser(user); setReportComment(""); } }}
+                    onClick={(e) => { e.stopPropagation(); if (!reportedUserIds.has(user.id)) { setReportingUser(user); setReportComment(""); } }}
                     disabled={reportedUserIds.has(user.id)}
                     className={`w-full mt-1 text-xs py-1 transition-colors rounded ${reportedUserIds.has(user.id) ? 'text-gray-300 cursor-default' : 'text-gray-400 hover:text-red-500'}`}
                   >
@@ -686,6 +687,49 @@ export default function AttendeeDashboard() {
         )}
 
       </main>
+
+      {/* Profile Modal */}
+      {profileUser && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50" onClick={() => setProfileUser(null)}>
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl" onClick={e => e.stopPropagation()}>
+            <div className="flex items-center gap-4 mb-6">
+              {profileUser.avatar_url ? (
+                <img src={profileUser.avatar_url} alt={profileUser.name} className="w-16 h-16 rounded-full border-2 border-blue-100 object-cover shadow-sm flex-shrink-0" />
+              ) : (
+                <div className="w-16 h-16 rounded-full bg-blue-100 text-blue-700 flex items-center justify-center font-bold text-2xl shadow-sm flex-shrink-0">
+                  {profileUser.name.charAt(0).toUpperCase()}
+                </div>
+              )}
+              <div className="min-w-0">
+                <h3 className="text-xl font-bold text-gray-900">{profileUser.name}</h3>
+                {profileUser.company && <p className="text-sm font-medium text-blue-600">{profileUser.company}</p>}
+                {profileUser.profile_link && (
+                  <a href={profileUser.profile_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:text-blue-700 flex items-center gap-1 mt-1">
+                    <ExternalLink size={11} /> {profileUser.profile_link.replace(/^https?:\/\//, '')}
+                  </a>
+                )}
+              </div>
+            </div>
+            {profileUser.bio && (
+              <p className="text-gray-600 text-sm leading-relaxed mb-6 whitespace-pre-wrap">{profileUser.bio}</p>
+            )}
+            <div className="flex gap-3">
+              <button
+                onClick={() => setProfileUser(null)}
+                className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 font-bold rounded-xl hover:bg-gray-50"
+              >
+                {t('attendeeDashboard.requestModal.cancelBtn')}
+              </button>
+              <button
+                onClick={() => { setSelectedUser(profileUser); setProfileUser(null); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
+                className="flex-1 px-4 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-md"
+              >
+                {t('attendeeDashboard.directory.requestMeetingBtn')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Report User Modal */}
       {reportingUser && (
