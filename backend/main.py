@@ -9,8 +9,11 @@ from slowapi.errors import RateLimitExceeded
 from typing import List
 import uuid
 import os
+import csv
+import io
 from datetime import datetime, timedelta
 import asyncio
+from fastapi import UploadFile, File
 
 def get_real_ip(request: Request) -> str:
     forwarded_for = request.headers.get("X-Forwarded-For")
@@ -25,7 +28,7 @@ FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 import models
 import schemas
 from database import SessionLocal, engine
-from email_service import send_host_welcome_email, send_attendee_magic_link, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification, send_broadcast
+from email_service import send_host_welcome_email, send_attendee_magic_link, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification, send_broadcast, send_bulk_invite
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -40,6 +43,7 @@ async def startup_event():
     try:
         for migration in [
             "ALTER TABLE users ADD COLUMN is_flagged BOOLEAN DEFAULT 0",
+            "ALTER TABLE users ADD COLUMN is_confirmed BOOLEAN DEFAULT 1",
             "ALTER TABLE users ADD COLUMN is_suspended BOOLEAN DEFAULT 0",
             "ALTER TABLE users ADD COLUMN report_comment TEXT",
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
@@ -320,7 +324,10 @@ def list_users(authorization: str = Header(None), db: Session = Depends(get_db))
     requester = db.query(models.User).filter(models.User.session_token == authorization).first()
     if not requester:
         raise HTTPException(status_code=401, detail="Invalid token")
-    return db.query(models.User).filter(models.User.event_id == requester.event_id).all()
+    return db.query(models.User).filter(
+        models.User.event_id == requester.event_id,
+        models.User.is_confirmed == True,
+    ).all()
 
 @app.get("/users/{user_id}", response_model=schemas.User)
 def get_user(user_id: int, authorization: str = Header(None), db: Session = Depends(get_db)):
@@ -360,7 +367,10 @@ def update_user(user_id: int, user_update: schemas.UserUpdate, authorization: st
              ts = db.query(models.TimeSlot).filter(models.TimeSlot.id == ts_id, models.TimeSlot.event_id == db_user.event_id).first()
              if ts:
                  db_user.available_timeslots.append(ts)
-                 
+
+    # Completing a profile update counts as confirmation
+    db_user.is_confirmed = True
+
     db.commit()
     db.refresh(db_user)
     return db_user
@@ -499,6 +509,75 @@ def get_event_attendees(access_code: str, authorization: str = Header(None), db:
         raise HTTPException(status_code=403, detail="Not authorized")
     return db.query(models.User).filter(models.User.event_id == db_event.id, models.User.is_host == False).all()
 
+@app.post("/events/{access_code}/users/bulk")
+async def bulk_create_users(access_code: str, file: UploadFile = File(...), authorization: str = Header(None), db: Session = Depends(get_db)):
+    db_event = db.query(models.Event).filter(models.Event.access_code == access_code).first()
+    if not db_event:
+        raise HTTPException(status_code=404, detail="Event not found")
+    if not authorization or db_event.admin_code != authorization:
+        raise HTTPException(status_code=403, detail="Not authorized")
+
+    content = await file.read()
+    try:
+        reader = csv.DictReader(io.StringIO(content.decode("utf-8-sig")))
+    except Exception:
+        raise HTTPException(status_code=400, detail="Could not parse CSV file")
+
+    created, skipped, errors = [], [], []
+
+    for i, row in enumerate(reader):
+        name = (row.get("name") or row.get("Name") or "").strip()
+        email = (row.get("email") or row.get("Email") or "").strip().lower()
+        company = (row.get("company") or row.get("Company") or "").strip() or None
+        bio = (row.get("bio") or row.get("Bio") or "").strip() or None
+
+        if not name or not email:
+            errors.append(f"Row {i+2}: missing name or email")
+            continue
+
+        existing = db.query(models.User).filter(models.User.email == email, models.User.event_id == db_event.id).first()
+        if existing:
+            skipped.append(email)
+            continue
+
+        session_token = str(uuid.uuid4())
+        avatar_url = f"https://ui-avatars.com/api/?name={name.replace(' ', '+')}&background=random"
+        db_user = models.User(
+            event_id=db_event.id,
+            name=name,
+            email=email,
+            company=company,
+            bio=bio,
+            avatar_url=avatar_url,
+            session_token=session_token,
+            is_host=False,
+            is_confirmed=False,
+        )
+        db.add(db_user)
+        db.commit()
+        db.refresh(db_user)
+
+        confirm_link = f"{FRONTEND_URL}/event/{access_code}?token={session_token}"
+        decline_link = f"{FRONTEND_URL}/event/{access_code}/decline?token={session_token}&uid={db_user.id}"
+        send_bulk_invite(email, name, company, bio, db_event.title, db_event.host_email, confirm_link, decline_link)
+        created.append(email)
+
+    return {"created": len(created), "skipped": len(skipped), "errors": errors}
+
+
+@app.delete("/invitations/decline")
+def decline_invitation(token: str, db: Session = Depends(get_db)):
+    db_user = db.query(models.User).filter(models.User.session_token == token).first()
+    if not db_user:
+        raise HTTPException(status_code=404, detail="Invitation not found or already declined")
+    if db_user.is_confirmed:
+        raise HTTPException(status_code=400, detail="This account has already been confirmed")
+    db.query(models.UserAvailability).filter(models.UserAvailability.user_id == db_user.id).delete()
+    db.delete(db_user)
+    db.commit()
+    return {"detail": "Your data has been deleted"}
+
+
 class BroadcastBody(PydanticModel):
     message: str
 
@@ -513,6 +592,7 @@ async def broadcast_message(access_code: str, body: BroadcastBody, authorization
         models.User.event_id == db_event.id,
         models.User.is_host == False,
         models.User.is_suspended == False,
+        models.User.is_confirmed == True,
     ).all()
     for attendee in attendees:
         send_broadcast(attendee.email, attendee.name, db_event.title, body.message)

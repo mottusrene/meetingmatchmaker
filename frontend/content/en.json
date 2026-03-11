@@ -192,7 +192,9 @@
     "submitBtn": "Register & Enter Dashboard",
     "loginHint": "If you have already registered, check your email for your secure login link.",
     "alreadyRegisteredError": "You are already registered for this event. Please check your email for your Magic Link to log in!",
-    "registrationFailedError": "Registration failed"
+    "registrationFailedError": "Registration failed",
+    "pendingBanner": "Your details have been pre-filled by the event organiser. Please review, complete your profile, and confirm your participation.",
+    "pendingSubmitBtn": "Confirm & Enter"
   },
   "attendeeDashboard": {
     "loading": "Loading dashboard...",
@@ -283,6 +285,26 @@
       "inputPlaceholder": "Type a message...",
       "sendBtn": "Send"
     }
+  },
+  "bulkUpload": {
+    "title": "Bulk Import Attendees",
+    "desc": "Upload a CSV with columns: name, email, and optionally company and bio. Each person will receive an email to confirm their profile.",
+    "consentLabel": "I confirm I have a lawful basis (e.g. event registration, prior consent) to process the personal data in this file on behalf of these individuals.",
+    "uploadBtn": "Upload CSV",
+    "uploadingBtn": "Uploading...",
+    "successPrefix": "Done:",
+    "successCreated": "{{count}} invited",
+    "successSkipped": "{{count}} already registered",
+    "errorLabel": "Errors:",
+    "formatHint": "Required columns: name, email — Optional: company, bio"
+  },
+  "declinePage": {
+    "loading": "Processing...",
+    "successTitle": "Data deleted",
+    "successMessage": "Your data has been removed. You will not appear in this event.",
+    "errorTitle": "Something went wrong",
+    "errorMessage": "This invitation may have already been declined or confirmed.",
+    "homeBtn": "Go to homepage"
   },
   "cookieBanner": {
     "message": "We use HTML5 Local Storage solely to keep you securely logged into your event profile. We do not use third-party tracking, advertising, or non-essential cookies. By continuing to use this site, you consent to this functional storage.",

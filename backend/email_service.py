@@ -79,6 +79,24 @@ def send_reinstated_notification(attendee_email: str, name: str, event_title: st
         template["body"].format(name=name, event_title=event_title),
     )
 
+def send_bulk_invite(attendee_email: str, name: str, company: str | None, bio: str | None, event_title: str, host_email: str, confirm_link: str, decline_link: str):
+    template = text_dict["bulkInvite"]
+    company_line = f"\n- Company: {company}" if company else ""
+    bio_line = f"\n- Bio: {bio}" if bio else ""
+    _send(
+        attendee_email,
+        template["subject"].format(event_title=event_title),
+        template["body"].format(
+            name=name,
+            event_title=event_title,
+            host_email=host_email,
+            company_line=company_line,
+            bio_line=bio_line,
+            confirm_link=confirm_link,
+            decline_link=decline_link,
+        ),
+    )
+
 def send_broadcast(attendee_email: str, name: str, event_title: str, message: str):
     template = text_dict["broadcast"]
     _send(

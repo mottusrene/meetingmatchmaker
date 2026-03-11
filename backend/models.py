@@ -24,6 +24,7 @@ class User(Base):
     is_host = Column(Boolean, default=False)
     is_flagged = Column(Boolean, default=False)
     is_suspended = Column(Boolean, default=False)
+    is_confirmed = Column(Boolean, default=True)
     report_comment = Column(String, nullable=True)
     event = relationship("Event", back_populates="attendees")
     available_timeslots = relationship("TimeSlot", secondary="user_availability")

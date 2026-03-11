@@ -28,12 +28,30 @@ export default function EventAccess() {
   const [availableTimeslots, setAvailableTimeslots] = useState<number[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [pendingUserId, setPendingUserId] = useState<string | null>(null);
 
   useEffect(() => {
     // Check if coming from a magic link
     if (urlToken) {
       localStorage.setItem(`session_token_${accessCode}`, urlToken);
-      router.push(`/event/${accessCode}/dashboard`);
+      // Check if this is a pending (bulk-invited) user who needs to confirm
+      fetch(`${getApiUrl()}/users/me`, { headers: { "Authorization": urlToken } })
+        .then(r => r.ok ? r.json() : null)
+        .then(userData => {
+          if (userData && !userData.is_confirmed) {
+            // Pre-fill the form and stay on this page for confirmation
+            setPendingUserId(userData.id.toString());
+            setName(userData.name || "");
+            setEmail(userData.email || "");
+            setCompany(userData.company || "");
+            setBio(userData.bio || "");
+            setProfileLink(userData.profile_link || "");
+          } else {
+            router.push(`/event/${accessCode}/dashboard`);
+          }
+        })
+        .catch(() => router.push(`/event/${accessCode}/dashboard`));
+      return;
     }
 
     // Check if already logged in for this event
@@ -64,30 +82,51 @@ export default function EventAccess() {
     setError("");
 
     try {
+      if (pendingUserId) {
+        // Bulk-invited user confirming their profile
+        const token = localStorage.getItem(`session_token_${accessCode}`);
+        const res = await fetch(`${getApiUrl()}/users/${pendingUserId}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json", "Authorization": token || "" },
+          body: JSON.stringify({
+            name,
+            company,
+            bio,
+            profile_link: profileLink,
+            available_timeslot_ids: availableTimeslots,
+          }),
+        });
+        if (!res.ok) {
+          const err = await res.json().catch(() => null);
+          throw new Error(err?.detail || t('eventJoin.registrationFailedError'));
+        }
+        router.push(`/event/${accessCode}/dashboard`);
+        return;
+      }
+
       const res = await fetch(`${getApiUrl()}/events/${accessCode}/users/`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ 
-          name, 
-          email, 
-          company, 
-          bio, 
-          profile_link: profileLink, 
+        body: JSON.stringify({
+          name,
+          email,
+          company,
+          bio,
+          profile_link: profileLink,
           is_host: false,
-          available_timeslot_ids: availableTimeslots 
+          available_timeslot_ids: availableTimeslots
         }),
       });
-      
+
       const data = await res.json();
-      
+
       if (!res.ok) {
         if (data.detail && data.detail.includes("Email already registered")) {
           throw new Error(t('eventJoin.alreadyRegisteredError'));
         }
         throw new Error(data.detail || t('eventJoin.registrationFailedError'));
       }
-      
-      // Successfully registered. Save token to local storage and proceed.
+
       localStorage.setItem(`session_token_${accessCode}`, data.session_token);
       router.push(`/event/${accessCode}/dashboard`);
     } catch (err: any) {
@@ -152,20 +191,28 @@ export default function EventAccess() {
               {t('eventJoin.formTitle')}
             </h2>
 
+            {pendingUserId && (
+              <div className="bg-blue-50 border border-blue-200 text-blue-800 text-sm rounded-lg px-4 py-3 mb-6">
+                {t('eventJoin.pendingBanner')}
+              </div>
+            )}
+
             <form onSubmit={handleJoin} className="space-y-5">
               {error && <div className="bg-red-50 text-red-600 p-4 rounded-lg text-sm">{error}</div>}
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">{t('eventJoin.emailLabel')}</label>
-                <input
-                  type="email"
-                  required
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
-                  placeholder={t('eventJoin.emailPlaceholder')}
-                />
-              </div>
+              {!pendingUserId && (
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">{t('eventJoin.emailLabel')}</label>
+                  <input
+                    type="email"
+                    required
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500"
+                    placeholder={t('eventJoin.emailPlaceholder')}
+                  />
+                </div>
+              )}
 
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('eventJoin.nameLabel')}</label>
@@ -244,30 +291,32 @@ export default function EventAccess() {
                 </div>
               )}
 
-              <div className="pt-2 border-t border-blue-100">
-                <label className="flex items-start gap-3 cursor-pointer group">
-                  <input 
-                    type="checkbox" 
-                    name="consent" 
-                    id="consent" 
-                    required
-                    checked={consent}
-                    onChange={(e) => setConsent(e.target.checked)}
-                    className="mt-1 w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
-                  />
-                  <span className="text-sm border-gray-100 text-left text-gray-600">
-                    {t('eventJoin.consentCheckbox')}<Link href="/privacy" className="text-blue-600 hover:text-blue-500 hover:underline">{t('eventJoin.privacyPolicy')}</Link>{t('eventJoin.consentSuffix')}
-                  </span>
-                </label>
-              </div>
+              {!pendingUserId && (
+                <div className="pt-2 border-t border-blue-100">
+                  <label className="flex items-start gap-3 cursor-pointer group">
+                    <input
+                      type="checkbox"
+                      name="consent"
+                      id="consent"
+                      required
+                      checked={consent}
+                      onChange={(e) => setConsent(e.target.checked)}
+                      className="mt-1 w-5 h-5 text-blue-600 rounded border-gray-300 focus:ring-blue-500 cursor-pointer"
+                    />
+                    <span className="text-sm border-gray-100 text-left text-gray-600">
+                      {t('eventJoin.consentCheckbox')}<Link href="/privacy" className="text-blue-600 hover:text-blue-500 hover:underline">{t('eventJoin.privacyPolicy')}</Link>{t('eventJoin.consentSuffix')}
+                    </span>
+                  </label>
+                </div>
+              )}
 
               <button
                 type="submit"
-                disabled={loading || !consent}
+                disabled={loading || (!pendingUserId && !consent)}
                 className={`w-full font-bold py-4 px-6 rounded-xl transition-all shadow-md transform hover:-translate-y-0.5 mt-2
-                  ${loading || !consent ? "bg-gray-400 cursor-not-allowed text-white" : "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"}`}
+                  ${loading || (!pendingUserId && !consent) ? "bg-gray-400 cursor-not-allowed text-white" : "bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 text-white"}`}
               >
-                {loading ? t('eventJoin.processingBtn') : t('eventJoin.submitBtn')}
+                {loading ? t('eventJoin.processingBtn') : pendingUserId ? t('eventJoin.pendingSubmitBtn') : t('eventJoin.submitBtn')}
               </button>
               <div className="text-center mt-4">
                  <p className="text-xs text-gray-500 italic">{t('eventJoin.loginHint')}</p>
