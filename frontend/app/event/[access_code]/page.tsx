@@ -51,7 +51,6 @@ export default function EventAccess() {
           }
         })
         .catch(() => router.push(`/event/${accessCode}/dashboard`));
-      return;
     }
 
     // Check if already logged in for this event
