@@ -467,14 +467,29 @@ export default function AttendeeDashboard() {
             {meetings.length === 0 ? (
               <p className="text-gray-500 italic p-6 bg-white rounded-2xl border border-gray-200 text-center">{t('attendeeDashboard.myMeetings.empty')}</p>
             ) : (
-              meetings.map(m => {
+              [...meetings].sort((a, b) => {
+                const uid = parseInt(userId || "0");
+                const statusOrder = (m: any) => {
+                  if (m.status === 'pending' && m.receiver_id === uid) return 0;
+                  if (m.status === 'accepted') return 1;
+                  if (m.status === 'pending' && m.requester_id === uid) return 2;
+                  return 3; // declined / cancelled
+                };
+                const so = statusOrder(a) - statusOrder(b);
+                if (so !== 0) return so;
+                // Within accepted, sort by timeslot start time
+                if (a.status === 'accepted' && b.status === 'accepted') {
+                  return new Date(a.timeslot.start_time).getTime() - new Date(b.timeslot.start_time).getTime();
+                }
+                return 0;
+              }).map(m => {
                 const isReceiver = m.receiver_id === parseInt(userId || "0");
                 const otherPerson = isReceiver ? m.requester : m.receiver;
                 
                 return (
                   <div key={m.id} className={`bg-white border rounded-2xl p-5 shadow-sm ${m.status === 'accepted' ? 'border-green-300' : (m.status === 'declined' || m.status === 'cancelled') ? 'border-red-300 opacity-70' : 'border-gray-200'}`}>
                     <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-bold text-gray-900">{otherPerson.name}</h4>
+                      <h4 className="font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setProfileUser(otherPerson)}>{otherPerson.name}</h4>
                       <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide ${
                         m.status === 'accepted' ? 'bg-green-100 text-green-700' : 
                         (m.status === 'declined' || m.status === 'cancelled') ? 'bg-red-100 text-red-700' : 
@@ -652,39 +667,41 @@ export default function AttendeeDashboard() {
         </section>
 
         {/* People I've Met */}
-        {meetings.filter(m => m.status === 'accepted').length > 0 && (
-          <section className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
-            <div className="border-b border-gray-100 pb-4 mb-6">
-              <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.metPeople.title')}</h2>
-              <p className="text-sm text-gray-500 mt-1">{t('attendeeDashboard.metPeople.subtitle')}</p>
-            </div>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {meetings.filter(m => m.status === 'accepted').map(m => {
-                const other = m.receiver_id === parseInt(userId || '0') ? m.requester : m.receiver;
-                return (
-                  <div key={m.id} className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-gray-100 transition-colors">
-                    {other.avatar_url ? (
-                      <img src={other.avatar_url} alt={other.name} className="w-12 h-12 rounded-full object-cover flex-shrink-0 border border-gray-200" />
-                    ) : (
-                      <div className="w-12 h-12 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-lg flex-shrink-0">
-                        {other.name.charAt(0).toUpperCase()}
-                      </div>
-                    )}
-                    <div className="min-w-0">
-                      <p className="font-semibold text-gray-900 truncate">{other.name}</p>
-                      {other.company && <p className="text-sm text-gray-500 truncate">{other.company}</p>}
-                      {other.profile_link && (
-                        <a href={other.profile_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:text-blue-700 flex items-center gap-1 mt-0.5">
-                          <ExternalLink size={11} /> Profile
-                        </a>
+        {(() => {
+          const now = new Date();
+          const metPeople = meetings.filter(m =>
+            m.status === 'accepted' && new Date(m.timeslot.end_time) < now
+          );
+          if (metPeople.length === 0) return null;
+          return (
+            <section className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+              <div className="border-b border-gray-100 pb-4 mb-6">
+                <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.metPeople.title')}</h2>
+                <p className="text-sm text-gray-500 mt-1">{t('attendeeDashboard.metPeople.subtitle')}</p>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                {metPeople.map(m => {
+                  const other = m.receiver_id === parseInt(userId || '0') ? m.requester : m.receiver;
+                  return (
+                    <div key={m.id} className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer" onClick={() => setProfileUser(other)}>
+                      {other.avatar_url ? (
+                        <img src={other.avatar_url} alt={other.name} className="w-12 h-12 rounded-full object-cover flex-shrink-0 border border-gray-200" />
+                      ) : (
+                        <div className="w-12 h-12 rounded-full bg-green-100 text-green-700 flex items-center justify-center font-bold text-lg flex-shrink-0">
+                          {other.name.charAt(0).toUpperCase()}
+                        </div>
                       )}
+                      <div className="min-w-0">
+                        <p className="font-semibold text-gray-900 truncate">{other.name}</p>
+                        {other.company && <p className="text-sm text-gray-500 truncate">{other.company}</p>}
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
-            </div>
-          </section>
-        )}
+                  );
+                })}
+              </div>
+            </section>
+          );
+        })()}
 
       </main>
 
