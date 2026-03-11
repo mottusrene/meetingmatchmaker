@@ -49,6 +49,37 @@ export default function HostDashboard() {
   const [suspendModal, setSuspendModal] = useState<{ user: any; action: "suspend" | "unsuspend" } | null>(null);
   const [suspendStatus, setSuspendStatus] = useState("");
 
+  const [bulkFile, setBulkFile] = useState<File | null>(null);
+  const [bulkUploading, setBulkUploading] = useState(false);
+  const [bulkResult, setBulkResult] = useState<{ created: number; skipped: number; errors: string[] } | null>(null);
+  const [bulkConsent, setBulkConsent] = useState(false);
+
+  const handleBulkUpload = async () => {
+    if (!bulkFile || !bulkConsent) return;
+    setBulkUploading(true);
+    setBulkResult(null);
+    const adminCode = searchParams.get("token") || passcode;
+    const formData = new FormData();
+    formData.append("file", bulkFile);
+    try {
+      const res = await fetch(`${getApiUrl()}/events/${accessCode}/users/bulk`, {
+        method: "POST",
+        headers: { "Authorization": adminCode || "" },
+        body: formData,
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || "Upload failed");
+      setBulkResult(data);
+      setBulkFile(null);
+      setBulkConsent(false);
+      fetchEventAndUsers();
+    } catch (err: any) {
+      setBulkResult({ created: 0, skipped: 0, errors: [err.message] });
+    } finally {
+      setBulkUploading(false);
+    }
+  };
+
   const [showBroadcast, setShowBroadcast] = useState(false);
   const [broadcastMessage, setBroadcastMessage] = useState("");
   const [broadcastConfirm, setBroadcastConfirm] = useState(false);
@@ -680,6 +711,41 @@ export default function HostDashboard() {
               className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-green-500 w-56"
             />
           </div>
+          {/* Bulk Import */}
+          <div className="border-b border-gray-100 p-6 bg-gray-50">
+            <p className="text-sm font-semibold text-gray-700 mb-1">{t('bulkUpload.title')}</p>
+            <p className="text-xs text-gray-500 mb-3">{t('bulkUpload.desc')}</p>
+            <p className="text-xs text-gray-400 mb-3 italic">{t('bulkUpload.formatHint')}</p>
+            <input
+              type="file"
+              accept=".csv"
+              onChange={e => { setBulkFile(e.target.files?.[0] || null); setBulkResult(null); }}
+              className="block w-full text-sm text-gray-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-sm file:font-medium file:bg-green-50 file:text-green-700 hover:file:bg-green-100 mb-3"
+            />
+            <label className="flex items-start gap-2 cursor-pointer mb-3">
+              <input type="checkbox" checked={bulkConsent} onChange={e => setBulkConsent(e.target.checked)} className="mt-0.5 w-4 h-4 text-green-600 rounded border-gray-300" />
+              <span className="text-xs text-gray-600">{t('bulkUpload.consentLabel')}</span>
+            </label>
+            <button
+              onClick={handleBulkUpload}
+              disabled={!bulkFile || !bulkConsent || bulkUploading}
+              className="text-sm font-medium px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+            >
+              {bulkUploading ? t('bulkUpload.uploadingBtn') : t('bulkUpload.uploadBtn')}
+            </button>
+            {bulkResult && (
+              <div className="mt-3 text-sm">
+                <p className="text-green-700 font-medium">{t('bulkUpload.successPrefix')} {t('bulkUpload.successCreated', { count: bulkResult.created })}, {t('bulkUpload.successSkipped', { count: bulkResult.skipped })}</p>
+                {bulkResult.errors.length > 0 && (
+                  <div className="mt-1 text-red-600 text-xs">
+                    <p className="font-medium">{t('bulkUpload.errorLabel')}</p>
+                    {bulkResult.errors.map((e, i) => <p key={i}>{e}</p>)}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+
           <div className="p-6">
             {attendees.length === 0 ? (
               <p className="text-gray-400 text-center italic py-8">No attendees yet.</p>
@@ -708,6 +774,9 @@ export default function HostDashboard() {
                             )}
                             {attendee.is_flagged && (
                               <span className="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded-full">{t('hostDashboard.attendees.flaggedBadge')}</span>
+                            )}
+                            {!attendee.is_confirmed && (
+                              <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Pending</span>
                             )}
                           </div>
                           {attendee.company && <p className="text-sm text-gray-500 truncate">{attendee.company}</p>}

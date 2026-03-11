@@ -42,6 +42,7 @@ class User(UserBase):
     is_host: bool
     is_flagged: bool = False
     is_suspended: bool = False
+    is_confirmed: bool = True
     report_comment: Optional[str] = None
     available_timeslots: List[TimeSlot] = []
 
