@@ -26,6 +26,7 @@ export default function AttendeeDashboard() {
   const [favourites, setFavourites] = useState<Set<number>>(new Set());
   const [showFavouritesOnly, setShowFavouritesOnly] = useState(false);
   const [profileUser, setProfileUser] = useState<any>(null);
+  const [profileUserShowRequest, setProfileUserShowRequest] = useState(true);
   const PAGE_SIZE = 12;
   
   // Selection state for meeting request modal
@@ -489,7 +490,7 @@ export default function AttendeeDashboard() {
                 return (
                   <div key={m.id} className={`bg-white border rounded-2xl p-5 shadow-sm ${m.status === 'accepted' ? 'border-green-300' : (m.status === 'declined' || m.status === 'cancelled') ? 'border-red-300 opacity-70' : 'border-gray-200'}`}>
                     <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors" onClick={() => setProfileUser(otherPerson)}>{otherPerson.name}</h4>
+                      <h4 className="font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors" onClick={() => { setProfileUser(otherPerson); setProfileUserShowRequest(false); }}>{otherPerson.name}</h4>
                       <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide ${
                         m.status === 'accepted' ? 'bg-green-100 text-green-700' : 
                         (m.status === 'declined' || m.status === 'cancelled') ? 'bg-red-100 text-red-700' : 
@@ -591,7 +592,7 @@ export default function AttendeeDashboard() {
               <p className="text-gray-500 italic p-6">{showFavouritesOnly ? t('attendeeDashboard.directory.emptyFavourites') : t('attendeeDashboard.directory.empty')}</p>
             ) : (
               paged.map(user => (
-                <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => setProfileUser(user)}>
+                <div key={user.id} className="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow cursor-pointer" onClick={() => { setProfileUser(user); setProfileUserShowRequest(true); }}>
                   <div className="flex items-start mb-4 gap-3">
                     <div className="flex-shrink-0">
                       {user.avatar_url ? (
@@ -683,7 +684,7 @@ export default function AttendeeDashboard() {
                 {metPeople.map(m => {
                   const other = m.receiver_id === parseInt(userId || '0') ? m.requester : m.receiver;
                   return (
-                    <div key={m.id} className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer" onClick={() => setProfileUser(other)}>
+                    <div key={m.id} className="flex items-center gap-3 p-4 rounded-xl border border-gray-100 bg-gray-50 hover:bg-gray-100 transition-colors cursor-pointer" onClick={() => { setProfileUser(other); setProfileUserShowRequest(false); }}>
                       {other.avatar_url ? (
                         <img src={other.avatar_url} alt={other.name} className="w-12 h-12 rounded-full object-cover flex-shrink-0 border border-gray-200" />
                       ) : (
@@ -737,12 +738,14 @@ export default function AttendeeDashboard() {
               >
                 {t('attendeeDashboard.requestModal.cancelBtn')}
               </button>
-              <button
-                onClick={() => { setSelectedUser(profileUser); setProfileUser(null); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
-                className="flex-1 px-4 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-md"
-              >
-                {t('attendeeDashboard.directory.requestMeetingBtn')}
-              </button>
+              {profileUserShowRequest && (
+                <button
+                  onClick={() => { setSelectedUser(profileUser); setProfileUser(null); setSelectedLocation(""); setSelectedTimeslot(""); setRequestMessage(""); setRequestStatus(""); }}
+                  className="flex-1 px-4 py-3 bg-blue-600 text-white font-bold rounded-xl hover:bg-blue-700 shadow-md"
+                >
+                  {t('attendeeDashboard.directory.requestMeetingBtn')}
+                </button>
+              )}
             </div>
           </div>
         </div>
