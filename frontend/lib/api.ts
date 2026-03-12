@@ -4,7 +4,7 @@
  */
 export function getApiUrl(): string {
   if (typeof window === 'undefined') return 'http://localhost:8000';
-  return `http://${window.location.hostname}:8000`;
+  return `${window.location.origin}/api`;
 }
 
 /**
