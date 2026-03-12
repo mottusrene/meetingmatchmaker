@@ -63,12 +63,15 @@ def send_removed_notification(attendee_email: str, name: str, event_title: str):
         template["body"].format(name=name, event_title=event_title),
     )
 
-def send_suspended_notification(attendee_email: str, name: str, event_title: str):
+def send_suspended_notification(attendee_email: str, name: str, event_title: str, message: str | None = None):
     template = text_dict["suspendedUser"]
+    body = template["body"].format(name=name, event_title=event_title)
+    if message:
+        body += f"\n\nMessage from the host:\n\"{message}\""
     _send(
         attendee_email,
         template["subject"].format(event_title=event_title),
-        template["body"].format(name=name, event_title=event_title),
+        body,
     )
 
 def send_reinstated_notification(attendee_email: str, name: str, event_title: str):

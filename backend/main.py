@@ -399,6 +399,9 @@ def delete_user(user_id: int, authorization: str = Header(None), db: Session = D
 class ReportBody(PydanticModel):
     comment: str = ""
 
+class SuspendBody(PydanticModel):
+    message: str | None = None
+
 @app.post("/users/{user_id}/report")
 @limiter.limit("5/minute")
 def report_user(request: Request, user_id: int, body: ReportBody, authorization: str = Header(None), db: Session = Depends(get_db)):
@@ -447,7 +450,9 @@ def host_delete_user(access_code: str, user_id: int, authorization: str = Header
     return {"message": "User forcibly removed from event"}
 
 @app.put("/events/{access_code}/users/{user_id}/suspend")
-def host_suspend_user(access_code: str, user_id: int, authorization: str = Header(None), db: Session = Depends(get_db)):
+def host_suspend_user(access_code: str, user_id: int, body: SuspendBody = None, authorization: str = Header(None), db: Session = Depends(get_db)):
+    if body is None:
+        body = SuspendBody()
     db_event = get_event(access_code, db)
 
     if db_event.admin_code != authorization:
@@ -479,7 +484,7 @@ def host_suspend_user(access_code: str, user_id: int, authorization: str = Heade
             )
 
     db.commit()
-    send_suspended_notification(db_user.email, db_user.name, db_event.title)
+    send_suspended_notification(db_user.email, db_user.name, db_event.title, body.message)
     return {"message": "User suspended"}
 
 @app.put("/events/{access_code}/users/{user_id}/unsuspend")
