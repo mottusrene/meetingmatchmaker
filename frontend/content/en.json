@@ -1,7 +1,7 @@
 {
   "metadata": {
-    "title": "MeetingMatches – Event Networking Made Simple",
-    "description": "The simplest way for event attendees to discover each other, schedule 1-on-1 meetings, and make the most of every event.",
+    "title": "MeetingMatches – Event Networking Made Simple and Private",
+    "description": "A simple and privacy-focused way for event attendees to discover each other and schedule 1-on-1 meetings.",
     "siteName": "MeetingMatches"
   },
   "global": {
@@ -10,22 +10,22 @@
   "landing": {
     "heroTitle": "Connect at your next",
     "heroHighlight": "Event",
-    "heroSubtitle": "The simplest way for event attendees to discover each other, manage their time, and request 1-on-1 meetings.",
-    "createEventBtn": "Create Event",
-    "eventCodePlaceholder": "Event Code",
-    "joinBtn": "Join",
+    "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings. ",
+    "createEventBtn": "Create Event For Free",
+    "eventCodePlaceholder": "Event Code (e.g. ABC123)",
+    "joinBtn": "Join Event For Free",
     "features": {
       "secure": {
-        "title": "Seamless & Secure",
-        "desc": "No passwords required. Magic links ensure rapid onboarding, and all event data is strictly auto-deleted 24 hours after conclusion for your privacy."
+        "title": "Privacy First",
+        "desc": "No passwords required. No contact information shared. All event data is auto-deleted 24 hours after conclusion. No tracking. No marketing emails. GDPR compliant."
       },
       "time": {
-        "title": "Time & Space Control",
-        "desc": "Define specific schedules and locations to ensure attendees only match when and where it physically makes sense, preventing all double-booking."
+        "title": "Time and Space Control",
+        "desc": "Hosts set schedules and locations, and meetings slots are automatically managed. Bulk-invitation options available."
       },
       "network": {
         "title": "Frictionless Networking",
-        "desc": "Attendees browse profiles and send direct 1-on-1 meeting requests with just a few clicks from any device."
+        "desc": "Attendees can join in 1 minute, browse profiles and send 1-on-1 meeting requests with just a few clicks."
       }
     },
     "footer": {
@@ -39,11 +39,11 @@
     "formTitle": "Create New Event",
     "formSubtitle": "Set up your matchmaking event in seconds.",
     "eventTitleLabel": "Event Title",
-    "eventTitlePlaceholder": "e.g., Annual Tech Summit 2024",
+    "eventTitlePlaceholder": "e.g., Annual Summit 2026",
     "descriptionLabel": "Description (Optional)",
     "descriptionPlaceholder": "A brief description of your event...",
     "locationLabel": "Location (Optional)",
-    "locationPlaceholder": "e.g., Grand Hyatt, NYC / Online via Zoom",
+    "locationPlaceholder": "e.g., Grand Hyatt, NYC",
     "hostEmailLabel": "Host Email",
     "hostEmailDesc": "Required. Your admin link will be emailed here so you can always return to manage this event.",
     "websiteLabel": "Event Website (Optional)",
@@ -54,7 +54,7 @@
     "consentCheckbox": "I agree to the ",
     "privacyPolicy": "Privacy Policy",
     "consentSuffix": " and consent to the collection of my provided information to facilitate this event. I understand all data will be automatically deleted 24 hours after the event concludes.",
-    "retentionNote": "Note: Event data will be auto-deleted 24 hours after the End Date.",
+    "retentionNote": "Important: Event data will be auto-deleted 24 hours after the End Date.",
     "submitButton": "Create Event",
     "submittingButton": "Creating...",
     "errorSuffix": "Failed to create event. Please try again."
@@ -70,7 +70,7 @@
       "attendeeDesc": "Share the attendee link so people can register and join your event.",
       "hostTitle": "For You (Host)",
       "copyAdminLink": "Copy My Admin Link",
-      "adminDesc": "Keep this link safe. Bookmark it to return to this dashboard and manage your event.",
+      "adminDesc": "Use this link to return to this dashboard and manage your event. We also emailed it to you.",
       "copied": "Link copied!",
       "adminCopied": "Admin link copied!",
       "qrCodeBtn": "Show QR Code",
@@ -80,9 +80,9 @@
     "meetingAreas": {
       "title": "Meeting Areas",
       "inputPlaceholder": "Meeting Area (e.g., Main Hall)",
-      "inputTooltip": "A room or confined area where one or more meetings can take place",
-      "tablesPlaceholder": "No. of Tables",
-      "tablesTooltip": "Number of concurrent meetings allowed",
+      "inputTooltip": "A room or area where one or more meetings can take place",
+      "tablesPlaceholder": "No. of tables",
+      "tablesTooltip": "Number of concurrent meetings",
       "addButton": "Add Area",
       "empty": "No locations added yet.",
       "tablesLabel": "Tables:",
@@ -90,7 +90,7 @@
     },
     "timeslots": {
       "title": "Available Time Slots",
-      "startLabel": "Start Time",
+      "startLabel": "Start Date and Time",
       "endLabel": "End Time",
       "endTooltip": "End Time (on same date as Start Time)",
       "durationLabel": "Duration (min)",
@@ -145,7 +145,7 @@
     },
     "attendees": {
       "title": "Attendees",
-      "searchPlaceholder": "Search by name or email...",
+      "searchPlaceholder": "Search by name or profile text...",
       "flagTooltip": "Reported by an attendee",
       "suspendedBadge": "Suspended",
       "flaggedBadge": "Reported",
@@ -178,11 +178,11 @@
     "emailPlaceholder": "you@company.com",
     "nameLabel": "Full Name",
     "namePlaceholder": "Jane Doe",
-    "companyLabel": "Company (Optional)",
-    "companyPlaceholder": "Acme Corp",
+    "companyLabel": "Company or Role (Optional)",
+    "companyPlaceholder": "University of Example / Professor",
     "profileLinkLabel": "Profile/Website Link (Optional)",
     "profileLinkPlaceholder": "https://linkedin.com/in/...",
-    "bioLabel": "Short Bio",
+    "bioLabel": "Short Bio or Summary",
     "bioPlaceholder": "I'm interested in...",
     "timeslotsLabel": "Which timeslots are you available to meet?",
     "consentCheckbox": "I agree to the ",
