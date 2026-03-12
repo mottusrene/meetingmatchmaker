@@ -48,6 +48,7 @@ export default function HostDashboard() {
   const [attendeeSearch, setAttendeeSearch] = useState("");
   const [suspendModal, setSuspendModal] = useState<{ user: any; action: "suspend" | "unsuspend" } | null>(null);
   const [suspendStatus, setSuspendStatus] = useState("");
+  const [suspendMessage, setSuspendMessage] = useState("");
 
   const [bulkFile, setBulkFile] = useState<File | null>(null);
   const [bulkUploading, setBulkUploading] = useState(false);
@@ -331,7 +332,11 @@ export default function HostDashboard() {
     const action = suspendModal.action;
     const res = await fetch(
       `${getApiUrl()}/events/${accessCode}/users/${suspendModal.user.id}/${action}`,
-      { method: "PUT", headers: { "Authorization": urlAdminCode || "" } }
+      {
+        method: "PUT",
+        headers: { "Authorization": urlAdminCode || "", "Content-Type": "application/json" },
+        body: action === "suspend" ? JSON.stringify({ message: suspendMessage || null }) : undefined
+      }
     );
     if (res.ok) {
       const successKey = action === "suspend"
@@ -339,7 +344,7 @@ export default function HostDashboard() {
         : t('hostDashboard.attendees.unsuspendModal.success');
       setSuspendStatus(successKey);
       fetchEventAndUsers();
-      setTimeout(() => { setSuspendModal(null); setSuspendStatus(""); }, 1200);
+      setTimeout(() => { setSuspendModal(null); setSuspendStatus(""); setSuspendMessage(""); }, 1200);
     } else {
       setSuspendStatus("Error: action failed.");
     }
@@ -972,6 +977,18 @@ export default function HostDashboard() {
                 : t('hostDashboard.attendees.unsuspendModal.description')
               ).replace("{{name}}", suspendModal.user.name)}
             </p>
+            {suspendModal.action === "suspend" && (
+              <div className="mb-6">
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.attendees.suspendModal.messageLabel')}</label>
+                <textarea
+                  value={suspendMessage}
+                  onChange={(e) => setSuspendMessage(e.target.value)}
+                  placeholder={t('hostDashboard.attendees.suspendModal.messagePlaceholder')}
+                  className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-900 resize-none"
+                  rows={3}
+                />
+              </div>
+            )}
             {suspendStatus && (
               <div className={`text-sm font-bold mb-4 ${suspendStatus.startsWith("Error") ? 'text-red-600' : 'text-green-600'}`}>
                 {suspendStatus}
@@ -979,7 +996,7 @@ export default function HostDashboard() {
             )}
             <div className="flex gap-3">
               <button
-                onClick={() => { setSuspendModal(null); setSuspendStatus(""); }}
+                onClick={() => { setSuspendModal(null); setSuspendStatus(""); setSuspendMessage(""); }}
                 className="flex-1 px-4 py-2 border border-gray-300 text-gray-700 font-bold rounded-xl hover:bg-gray-50"
               >
                 {suspendModal.action === "suspend"

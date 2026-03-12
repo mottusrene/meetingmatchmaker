@@ -10,14 +10,14 @@
   "landing": {
     "heroTitle": "Connect at your next",
     "heroHighlight": "Event",
-    "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings. ",
+    "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings.",
     "createEventBtn": "Create Event For Free",
-    "eventCodePlaceholder": "Event Code (e.g. ABC123)",
-    "joinBtn": "Join Event",
+    "eventCodePlaceholder": "Event Code",
+    "joinBtn": "Join",
     "features": {
       "secure": {
         "title": "Privacy First",
-        "desc": "No passwords. No contact information shared. No marketing emails. Data auto-deleted 24 hours after event."
+        "desc": "No passwords. No contact information sharing. No marketing emails. Data auto-deleted 24 hours after event."
       },
       "time": {
         "title": "Minimal Host Involvement",
@@ -25,7 +25,7 @@
       },
       "network": {
         "title": "Frictionless Networking",
-        "desc": "Attendees can join in 1 minute, browse profiles and send meeting requests with one click. Private chatting between attendees with accepted meetings."
+        "desc": "Attendees can join in 1 minute and send meeting requests with 1 click. Private chat between attendees once a meeting is accepted."
       }
     },
     "footer": {
@@ -154,6 +154,8 @@
       "suspendModal": {
         "title": "Suspend Attendee",
         "description": "Are you sure you want to suspend {{name}}? Their pending and accepted meetings will be cancelled, and they will receive an email notification. You can reinstate them at any time.",
+        "messageLabel": "Message to attendee (optional)",
+        "messagePlaceholder": "Let them know why they've been suspended...",
         "cancelBtn": "Cancel",
         "confirmBtn": "Yes, Suspend",
         "success": "Attendee suspended"
@@ -209,7 +211,7 @@
       "editProfileBtn": "Edit Profile",
       "copiedLink": "Copied!",
       "myLoginLink": "My login link",
-      "logoutBtn": "Logout"
+      "logoutBtn": "Log out"
     },
     "myMeetings": {
       "title": "My Meetings",
