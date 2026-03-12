@@ -443,15 +443,18 @@ export default function AttendeeDashboard() {
             </div>
           </div>
 
-          <button 
-            onClick={() => {
-              localStorage.removeItem(`session_token_${accessCode}`);
-              router.push(`/event/${accessCode}`);
-            }}
-            className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors h-fit self-end sm:ml-4 sm:shrink-0"
-          >
-            {t('attendeeDashboard.header.logoutBtn')}
-          </button>
+          <div className="flex flex-col items-end gap-3 self-end sm:ml-4 sm:shrink-0">
+            <span className="text-white/40 text-xs font-semibold tracking-wide hidden sm:block">MeetingMatches</span>
+            <button
+              onClick={() => {
+                localStorage.removeItem(`session_token_${accessCode}`);
+                router.push(`/event/${accessCode}`);
+              }}
+              className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors h-fit"
+            >
+              {t('attendeeDashboard.header.logoutBtn')}
+            </button>
+          </div>
 
         </div>
       </header>

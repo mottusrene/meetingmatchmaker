@@ -7,7 +7,9 @@
       "WebSearch",
       "Bash(cat:*)",
       "Bash(docker compose:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(sed -n '370,420p' /home/renemottus/Downloads/matchMaking/frontend/app/host/\\\\[access_code\\\\]/page.tsx)",
+      "Bash(sed -n '384,460p' /home/renemottus/Downloads/matchMaking/frontend/app/event/\\\\[access_code\\\\]/dashboard/page.tsx)"
     ]
   }
 }
