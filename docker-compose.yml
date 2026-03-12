@@ -17,7 +17,7 @@ services:
       - SMTP_USER=meetings@personomist.com
       - SMTP_PASS=****
       - FROM_EMAIL=meetings@personomist.com
-      - FRONTEND_URL=http://personomist.com:3000
+      - FRONTEND_URL=https://meetingmatches.com
     restart: always
 
   frontend:
