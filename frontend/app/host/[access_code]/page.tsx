@@ -405,13 +405,16 @@ export default function HostDashboard() {
               <p className="text-indigo-200 mt-1 text-sm">{t('hostDashboard.title')}</p>
             </div>
           </div>
-          <div className="flex gap-4">
-            <button onClick={() => { setEditEventStatus(""); setIsEditingEvent(true); }} className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors">
-              {t('hostDashboard.editEventBtn')}
-            </button>
-            <Link href="/" className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors hidden sm:block">
-              {t('hostDashboard.exitDashboardBtn')}
-            </Link>
+          <div className="flex flex-col items-end gap-3">
+            <span className="text-white/40 text-xs font-semibold tracking-wide hidden sm:block">MeetingMatches</span>
+            <div className="flex gap-4">
+              <button onClick={() => { setEditEventStatus(""); setIsEditingEvent(true); }} className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors">
+                {t('hostDashboard.editEventBtn')}
+              </button>
+              <Link href="/" className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors hidden sm:block">
+                {t('hostDashboard.exitDashboardBtn')}
+              </Link>
+            </div>
           </div>
         </div>
       </header>
