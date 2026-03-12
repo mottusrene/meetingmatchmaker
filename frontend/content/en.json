@@ -17,15 +17,15 @@
     "features": {
       "secure": {
         "title": "Privacy First",
-        "desc": "No passwords. No contact information shared. Event data is auto-deleted 24 hours after conclusion. No marketing emails."
+        "desc": "No passwords. No contact information shared. No marketing emails. Data auto-deleted 24 hours after event."
       },
       "time": {
-        "title": "Time and Space Control",
-        "desc": "Hosts set schedules and locations, and meetings are automatically managed."
+        "title": "Minimal Host Involvement",
+        "desc": "Hosts set schedules and locations, and meetings are automatically managed. Hosts don't see meeting data."
       },
       "network": {
         "title": "Frictionless Networking",
-        "desc": "Attendees can join in 1 minute, browse profiles and send meeting requests with one click. Attendees with accepted meetings can privately chat."
+        "desc": "Attendees can join in 1 minute, browse profiles and send meeting requests with one click. Private chatting between attendees with accepted meetings."
       }
     },
     "footer": {
