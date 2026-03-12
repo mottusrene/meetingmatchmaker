@@ -1,6 +1,7 @@
 "use client";
 
 import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
@@ -444,7 +445,7 @@ export default function AttendeeDashboard() {
           </div>
 
           <div className="flex flex-col items-end gap-3 self-end sm:ml-4 sm:shrink-0">
-            <span className="text-white/40 text-xs font-semibold tracking-wide hidden sm:block">MeetingMatches</span>
+            <Logo className="text-white/70 hover:text-white text-base hidden sm:block" newTab />
             <button
               onClick={() => {
                 localStorage.removeItem(`session_token_${accessCode}`);
