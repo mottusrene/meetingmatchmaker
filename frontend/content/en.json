@@ -13,19 +13,19 @@
     "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings. ",
     "createEventBtn": "Create Event For Free",
     "eventCodePlaceholder": "Event Code (e.g. ABC123)",
-    "joinBtn": "Join Event For Free",
+    "joinBtn": "Join Event",
     "features": {
       "secure": {
         "title": "Privacy First",
-        "desc": "No passwords required. No contact information shared. All event data is auto-deleted 24 hours after conclusion. No tracking. No marketing emails. GDPR compliant."
+        "desc": "No passwords. No contact information shared. Event data is auto-deleted 24 hours after conclusion. No marketing emails."
       },
       "time": {
         "title": "Time and Space Control",
-        "desc": "Hosts set schedules and locations, and meetings slots are automatically managed. Bulk-invitation options available."
+        "desc": "Hosts set schedules and locations, and meetings are automatically managed."
       },
       "network": {
         "title": "Frictionless Networking",
-        "desc": "Attendees can join in 1 minute, browse profiles and send 1-on-1 meeting requests with just a few clicks."
+        "desc": "Attendees can join in 1 minute, browse profiles and send meeting requests with one click. Attendees with accepted meetings can privately chat."
       }
     },
     "footer": {
