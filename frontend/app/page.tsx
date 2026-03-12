@@ -22,7 +22,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-blue-100 flex flex-col font-sans">
       <main className="flex-grow container mx-auto px-6 pb-16 flex flex-col items-center justify-center text-center">
-        <Image src="/logo.png" alt="MeetingMatches" width={160} height={160} className="mb-8" />
+        <Image src="/logo.png" alt="MeetingMatches" width={160} height={160} className="mt-10 mb-8" />
         <h1 className="text-5xl md:text-6xl font-extrabold text-indigo-900 mb-6 tracking-tight">
           {t('landing.heroTitle')} <span className="text-blue-600">{t('landing.heroHighlight')}</span>
         </h1>
