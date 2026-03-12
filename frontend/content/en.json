@@ -10,7 +10,7 @@
   "landing": {
     "heroTitle": "Connect at your next",
     "heroHighlight": "Event",
-    "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings.",
+    "heroSubtitle": "A simple and privacy-focused way for event attendees to discover each other and request 1-on-1 meetings",
     "createEventBtn": "Create Event For Free",
     "eventCodePlaceholder": "Event Code",
     "joinBtn": "Join",
@@ -25,7 +25,7 @@
       },
       "network": {
         "title": "Frictionless Networking",
-        "desc": "Attendees can join in 1 minute and send meeting requests with 1 click. Private chat between attendees once a meeting is accepted."
+        "desc": "Attendees can join in 1 minute and send or manage meeting requests with 1 click. Chat privately when a meeting is accepted."
       }
     },
     "footer": {

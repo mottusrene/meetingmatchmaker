@@ -1,6 +1,7 @@
 "use client";
 
 import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
@@ -411,7 +412,7 @@ export default function HostDashboard() {
             </div>
           </div>
           <div className="flex flex-col items-end gap-3">
-            <span className="text-white/40 text-xs font-semibold tracking-wide hidden sm:block">MeetingMatches</span>
+            <Logo className="text-white/70 hover:text-white text-base hidden sm:block" newTab />
             <div className="flex gap-4">
               <button onClick={() => { setEditEventStatus(""); setIsEditingEvent(true); }} className="bg-white/10 hover:bg-white/20 px-4 py-2 rounded-lg font-medium transition-colors">
                 {t('hostDashboard.editEventBtn')}
