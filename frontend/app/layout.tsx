@@ -6,6 +6,7 @@ import content from "../content/en.json";
 const { title, description, siteName } = content.metadata;
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://meetingmatches.com'),
   title,
   description,
   icons: { icon: '/favicon.png' },
