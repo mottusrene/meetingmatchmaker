@@ -75,7 +75,10 @@
       "adminCopied": "Admin link copied!",
       "qrCodeBtn": "Show QR Code",
       "qrDesc": "Print or display this QR code at your event so attendees can register instantly.",
-      "qrDownloadBtn": "Download QR (SVG)"
+      "qrDownloadBtn": "Download QR (SVG)",
+      "noLocationsAndSlotsWarning": "You haven't added any meeting areas or time slots yet. Attendees can register, but won't be able to request meetings until both are set up.",
+      "noLocationsWarning": "You haven't added any meeting areas yet. Attendees won't be able to request meetings until at least one area is added.",
+      "noSlotsWarning": "You haven't generated any time slots yet. Attendees won't be able to request meetings until time slots are added."
     },
     "meetingAreas": {
       "title": "Meeting Areas",
@@ -90,10 +93,10 @@
     },
     "timeslots": {
       "title": "Available Time Slots",
-      "startLabel": "Start Date and Time",
+      "startLabel": "Start Date and Time of Meetings' Window",
       "endLabel": "End Time",
       "endTooltip": "End Time (on same date as Start Time)",
-      "durationLabel": "Duration (min)",
+      "durationLabel": "Individual Meeting Duration (min)",
       "generateButton": "Generate",
       "empty": "No time slots added yet.",
       "starts": "Starts",
@@ -196,7 +199,8 @@
     "alreadyRegisteredError": "You are already registered for this event. Please check your email for your Magic Link to log in!",
     "registrationFailedError": "Registration failed",
     "pendingBanner": "Your details have been pre-filled by the event organiser. Please review, complete your profile, and confirm your participation.",
-    "pendingSubmitBtn": "Confirm & Enter"
+    "pendingSubmitBtn": "Confirm & Enter",
+    "noTimeslotsNote": "The host hasn't set up meeting times yet. You can still register now and your availability will be confirmed once the schedule is ready."
   },
   "attendeeDashboard": {
     "loading": "Loading dashboard...",

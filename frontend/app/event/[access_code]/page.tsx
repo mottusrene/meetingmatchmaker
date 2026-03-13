@@ -256,6 +256,13 @@ export default function EventAccess() {
                 />
               </div>
               
+              {timeslots.length === 0 && (
+                <div className="pt-4 border-t border-gray-100">
+                  <p className="text-sm text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-4">
+                    ⚠️ {t('eventJoin.noTimeslotsNote')}
+                  </p>
+                </div>
+              )}
               {timeslots.length > 0 && (
                 <div className="pt-4 border-t border-gray-100">
                   <label className="block text-sm font-bold text-gray-800 mb-3">{t('eventJoin.timeslotsLabel')}</label>
