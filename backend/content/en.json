@@ -39,7 +39,7 @@
       },
       "message": {
         "subject": "New Message from {sender_name}",
-        "body": "Hi {receiver_name},\n\nYou have a new message from {sender_name} regarding your upcoming meeting at '{event_title}':\n\n\"{content}\"\n\nPlease log in to the dashboard to reply."
+        "body": "Hi {receiver_name},\n\nYou have a new message from {sender_name} regarding your upcoming meeting at '{event_title}':\n\n\"{content}\"\n\nReply here:\n{magic_link}"
       }
     },
     "bulkInvite": {

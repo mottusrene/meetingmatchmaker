@@ -849,13 +849,15 @@ def send_message(meeting_id: int, message: schemas.MessageCreate, authorization:
     # Notify other user
     other_user = m.receiver if user.id == m.requester_id else m.requester
     event = db.query(models.Event).filter(models.Event.id == m.event_id).first()
+    other_user_link = f"{FRONTEND_URL}/event/{event.access_code}?token={other_user.session_token}"
     send_meeting_notification(
         other_user.email,
         "message",
         sender_name=user.name,
         receiver_name=other_user.name,
         event_title=event.title,
-        content=message.content
+        content=message.content,
+        magic_link=other_user_link
     )
     
     return db_message

@@ -215,12 +215,19 @@ export default function HostDashboard() {
     }
 
     const durationMs = parseInt(newSlotDuration) * 60000;
-    
+
     if (durationMs <= 0) {
         alert("Duration must be a positive number.");
         return;
     }
-    
+
+    const windowMs = end.getTime() - start.getTime();
+    if (windowMs < durationMs) {
+        const windowMin = Math.round(windowMs / 60000);
+        alert(`The time window is only ${windowMin} minute${windowMin !== 1 ? 's' : ''}, but each meeting is ${newSlotDuration} minutes. Please either extend the end time or reduce the meeting duration.`);
+        return;
+    }
+
     const requests = [];
     let current = start.getTime();
     while (current + durationMs <= end.getTime()) {
@@ -461,6 +468,17 @@ export default function HostDashboard() {
                 {t('hostDashboard.quickActions.qrCodeBtn')}
               </button>
             </div>
+            {(locations.length === 0 || timeslots.length === 0) && (
+              <div className="mt-4 bg-amber-50 border border-amber-200 rounded-xl p-4 text-sm text-amber-800">
+                ⚠️ {t(
+                  locations.length === 0 && timeslots.length === 0
+                    ? 'hostDashboard.quickActions.noLocationsAndSlotsWarning'
+                    : locations.length === 0
+                    ? 'hostDashboard.quickActions.noLocationsWarning'
+                    : 'hostDashboard.quickActions.noSlotsWarning'
+                )}
+              </div>
+            )}
             {showQr && (
               <div className="mt-5 pt-5 border-t border-gray-100 flex flex-col sm:flex-row items-center gap-6">
                 <div className="bg-white p-4 rounded-xl border border-gray-200 shadow-sm">
