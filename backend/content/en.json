@@ -31,7 +31,7 @@
       },
       "declined": {
         "subject": "Meeting Declined – {event_title}",
-        "body": "Hi {requester_name},\n\n{receiver_name} declined your meeting request at '{event_title}'. You can log in to send a request to another attendee:\n{magic_link}"
+        "body": "Hi {requester_name},\n\n{receiver_name} declined your meeting request at '{event_title}'.{reason_block}\n\nYou can log in to send a request to another attendee:\n{magic_link}"
       },
       "cancelled": {
         "subject": "Meeting Cancelled – {event_title}",
