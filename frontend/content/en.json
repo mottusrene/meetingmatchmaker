@@ -286,7 +286,7 @@
       "confirmRemoveBtn": "Yes, remove me"
     },
     "availability": {
-      "title": "My Availability",
+      "title": "Edit Availability",
       "saveBtn": "Save",
       "savingBtn": "Saving...",
       "cancelBtn": "Cancel"

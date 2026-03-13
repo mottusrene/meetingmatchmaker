@@ -567,7 +567,7 @@ export default function AttendeeDashboard() {
 
         {/* My Availability */}
         {timeslots.length > 0 && (
-          <section className="lg:col-span-1 lg:col-start-3 bg-white rounded-2xl shadow-sm border border-gray-200">
+          <section className="lg:col-span-1 lg:col-start-3 bg-white rounded-2xl shadow-sm border border-gray-200 self-start">
             <button
               onClick={() => {
                 if (!showAvailability) {
