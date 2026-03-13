@@ -85,7 +85,7 @@
       "inputPlaceholder": "Meeting Area (e.g., Main Hall)",
       "inputTooltip": "A room or area where one or more meetings can take place",
       "tablesPlaceholder": "No. of tables",
-      "tablesTooltip": "Number of concurrent meetings",
+      "tablesTooltip": "Number of concurrent meetings in the room/area",
       "addButton": "Add Area",
       "empty": "No locations added yet.",
       "tablesLabel": "Tables:",
@@ -223,6 +223,13 @@
       "empty": "You have no meeting requests.",
       "acceptBtn": "Accept",
       "declineBtn": "Decline",
+      "declineModal": {
+        "title": "Decline Meeting Request",
+        "description": "Let {{name}} know why you're declining (optional).",
+        "reasonPlaceholder": "e.g. I'm already meeting someone during this slot...",
+        "cancelBtn": "Cancel",
+        "confirmBtn": "Decline"
+      },
       "waitingResponse": "Waiting for response",
       "chatBtn": "Chat",
       "addCalendarBtn": "Add to Calendar",

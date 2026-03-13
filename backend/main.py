@@ -402,6 +402,9 @@ class ReportBody(PydanticModel):
 class SuspendBody(PydanticModel):
     message: str | None = None
 
+class MeetingStatusBody(PydanticModel):
+    reason: str | None = None
+
 @app.post("/users/{user_id}/report")
 @limiter.limit("5/minute")
 def report_user(request: Request, user_id: int, body: ReportBody, authorization: str = Header(None), db: Session = Depends(get_db)):
@@ -693,7 +696,9 @@ def get_user_meetings(user_id: int, db: Session = Depends(get_db)):
     ).all()
 
 @app.put("/meetings/{meeting_id}/status", response_model=schemas.Meeting)
-def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(get_db)):
+def update_meeting_status(meeting_id: int, status: str, body: MeetingStatusBody = None, db: Session = Depends(get_db)):
+    if body is None:
+        body = MeetingStatusBody()
     if status not in ["pending", "accepted", "declined", "cancelled"]:
         raise HTTPException(status_code=400, detail="Invalid status")
     
@@ -763,6 +768,7 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
         if status in ["accepted", "declined"]:
             table_str = f", Table {db_meeting.table_number}" if db_meeting.table_number else ""
+            reason_block = f"\n\nReason: \"{body.reason}\"" if status == "declined" and body.reason else ""
             send_meeting_notification(
                 requester.email,
                 status,
@@ -774,6 +780,7 @@ def update_meeting_status(meeting_id: int, status: str, db: Session = Depends(ge
                 location_name=location_name,
                 table_str=table_str,
                 magic_link=requester_link,
+                reason_block=reason_block,
             )
         elif status == "cancelled":
             send_meeting_notification(

@@ -50,6 +50,10 @@ export default function AttendeeDashboard() {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [copiedMagicLink, setCopiedMagicLink] = useState(false);
 
+  // Decline modal state
+  const [declineModal, setDeclineModal] = useState<any>(null);
+  const [declineReason, setDeclineReason] = useState("");
+
   // Availability panel state
   const [showAvailability, setShowAvailability] = useState(false);
   const [availabilityEdit, setAvailabilityEdit] = useState<number[]>([]);
@@ -196,11 +200,12 @@ export default function AttendeeDashboard() {
     }
   };
 
-  const updateMeeting = async (meetingId: number, status: string) => {
+  const updateMeeting = async (meetingId: number, status: string, reason?: string) => {
     const token = localStorage.getItem(`session_token_${accessCode}`);
     const res = await fetch(`${getApiUrl()}/meetings/${meetingId}/status?status=${status}`, {
       method: "PUT",
-      headers: { "Authorization": token || "" }
+      headers: { "Authorization": token || "", "Content-Type": "application/json" },
+      body: reason ? JSON.stringify({ reason }) : undefined
     });
     if (res.ok) {
       fetch(`${getApiUrl()}/users/${userId}/meetings/`)
@@ -532,7 +537,7 @@ export default function AttendeeDashboard() {
                         <button onClick={() => updateMeeting(m.id, 'accepted')} className="flex-1 bg-green-50 text-green-700 border border-green-200 hover:bg-green-100 font-medium py-2 rounded-lg transition-colors flex justify-center items-center">
                           <CheckCircle size={16} className="mr-1" /> {t('attendeeDashboard.myMeetings.acceptBtn')}
                         </button>
-                        <button onClick={() => updateMeeting(m.id, 'declined')} className="flex-1 bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-medium py-2 rounded-lg transition-colors flex justify-center items-center">
+                        <button onClick={() => { setDeclineModal(m); setDeclineReason(""); }} className="flex-1 bg-red-50 text-red-700 border border-red-200 hover:bg-red-100 font-medium py-2 rounded-lg transition-colors flex justify-center items-center">
                           <XCircle size={16} className="mr-1" /> {t('attendeeDashboard.myMeetings.declineBtn')}
                         </button>
                       </div>
@@ -797,6 +802,37 @@ export default function AttendeeDashboard() {
         })()}
 
       </main>
+
+      {/* Decline Modal */}
+      {declineModal && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 z-50">
+          <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <h3 className="text-xl font-bold text-gray-900 mb-2">{t('attendeeDashboard.myMeetings.declineModal.title')}</h3>
+            <p className="text-gray-600 text-sm mb-4">{t('attendeeDashboard.myMeetings.declineModal.description').replace('{{name}}', declineModal.requester?.name || '')}</p>
+            <textarea
+              value={declineReason}
+              onChange={e => setDeclineReason(e.target.value)}
+              placeholder={t('attendeeDashboard.myMeetings.declineModal.reasonPlaceholder')}
+              className="w-full border border-gray-300 rounded-xl px-3 py-2 text-sm text-gray-900 resize-none mb-5"
+              rows={3}
+            />
+            <div className="flex gap-3">
+              <button onClick={() => setDeclineModal(null)} className="flex-1 py-2 border border-gray-300 text-gray-700 font-medium rounded-xl hover:bg-gray-50">
+                {t('attendeeDashboard.myMeetings.declineModal.cancelBtn')}
+              </button>
+              <button
+                onClick={async () => {
+                  await updateMeeting(declineModal.id, 'declined', declineReason || undefined);
+                  setDeclineModal(null);
+                }}
+                className="flex-1 py-2 bg-red-600 text-white font-bold rounded-xl hover:bg-red-700"
+              >
+                {t('attendeeDashboard.myMeetings.declineModal.confirmBtn')}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Profile Modal */}
       {profileUser && (
