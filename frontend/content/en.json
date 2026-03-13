@@ -285,6 +285,12 @@
       "keepProfileBtn": "Keep my profile",
       "confirmRemoveBtn": "Yes, remove me"
     },
+    "availability": {
+      "title": "My Availability",
+      "saveBtn": "Save",
+      "savingBtn": "Saving...",
+      "cancelBtn": "Cancel"
+    },
     "chatModal": {
       "titlePrefix": "Chat with",
       "empty": "No messages yet. Say hi!",
