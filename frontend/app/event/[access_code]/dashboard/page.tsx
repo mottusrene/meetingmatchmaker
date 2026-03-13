@@ -50,6 +50,12 @@ export default function AttendeeDashboard() {
   const [deleteConfirm, setDeleteConfirm] = useState(false);
   const [copiedMagicLink, setCopiedMagicLink] = useState(false);
 
+  // Availability panel state
+  const [showAvailability, setShowAvailability] = useState(false);
+  const [availabilityEdit, setAvailabilityEdit] = useState<number[]>([]);
+  const [availabilitySaving, setAvailabilitySaving] = useState(false);
+  const [availabilityDirty, setAvailabilityDirty] = useState(false);
+
   // Report state
   const [reportedUserIds, setReportedUserIds] = useState<Set<number>>(new Set());
   const [reportingUser, setReportingUser] = useState<any>(null);
@@ -558,6 +564,88 @@ export default function AttendeeDashboard() {
             )}
           </div>
         </section>
+
+        {/* My Availability */}
+        {timeslots.length > 0 && (
+          <section className="lg:col-span-1 lg:col-start-3 bg-white rounded-2xl shadow-sm border border-gray-200">
+            <button
+              onClick={() => {
+                if (!showAvailability) {
+                  setAvailabilityEdit(me?.available_timeslots ? me.available_timeslots.map((t: any) => t.id) : []);
+                  setAvailabilityDirty(false);
+                }
+                setShowAvailability(v => !v);
+              }}
+              className="w-full flex items-center justify-between px-6 py-4 text-left"
+            >
+              <span className="font-bold text-gray-800">{t('attendeeDashboard.availability.title')}</span>
+              <span className="text-gray-400 text-sm">{showAvailability ? '▲' : '▼'}</span>
+            </button>
+            {showAvailability && (
+              <div className="px-6 pb-6 border-t border-gray-100 pt-4">
+                <div className="grid grid-cols-2 gap-2 mb-4">
+                  {timeslots.map((slot: any) => {
+                    const isSelected = availabilityEdit.includes(slot.id);
+                    const dateObj = parseDate(slot.start_time);
+                    const dateStr = dateObj.toLocaleDateString([], { month: 'short', day: 'numeric' });
+                    const timeStr = `${dateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })} – ${parseDate(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}`;
+                    return (
+                      <label
+                        key={slot.id}
+                        className={`flex flex-col items-center justify-center p-3 rounded-xl border-2 cursor-pointer transition-all text-center ${isSelected ? 'border-blue-500 bg-blue-50 text-blue-700' : 'border-gray-200 bg-gray-50 text-gray-500 hover:border-blue-300'}`}
+                      >
+                        <input
+                          type="checkbox"
+                          className="sr-only"
+                          checked={isSelected}
+                          onChange={(e) => {
+                            setAvailabilityEdit(prev =>
+                              e.target.checked ? [...prev, slot.id] : prev.filter(id => id !== slot.id)
+                            );
+                            setAvailabilityDirty(true);
+                          }}
+                        />
+                        <span className="text-xs font-bold uppercase tracking-wider opacity-70 mb-1">{dateStr}</span>
+                        <span className="text-xs font-medium">{timeStr}</span>
+                      </label>
+                    );
+                  })}
+                </div>
+                {availabilityDirty && (
+                  <div className="flex gap-2">
+                    <button
+                      onClick={() => { setAvailabilityEdit(me?.available_timeslots ? me.available_timeslots.map((t: any) => t.id) : []); setAvailabilityDirty(false); }}
+                      className="flex-1 py-2 text-sm font-medium border border-gray-200 rounded-xl text-gray-600 hover:bg-gray-50"
+                    >
+                      {t('attendeeDashboard.availability.cancelBtn')}
+                    </button>
+                    <button
+                      onClick={async () => {
+                        setAvailabilitySaving(true);
+                        const token = localStorage.getItem(`session_token_${accessCode}`);
+                        const res = await fetch(`${getApiUrl()}/users/${userId}`, {
+                          method: 'PUT',
+                          headers: { 'Content-Type': 'application/json', 'Authorization': token || '' },
+                          body: JSON.stringify({ available_timeslot_ids: availabilityEdit }),
+                        });
+                        if (res.ok) {
+                          const updated = await res.json();
+                          setMe(updated);
+                          setAvailabilityDirty(false);
+                        }
+                        setAvailabilitySaving(false);
+                      }}
+                      disabled={availabilitySaving}
+                      className="flex-1 py-2 text-sm font-bold bg-blue-600 text-white rounded-xl hover:bg-blue-700 disabled:opacity-50"
+                    >
+                      {availabilitySaving ? t('attendeeDashboard.availability.savingBtn') : t('attendeeDashboard.availability.saveBtn')}
+                    </button>
+                  </div>
+                )}
+              </div>
+            )}
+          </section>
+        )}
 
         {/* Attendee Directory — second in DOM so it appears below My Meetings on mobile */}
         <section className="lg:col-span-2 lg:col-start-1 lg:row-start-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
