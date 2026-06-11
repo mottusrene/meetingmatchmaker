@@ -8,6 +8,10 @@
       "subject": "Your Secure Access Link for {event_title}",
       "body": "Hi {name}, welcome to the matchmaking portal for {event_title}! You can securely log back in to your dashboard anytime using this link:\n👉 {magic_link}"
     },
+    "resendLink": {
+      "subject": "Your Login Link for {event_title}",
+      "body": "Hi {name},\n\nYou (or someone using your email address) requested a new login link for {event_title}. Here it is:\n👉 {magic_link}\n\nIf you did not request this, you can safely ignore this email."
+    },
     "removedUser": {
       "subject": "Access Revoked for {event_title}",
       "body": "Hi {name},\n\nYour access to '{event_title}' has been revoked by the event host."

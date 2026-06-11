@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl } from '@/lib/api';
 import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
@@ -114,7 +114,7 @@ export default function AttendeeDashboard() {
     const interval = setInterval(() => {
       const token = localStorage.getItem(`session_token_${accessCode}`);
       if (!token) return;
-      fetch(`${getApiUrl()}/users/${userId}/meetings/`).then(r => r.json()).then(setMeetings).catch(() => {});
+      fetch(`${getApiUrl()}/users/${userId}/meetings/`, { headers: { "Authorization": token } }).then(r => r.json()).then(setMeetings).catch(() => {});
       fetch(`${getApiUrl()}/users/`, { headers: { "Authorization": token } })
         .then(r => r.json())
         .then((data: any[]) => setUsers(data.filter((u: any) => u.id !== parseInt(userId) && !u.is_host && !u.is_suspended)))
@@ -153,7 +153,7 @@ export default function AttendeeDashboard() {
         fetch(`${getApiUrl()}/users/`, { headers: { "Authorization": token } }).then(r => r.json()),
         fetch(`${getApiUrl()}/events/${accessCode}/locations/`).then(r => r.json()),
         fetch(`${getApiUrl()}/events/${accessCode}/timeslots/`).then(r => r.json()),
-        fetch(`${getApiUrl()}/users/${userData.id}/meetings/`).then(r => r.json())
+        fetch(`${getApiUrl()}/users/${userData.id}/meetings/`, { headers: { "Authorization": token } }).then(r => r.json())
       ]).then(([evtData, usersData, locsData, slotsData, mtgsData]) => {
         setEvent(evtData);
         setUsers(usersData.filter((u: any) => u.id !== userData.id && !u.is_host && !u.is_suspended));
@@ -172,9 +172,10 @@ export default function AttendeeDashboard() {
     }
     
     setRequestStatus(t('attendeeDashboard.requestModal.sendingBtn'));
-    const res = await fetch(`${getApiUrl()}/events/${accessCode}/meetings/?requester_id=${userId}`, {
+    const token = localStorage.getItem(`session_token_${accessCode}`);
+    const res = await fetch(`${getApiUrl()}/events/${accessCode}/meetings/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": token || "" },
       body: JSON.stringify({
         receiver_id: selectedUser.id,
         location_id: parseInt(selectedLocation),
@@ -190,7 +191,7 @@ export default function AttendeeDashboard() {
         setRequestStatus("");
         setRequestMessage("");
         // Refresh meetings
-        fetch(`${getApiUrl()}/users/${userId}/meetings/`)
+        fetch(`${getApiUrl()}/users/${userId}/meetings/`, { headers: { "Authorization": token || "" } })
           .then(r => r.json())
           .then(setMeetings);
       }, 1500);
@@ -208,7 +209,7 @@ export default function AttendeeDashboard() {
       body: reason ? JSON.stringify({ reason }) : undefined
     });
     if (res.ok) {
-      fetch(`${getApiUrl()}/users/${userId}/meetings/`)
+      fetch(`${getApiUrl()}/users/${userId}/meetings/`, { headers: { "Authorization": token || "" } })
           .then(r => r.json())
           .then(setMeetings);
     } else {
@@ -426,8 +427,8 @@ export default function AttendeeDashboard() {
                   {event.location && (
                     <span className="flex items-center"><MapPin size={14} className="mr-1" /> {event.location}</span>
                   )}
-                  {event.website && (
-                    <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+                  {safeUrl(event.website) && (
+                    <a href={safeUrl(event.website)} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
                       <ExternalLink size={14} className="mr-1" /> {event.website.replace(/^https?:\/\//, '')}
                     </a>
                   )}
@@ -495,7 +496,7 @@ export default function AttendeeDashboard() {
                 if (so !== 0) return so;
                 // Within accepted, sort by timeslot start time
                 if (a.status === 'accepted' && b.status === 'accepted') {
-                  return new Date(a.timeslot.start_time).getTime() - new Date(b.timeslot.start_time).getTime();
+                  return parseDate(a.timeslot.start_time).getTime() - parseDate(b.timeslot.start_time).getTime();
                 }
                 return 0;
               }).map(m => {
@@ -555,7 +556,7 @@ export default function AttendeeDashboard() {
                             </span>
                           )}
                         </button>
-                        <a href={`${getApiUrl()}/meetings/${m.id}/calendar`} download className="text-sm text-blue-600 hover:text-blue-800 font-medium py-1 px-3 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
+                        <a href={`${getApiUrl()}/meetings/${m.id}/calendar?token=${encodeURIComponent(typeof window !== 'undefined' ? localStorage.getItem(`session_token_${accessCode}`) || '' : '')}`} download className="text-sm text-blue-600 hover:text-blue-800 font-medium py-1 px-3 border border-blue-200 rounded-lg hover:bg-blue-50 transition-colors flex items-center">
                           <Calendar size={14} className="mr-1" /> {t('attendeeDashboard.myMeetings.addCalendarBtn')}
                         </a>
                         <button onClick={() => updateMeeting(m.id, 'cancelled')} className="text-sm text-red-600 hover:text-red-800 font-medium py-1 px-3 border border-red-200 rounded-lg hover:bg-red-50 transition-colors flex items-center">
@@ -705,8 +706,8 @@ export default function AttendeeDashboard() {
                       {user.company && <p className="text-sm font-medium text-blue-600 truncate">{user.company}</p>}
                     </div>
                     <div className="flex items-center gap-2 flex-shrink-0" onClick={e => e.stopPropagation()}>
-                      {user.profile_link && (
-                        <a href={user.profile_link} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" title="View Profile">
+                      {safeUrl(user.profile_link) && (
+                        <a href={safeUrl(user.profile_link)} target="_blank" rel="noopener noreferrer" className="text-blue-500 hover:text-blue-700" title="View Profile">
                           <ExternalLink size={18} />
                         </a>
                       )}
@@ -768,7 +769,7 @@ export default function AttendeeDashboard() {
         {(() => {
           const now = new Date();
           const metPeople = meetings.filter(m =>
-            m.status === 'accepted' && new Date(m.timeslot.end_time) < now
+            m.status === 'accepted' && parseDate(m.timeslot.end_time) < now
           );
           if (metPeople.length === 0) return null;
           return (
@@ -849,8 +850,8 @@ export default function AttendeeDashboard() {
               <div className="min-w-0">
                 <h3 className="text-xl font-bold text-gray-900">{profileUser.name}</h3>
                 {profileUser.company && <p className="text-sm font-medium text-blue-600">{profileUser.company}</p>}
-                {profileUser.profile_link && (
-                  <a href={profileUser.profile_link} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:text-blue-700 flex items-center gap-1 mt-1">
+                {safeUrl(profileUser.profile_link) && (
+                  <a href={safeUrl(profileUser.profile_link)} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-500 hover:text-blue-700 flex items-center gap-1 mt-1">
                     <ExternalLink size={11} /> {profileUser.profile_link.replace(/^https?:\/\//, '')}
                   </a>
                 )}
@@ -943,7 +944,7 @@ export default function AttendeeDashboard() {
                     })
                     .map(t => (
                     <option key={t.id} value={t.id}>
-                      {new Date(t.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {new Date(t.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                      {parseDate(t.start_time).toLocaleDateString([], {month: 'short', day: 'numeric'})} {parseDate(t.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {parseDate(t.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                     </option>
                   ))}
                 </select>

@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl } from '@/lib/api';
 
 import { useEffect, useState } from "react";
 import { useParams, useRouter, useSearchParams } from "next/navigation";
@@ -29,6 +29,10 @@ export default function EventAccess() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [pendingUserId, setPendingUserId] = useState<string | null>(null);
+
+  const [showResend, setShowResend] = useState(false);
+  const [resendEmail, setResendEmail] = useState("");
+  const [resendStatus, setResendStatus] = useState<"" | "sending" | "sent" | "error">("");
 
   useEffect(() => {
     // Check if coming from a magic link
@@ -121,6 +125,10 @@ export default function EventAccess() {
 
       if (!res.ok) {
         if (data.detail && data.detail.includes("Email already registered")) {
+          // Offer to resend their login link right away
+          setShowResend(true);
+          setResendEmail(email);
+          setResendStatus("");
           throw new Error(t('eventJoin.alreadyRegisteredError'));
         }
         throw new Error(data.detail || t('eventJoin.registrationFailedError'));
@@ -132,6 +140,22 @@ export default function EventAccess() {
       setError(err.message);
     } finally {
       setLoading(false);
+    }
+  };
+
+  const handleResend = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!resendEmail.trim()) return;
+    setResendStatus("sending");
+    try {
+      const res = await fetch(`${getApiUrl()}/events/${accessCode}/resend-link`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: resendEmail.trim() }),
+      });
+      setResendStatus(res.ok ? "sent" : "error");
+    } catch {
+      setResendStatus("error");
     }
   };
 
@@ -176,8 +200,8 @@ export default function EventAccess() {
               {event.location && (
                 <span className="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mr-1"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg> {event.location}</span>
               )}
-              {event.website && (
-                <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+              {safeUrl(event.website) && (
+                <a href={safeUrl(event.website)} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
                   <ExternalLink size={14} className="mr-1" /> {event.website.replace(/^https?:\/\//, '')}
                 </a>
               )}
@@ -326,8 +350,51 @@ export default function EventAccess() {
               </button>
               <div className="text-center mt-4">
                  <p className="text-xs text-gray-500 italic">{t('eventJoin.loginHint')}</p>
+                 {!showResend && (
+                   <button
+                     type="button"
+                     onClick={() => { setShowResend(true); setResendEmail(email); setResendStatus(""); }}
+                     className="text-xs text-blue-600 hover:text-blue-800 hover:underline font-medium mt-1"
+                   >
+                     {t('eventJoin.resendToggle')}
+                   </button>
+                 )}
               </div>
             </form>
+
+            {showResend && (
+              <div className="mt-6 pt-5 border-t border-gray-100">
+                {resendStatus === "sent" ? (
+                  <p className="text-sm text-green-700 bg-green-50 border border-green-200 rounded-lg px-4 py-3 text-center">
+                    {t('eventJoin.resendSuccess')}
+                  </p>
+                ) : (
+                  <form onSubmit={handleResend} className="space-y-3">
+                    <p className="text-sm text-gray-600">{t('eventJoin.resendDesc')}</p>
+                    <div className="flex gap-2">
+                      <input
+                        type="email"
+                        required
+                        value={resendEmail}
+                        onChange={(e) => setResendEmail(e.target.value)}
+                        className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 text-sm"
+                        placeholder={t('eventJoin.emailPlaceholder')}
+                      />
+                      <button
+                        type="submit"
+                        disabled={resendStatus === "sending"}
+                        className="px-4 py-2 bg-blue-600 text-white text-sm font-bold rounded-lg hover:bg-blue-700 disabled:opacity-50 whitespace-nowrap"
+                      >
+                        {resendStatus === "sending" ? t('eventJoin.resendSendingBtn') : t('eventJoin.resendBtn')}
+                      </button>
+                    </div>
+                    {resendStatus === "error" && (
+                      <p className="text-xs text-red-600">{t('eventJoin.resendError')}</p>
+                    )}
+                  </form>
+                )}
+              </div>
+            )}
           </div>
         </div>
       </div>

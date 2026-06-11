@@ -98,7 +98,10 @@ server {
     location /api/ {
         proxy_pass http://127.0.0.1:8000/; # Notice the trailing slash! It strips /api/ before hitting FastAPI
         proxy_set_header Host $host;
+        # X-Real-IP is the rate-limit key the backend trusts. $remote_addr OVERWRITES any
+        # client-supplied header, so attendees cannot spoof it to dodge rate limits.
         proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     }
 
     # Route everything else to the Next.js Frontend

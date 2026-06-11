@@ -21,6 +21,16 @@ export function parseDate(s: string): Date {
 }
 
 /**
+ * Return the URL only if it is a safe http(s) link, otherwise undefined.
+ * Defends against stored javascript:/data: values ending up in an href.
+ */
+export function safeUrl(url?: string | null): string | undefined {
+  if (!url) return undefined;
+  const trimmed = url.trim();
+  return /^https?:\/\//i.test(trimmed) ? trimmed : undefined;
+}
+
+/**
  * Copy text to the clipboard.
  * Falls back to the legacy execCommand approach when the Clipboard API is
  * unavailable (HTTP, older browsers).

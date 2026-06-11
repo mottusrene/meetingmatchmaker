@@ -10,6 +10,8 @@
    inkscape:export-filename="favicon.svg"
    inkscape:export-xdpi="96"
    inkscape:export-ydpi="96"
+   sodipodi:docname="favicon.svg"
+   inkscape:version="1.2.2 (b0a8486541, 2022-12-01)"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -25,14 +27,23 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     showgrid="false" />
+     showgrid="false"
+     inkscape:zoom="6.1610119"
+     inkscape:cx="66.222888"
+     inkscape:cy="66.222888"
+     inkscape:window-width="1920"
+     inkscape:window-height="962"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg307" />
   <defs
      id="defs304">
     <pattern
        inkscape:collect="always"
        xlink:href="#pattern11633"
        id="pattern13880"
-       patternTransform="matrix(10,0,0,10,-131.24589,-10.803674)" />
+       patternTransform="matrix(10,0,0,10,-130.71672,-10.803674)" />
     <pattern
        inkscape:collect="always"
        xlink:href="#Strips1_1"
@@ -61,27 +72,27 @@
      id="layer1">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0499999;stroke-linejoin:round;stroke-miterlimit:3;paint-order:stroke fill markers"
-       x="18.149626"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:'Latin Modern Sans Quotation';-inkscape-font-specification:'Latin Modern Sans Quotation, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;text-anchor:middle;fill:none;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.0499999;stroke-linejoin:round;stroke-miterlimit:3;paint-order:stroke fill markers"
+       x="18.678793"
        y="29.075542"
        id="text11645"><tspan
          sodipodi:role="line"
          id="tspan11643"
-         style="fill:#4f46e5;fill-opacity:1;stroke-width:0.05"
-         x="18.149626"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:'Latin Modern Sans Quotation';-inkscape-font-specification:'Latin Modern Sans Quotation, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4f46e5;fill-opacity:1;stroke-width:0.05"
+         x="18.678793"
          y="29.075542">M</tspan></text>
   </g>
   <text
      xml:space="preserve"
-     style="font-size:31.75px;line-height:0;font-family:Ubuntu;-inkscape-font-specification:Ubuntu;text-align:center;letter-spacing:-3.96875px;word-spacing:-0.73025px;text-anchor:middle;fill:#71aa6e;fill-rule:evenodd;stroke:url(#pattern13880);stroke-width:0.0499999;stroke-miterlimit:3"
-     x="17.148281"
+     style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;line-height:0;font-family:'Latin Modern Sans Quotation';-inkscape-font-specification:'Latin Modern Sans Quotation, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;text-align:center;letter-spacing:-3.96875px;word-spacing:-0.73025px;text-anchor:middle;fill:#71aa6e;fill-rule:evenodd;stroke:url(#pattern13880);stroke-width:0.0499999;stroke-miterlimit:3"
+     x="17.677448"
      y="28.205669"
      id="text482"><tspan
        sodipodi:role="line"
        id="tspan480"
-       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4f46e5;fill-opacity:1;stroke:url(#pattern13880);stroke-width:0.05;stroke-linejoin:round;paint-order:stroke fill markers"
-       x="15.163906"
+       style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:'Latin Modern Sans Quotation';-inkscape-font-specification:'Latin Modern Sans Quotation, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#4f46e5;fill-opacity:1;stroke:url(#pattern13880);stroke-width:0.05;stroke-linejoin:round;paint-order:stroke fill markers"
+       x="15.693072"
        y="28.205669"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:Montserrat;-inkscape-font-specification:'Montserrat, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#2563eb;fill-opacity:1;stroke:url(#pattern13880);stroke-linejoin:round;paint-order:stroke fill markers"
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:31.75px;font-family:'Latin Modern Sans Quotation';-inkscape-font-specification:'Latin Modern Sans Quotation, Bold';font-variant-ligatures:normal;font-variant-caps:normal;font-variant-numeric:normal;font-variant-east-asian:normal;fill:#2563eb;fill-opacity:1;stroke:url(#pattern13880);stroke-linejoin:round;paint-order:stroke fill markers"
          id="tspan9338">M</tspan></tspan></text>
 </svg>

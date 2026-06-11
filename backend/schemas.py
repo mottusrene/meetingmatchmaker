@@ -1,6 +1,18 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, field_validator
 from typing import List, Optional
 from datetime import datetime
+
+def validate_http_url(v: Optional[str]) -> Optional[str]:
+    """Allow only http(s) links. These values are rendered into href attributes,
+    so schemes like javascript: must never be stored. Empty values become None."""
+    if v is None:
+        return None
+    v = v.strip()
+    if not v:
+        return None
+    if not (v.lower().startswith("http://") or v.lower().startswith("https://")):
+        raise ValueError("Link must start with http:// or https://")
+    return v
 
 class TimeSlotBase(BaseModel):
     start_time: datetime
@@ -28,6 +40,8 @@ class UserCreate(UserBase):
     is_host: bool = False
     available_timeslot_ids: List[int] = []
 
+    _v_profile_link = field_validator("profile_link")(validate_http_url)
+
 class UserUpdate(BaseModel):
     name: Optional[str] = None
     company: Optional[str] = None
@@ -35,6 +49,8 @@ class UserUpdate(BaseModel):
     profile_link: Optional[str] = None
     avatar_url: Optional[str] = None
     available_timeslot_ids: Optional[List[int]] = None
+
+    _v_profile_link = field_validator("profile_link")(validate_http_url)
 
 class User(UserBase):
     id: int
@@ -44,6 +60,22 @@ class User(UserBase):
     is_suspended: bool = False
     is_confirmed: bool = True
     report_comment: Optional[str] = None
+    available_timeslots: List[TimeSlot] = []
+
+    class Config:
+        from_attributes = True
+
+# What other attendees may see: no email, no flag/report data, no token
+class UserPublic(BaseModel):
+    id: int
+    name: str
+    company: Optional[str] = None
+    bio: Optional[str] = None
+    profile_link: Optional[str] = None
+    avatar_url: Optional[str] = None
+    is_host: bool
+    is_suspended: bool = False
+    is_confirmed: bool = True
     available_timeslots: List[TimeSlot] = []
 
     class Config:
@@ -73,13 +105,33 @@ class EventUpdate(BaseModel):
     start_date: Optional[datetime] = None
     end_date: Optional[datetime] = None
 
+    _v_website = field_validator("website")(validate_http_url)
+
 class EventCreate(EventBase):
     passcode: Optional[str] = None
+
+    _v_website = field_validator("website")(validate_http_url)
 
 class Event(EventBase):
     id: int
     access_code: str
     admin_code: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+# What anyone with the public access code may see: no admin_code, no host_email
+class EventPublic(BaseModel):
+    id: int
+    access_code: str
+    title: str
+    description: Optional[str] = None
+    logo_url: Optional[str] = None
+    banner_url: Optional[str] = None
+    website: Optional[str] = None
+    location: Optional[str] = None
+    start_date: Optional[datetime] = None
+    end_date: Optional[datetime] = None
 
     class Config:
         from_attributes = True
@@ -110,8 +162,8 @@ class Message(MessageBase):
     sender_id: int
     timestamp: datetime
     
-    sender: User
-    
+    sender: UserPublic
+
     class Config:
         from_attributes = True
 
@@ -131,8 +183,8 @@ class Meeting(MeetingBase):
     request_message: Optional[str] = None
     table_number: Optional[int] = None
     
-    requester: User
-    receiver: User
+    requester: UserPublic
+    receiver: UserPublic
     location: Location
     timeslot: TimeSlot
 

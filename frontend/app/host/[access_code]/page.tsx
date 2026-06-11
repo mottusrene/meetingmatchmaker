@@ -1,12 +1,12 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl } from '@/lib/api';
 import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
 import { useParams, useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { MapPin, Clock, Copy, Users, CheckCircle, ExternalLink, QrCode } from "lucide-react";
+import { MapPin, Clock, Copy, Users, CheckCircle, ExternalLink, QrCode, BarChart3, RefreshCw } from "lucide-react";
 import QRCode from "react-qr-code";
 import { useTranslation } from "@/hooks/useTranslation";
 
@@ -82,6 +82,9 @@ export default function HostDashboard() {
     }
   };
 
+  const [stats, setStats] = useState<any>(null);
+  const [statsLoading, setStatsLoading] = useState(false);
+
   const [showBroadcast, setShowBroadcast] = useState(false);
   const [broadcastMessage, setBroadcastMessage] = useState("");
   const [broadcastConfirm, setBroadcastConfirm] = useState(false);
@@ -92,15 +95,31 @@ export default function HostDashboard() {
     fetchEventAndUsers();
     fetchLocations();
     fetchTimeslots();
+    fetchStats();
   }, [accessCode]);
 
-  // Auto-refresh attendees every 30s
+  // Auto-refresh attendees and stats every 30s
   useEffect(() => {
     const interval = setInterval(() => {
       fetchEventAndUsers();
+      fetchStats();
     }, 30000);
     return () => clearInterval(interval);
   }, [accessCode]);
+
+  const fetchStats = async () => {
+    try {
+      const adminCode = searchParams.get("token") || passcode;
+      const res = await fetch(`${getApiUrl()}/events/${accessCode}/stats`, {
+        headers: { "Authorization": adminCode || "" }
+      });
+      if (res.ok) setStats(await res.json());
+    } catch (e) {
+      console.error(e);
+    } finally {
+      setStatsLoading(false);
+    }
+  };
 
   const fetchEventAndUsers = async () => {
     try {
@@ -156,20 +175,27 @@ export default function HostDashboard() {
   };
 
   const removeTimeslot = async (id: number) => {
+    const adminCode = searchParams.get("token") || passcode;
     const res = await fetch(`${getApiUrl()}/events/${accessCode}/timeslots/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: { "Authorization": adminCode || "" }
     });
     if (res.ok) {
       fetchTimeslots();
+      fetchStats();
+    } else {
+      const err = await res.json().catch(() => null);
+      alert(err?.detail || "Failed to delete time slot.");
     }
   };
 
   const addLocation = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newLocation) return;
+    const adminCode = searchParams.get("token") || passcode;
     const res = await fetch(`${getApiUrl()}/events/${accessCode}/locations/`, {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": adminCode || "" },
       body: JSON.stringify({ name: newLocation, capacity: parseInt(newCapacity) || 1 }),
     });
     if (res.ok) {
@@ -180,11 +206,16 @@ export default function HostDashboard() {
   };
 
   const removeLocation = async (id: number) => {
+    const adminCode = searchParams.get("token") || passcode;
     const res = await fetch(`${getApiUrl()}/events/${accessCode}/locations/${id}`, {
-      method: "DELETE"
+      method: "DELETE",
+      headers: { "Authorization": adminCode || "" }
     });
     if (res.ok) {
       fetchLocations();
+    } else {
+      const err = await res.json().catch(() => null);
+      alert(err?.detail || "Failed to delete meeting area.");
     }
   };
 
@@ -228,6 +259,7 @@ export default function HostDashboard() {
         return;
     }
 
+    const adminCode = searchParams.get("token") || passcode;
     const requests = [];
     let current = start.getTime();
     while (current + durationMs <= end.getTime()) {
@@ -235,7 +267,7 @@ export default function HostDashboard() {
         requests.push(
             fetch(`${getApiUrl()}/events/${accessCode}/timeslots/`, {
                 method: "POST",
-                headers: { "Content-Type": "application/json" },
+                headers: { "Content-Type": "application/json", "Authorization": adminCode || "" },
                 body: JSON.stringify({ start_time: new Date(current).toISOString(), end_time: new Date(slotEnd).toISOString() }),
             })
         );
@@ -409,8 +441,8 @@ export default function HostDashboard() {
                 {event.location && (
                   <span className="flex items-center"><MapPin size={14} className="mr-1" /> {event.location}</span>
                 )}
-                {event.website && (
-                  <a href={event.website} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
+                {safeUrl(event.website) && (
+                  <a href={safeUrl(event.website)} target="_blank" rel="noopener noreferrer" className="flex items-center hover:text-white transition-colors">
                     <ExternalLink size={14} className="mr-1" /> {event.website.replace(/^https?:\/\//, '')}
                   </a>
                 )}
@@ -526,13 +558,13 @@ export default function HostDashboard() {
           <div className="p-5 sm:p-6 flex items-center justify-between">
             <div>
               <h3 className="font-bold text-gray-800">{t('hostDashboard.broadcast.toggleBtn')}</h3>
-              <p className="text-sm text-gray-500 mt-0.5">Email all active attendees instantly</p>
+              <p className="text-sm text-gray-500 mt-0.5">{t('hostDashboard.broadcast.subtitle')}</p>
             </div>
             <button
               onClick={() => { setShowBroadcast(b => !b); setBroadcastConfirm(false); setBroadcastStatus(""); }}
               className="flex items-center gap-2 font-medium py-2 px-4 rounded-xl border transition-colors bg-indigo-50 border-indigo-200 text-indigo-700 hover:bg-indigo-100"
             >
-              {showBroadcast ? "Hide" : "Compose"}
+              {showBroadcast ? t('hostDashboard.broadcast.hideBtn') : t('hostDashboard.broadcast.composeBtn')}
             </button>
           </div>
           {showBroadcast && (
@@ -578,6 +610,91 @@ export default function HostDashboard() {
               )}
             </div>
           )}
+        </section>
+
+        {/* Meeting Statistics */}
+        <section className="bg-white shadow-sm border border-gray-200 rounded-2xl overflow-hidden">
+          <div className="bg-amber-50 border-b border-amber-100 p-6 flex items-center justify-between gap-3">
+            <div className="flex items-center gap-3">
+              <div className="bg-amber-100 text-amber-600 p-2 rounded-lg">
+                <BarChart3 size={24} />
+              </div>
+              <div>
+                <h2 className="text-xl font-bold text-gray-800">{t('hostDashboard.stats.title')}</h2>
+                <p className="text-sm text-gray-500">{t('hostDashboard.stats.subtitle')}</p>
+              </div>
+            </div>
+            <button
+              onClick={() => { setStatsLoading(true); fetchStats(); }}
+              disabled={statsLoading}
+              className="flex items-center gap-2 text-sm font-medium px-4 py-2 rounded-lg border border-gray-200 text-gray-600 hover:bg-gray-50 disabled:opacity-50 transition-colors"
+            >
+              <RefreshCw size={15} className={statsLoading ? 'animate-spin' : ''} />
+              {t('hostDashboard.stats.refreshBtn')}
+            </button>
+          </div>
+          <div className="p-6">
+            {!stats ? (
+              <p className="text-gray-400 text-center italic py-4">{t('global.loading')}</p>
+            ) : (
+              <>
+                <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mb-6">
+                  {[
+                    { label: t('hostDashboard.stats.totalLabel'), value: stats.totals.total, cls: 'bg-gray-50 border-gray-200 text-gray-800' },
+                    { label: t('hostDashboard.stats.pendingLabel'), value: stats.totals.pending, cls: 'bg-yellow-50 border-yellow-200 text-yellow-700' },
+                    { label: t('hostDashboard.stats.acceptedLabel'), value: stats.totals.accepted, cls: 'bg-green-50 border-green-200 text-green-700' },
+                    { label: t('hostDashboard.stats.declinedLabel'), value: stats.totals.declined, cls: 'bg-red-50 border-red-200 text-red-700' },
+                    { label: t('hostDashboard.stats.cancelledLabel'), value: stats.totals.cancelled, cls: 'bg-orange-50 border-orange-200 text-orange-700' },
+                  ].map(card => (
+                    <div key={card.label} className={`rounded-xl border p-4 text-center ${card.cls}`}>
+                      <div className="text-2xl font-extrabold">{card.value}</div>
+                      <div className="text-xs font-medium mt-1 uppercase tracking-wide opacity-80">{card.label}</div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-sm text-gray-500 mb-6">
+                  <strong className="text-gray-700">{stats.attendees.total}</strong> {t('hostDashboard.stats.attendeesLabel').toLowerCase()} — {stats.attendees.confirmed} {t('hostDashboard.stats.confirmedLabel')}{stats.attendees.pending_invites > 0 && <>, {stats.attendees.pending_invites} {t('hostDashboard.stats.pendingInvitesLabel')}</>}{stats.attendees.suspended > 0 && <>, {stats.attendees.suspended} {t('hostDashboard.stats.suspendedLabel')}</>}
+                </p>
+                {stats.by_slot.length === 0 ? (
+                  <p className="text-gray-400 text-sm italic">{t('hostDashboard.stats.noSlots')}</p>
+                ) : stats.totals.total === 0 ? (
+                  <p className="text-gray-400 text-sm italic">{t('hostDashboard.stats.empty')}</p>
+                ) : (
+                  <div className="overflow-x-auto">
+                    <p className="text-sm font-bold text-gray-700 mb-2">{t('hostDashboard.stats.bySlotTitle')}</p>
+                    <table className="w-full text-sm">
+                      <thead>
+                        <tr className="text-left text-xs text-gray-500 uppercase tracking-wide border-b border-gray-200">
+                          <th className="py-2 pr-4">{t('hostDashboard.stats.slotColumn')}</th>
+                          <th className="py-2 px-3 text-center">{t('hostDashboard.stats.pendingLabel')}</th>
+                          <th className="py-2 px-3 text-center">{t('hostDashboard.stats.acceptedLabel')}</th>
+                          <th className="py-2 px-3 text-center">{t('hostDashboard.stats.declinedLabel')}</th>
+                          <th className="py-2 px-3 text-center">{t('hostDashboard.stats.cancelledLabel')}</th>
+                          <th className="py-2 px-3 text-center">{t('hostDashboard.stats.tablesUsedColumn')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {stats.by_slot.map((slot: any) => (
+                          <tr key={slot.timeslot_id} className="border-b border-gray-100 last:border-0">
+                            <td className="py-2 pr-4 font-medium text-gray-800 whitespace-nowrap">
+                              {parseDate(slot.start_time).toLocaleDateString([], { month: 'short', day: 'numeric' })}{' '}
+                              {parseDate(slot.start_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                              –{parseDate(slot.end_time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                            </td>
+                            <td className={`py-2 px-3 text-center ${slot.pending ? 'text-yellow-700 font-bold' : 'text-gray-300'}`}>{slot.pending}</td>
+                            <td className={`py-2 px-3 text-center ${slot.accepted ? 'text-green-700 font-bold' : 'text-gray-300'}`}>{slot.accepted}</td>
+                            <td className={`py-2 px-3 text-center ${slot.declined ? 'text-red-600 font-bold' : 'text-gray-300'}`}>{slot.declined}</td>
+                            <td className={`py-2 px-3 text-center ${slot.cancelled ? 'text-orange-600 font-bold' : 'text-gray-300'}`}>{slot.cancelled}</td>
+                            <td className="py-2 px-3 text-center text-gray-600">{slot.accepted} / {stats.tables_per_slot}</td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </>
+            )}
+          </div>
         </section>
 
         {/* Locations Manager */}
@@ -775,7 +892,7 @@ export default function HostDashboard() {
 
           <div className="p-6">
             {attendees.length === 0 ? (
-              <p className="text-gray-400 text-center italic py-8">No attendees yet.</p>
+              <p className="text-gray-400 text-center italic py-8">{t('hostDashboard.attendees.empty')}</p>
             ) : (
               <div className="space-y-3">
                 {attendees
@@ -803,7 +920,7 @@ export default function HostDashboard() {
                               <span className="text-xs font-bold text-red-700 bg-red-100 px-2 py-0.5 rounded-full">{t('hostDashboard.attendees.flaggedBadge')}</span>
                             )}
                             {!attendee.is_confirmed && (
-                              <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">Pending</span>
+                              <span className="text-xs font-bold text-gray-500 bg-gray-100 px-2 py-0.5 rounded-full">{t('hostDashboard.attendees.pendingBadge')}</span>
                             )}
                           </div>
                           {attendee.company && <p className="text-sm text-gray-500 truncate">{attendee.company}</p>}
@@ -955,7 +1072,7 @@ export default function HostDashboard() {
                   )}
                 </div>
                 {editBannerUrl && (
-                  <button type="button" onClick={() => setEditBannerUrl("")} className="text-xs text-red-500 hover:text-red-700 mt-1">Remove banner</button>
+                  <button type="button" onClick={() => setEditBannerUrl("")} className="text-xs text-red-500 hover:text-red-700 mt-1">{t('hostDashboard.editModal.removeBannerBtn')}</button>
                 )}
               </div>
 
