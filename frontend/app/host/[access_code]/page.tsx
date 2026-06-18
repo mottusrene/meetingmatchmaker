@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard, safeUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl, imageToDataUrl } from '@/lib/api';
 import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
@@ -339,8 +339,12 @@ export default function HostDashboard() {
         setEditEventStatus("Event updated successfully!");
         fetchEventAndUsers();
         setTimeout(() => setIsEditingEvent(false), 1500);
-    } else {
+    } else if (res.status === 413) {
+        setEditEventStatus("Error: Image is too large. Please use a smaller logo or banner image.");
+    } else if (res.status === 401 || res.status === 403) {
         setEditEventStatus("Error: Not authorized or invalid admin link.");
+    } else {
+        setEditEventStatus(`Error: Update failed (${res.status}).`);
     }
   };
 
@@ -1032,15 +1036,15 @@ export default function HostDashboard() {
                 <div className="flex gap-2 items-center">
                   <input 
                     type="file" 
-                    accept="image/*" 
-                    onChange={(e) => {
+                    accept="image/*"
+                    onChange={async (e) => {
                       const file = e.target.files?.[0];
                       if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          setEditLogoUrl(reader.result as string);
-                        };
-                        reader.readAsDataURL(file);
+                        try {
+                          setEditLogoUrl(await imageToDataUrl(file, 512));
+                        } catch (err) {
+                          setEditEventStatus(`Error: ${err instanceof Error ? err.message : 'Could not load image.'}`);
+                        }
                       }
                     }}
                     className="w-full border border-gray-300 rounded-lg focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100" 
@@ -1057,12 +1061,14 @@ export default function HostDashboard() {
                   <input
                     type="file"
                     accept="image/*"
-                    onChange={(e) => {
+                    onChange={async (e) => {
                       const file = e.target.files?.[0];
                       if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => { setEditBannerUrl(reader.result as string); };
-                        reader.readAsDataURL(file);
+                        try {
+                          setEditBannerUrl(await imageToDataUrl(file, 1600));
+                        } catch (err) {
+                          setEditEventStatus(`Error: ${err instanceof Error ? err.message : 'Could not load image.'}`);
+                        }
                       }
                     }}
                     className="w-full border border-gray-300 rounded-lg focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-semibold file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"

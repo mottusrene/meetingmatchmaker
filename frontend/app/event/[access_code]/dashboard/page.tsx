@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard, safeUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl, imageToDataUrl } from '@/lib/api';
 import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
@@ -1023,15 +1023,15 @@ export default function AttendeeDashboard() {
                 <div className="flex gap-2 items-center">
                   <input 
                     type="file" 
-                    accept="image/*" 
-                    onChange={(e) => {
+                    accept="image/*"
+                    onChange={async (e) => {
                       const file = e.target.files?.[0];
                       if (file) {
-                        const reader = new FileReader();
-                        reader.onloadend = () => {
-                          setEditAvatarUrl(reader.result as string);
-                        };
-                        reader.readAsDataURL(file);
+                        try {
+                          setEditAvatarUrl(await imageToDataUrl(file, 512));
+                        } catch (err) {
+                          setEditError(err instanceof Error ? err.message : 'Could not load image.');
+                        }
                       }
                     }}
                     className="w-full border border-gray-300 rounded-lg focus:ring-blue-500 file:mr-4 file:py-2 file:px-4 file:rounded-l-lg file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100" 

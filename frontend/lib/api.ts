@@ -21,6 +21,53 @@ export function parseDate(s: string): Date {
 }
 
 /**
+ * Read an image file, downscale it to fit within `maxDim` pixels, and return a
+ * compressed data URL. This keeps payloads small so they never trip nginx's
+ * `client_max_body_size` (1 MB by default) — the cause of the intermittent
+ * "can't upload PNG/JPG" failures, where a large image returned a 413 that the
+ * UI mis-reported as an auth/endpoint error.
+ *
+ * Images with transparency (PNG) are re-encoded as PNG to preserve the alpha
+ * channel; everything else is re-encoded as JPEG for much smaller files.
+ */
+export function imageToDataUrl(
+  file: File,
+  maxDim = 1024,
+  quality = 0.85,
+): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = () => reject(new Error('Could not read the image file.'));
+    reader.onload = () => {
+      const img = new Image();
+      img.onerror = () => reject(new Error('That file is not a valid image.'));
+      img.onload = () => {
+        const scale = Math.min(1, maxDim / Math.max(img.width, img.height));
+        const w = Math.round(img.width * scale);
+        const h = Math.round(img.height * scale);
+        const canvas = document.createElement('canvas');
+        canvas.width = w;
+        canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        if (!ctx) {
+          reject(new Error('Could not process the image.'));
+          return;
+        }
+        ctx.drawImage(img, 0, 0, w, h);
+        const isPng = file.type === 'image/png';
+        resolve(
+          isPng
+            ? canvas.toDataURL('image/png')
+            : canvas.toDataURL('image/jpeg', quality),
+        );
+      };
+      img.src = reader.result as string;
+    };
+    reader.readAsDataURL(file);
+  });
+}
+
+/**
  * Return the URL only if it is a safe http(s) link, otherwise undefined.
  * Defends against stored javascript:/data: values ending up in an href.
  */
