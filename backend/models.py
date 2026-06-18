@@ -38,6 +38,7 @@ class Event(Base):
     access_code = Column(String, unique=True, index=True)
     admin_code = Column(String, unique=True, index=True)
     host_email = Column(String)
+    host_name = Column(String, nullable=True)  # Organiser display name shown to attendees / in invites
     passcode = Column(String)
     title = Column(String)
     description = Column(String)

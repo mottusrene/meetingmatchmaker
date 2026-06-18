@@ -61,6 +61,7 @@ async def startup_event():
             "ALTER TABLE users ADD COLUMN report_comment TEXT",
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
             "ALTER TABLE events ADD COLUMN website TEXT",
+            "ALTER TABLE events ADD COLUMN host_name TEXT",
             "ALTER TABLE meetings ADD COLUMN request_message TEXT",
             "ALTER TABLE meetings ADD COLUMN table_number INTEGER",
             # Prevent the same (lowercase) email registering twice for one event.
@@ -157,6 +158,7 @@ def create_event(request: Request, event: schemas.EventCreate, db: Session = Dep
         description=event.description,
         passcode=event.passcode,
         host_email=event.host_email,
+        host_name=event.host_name,
         access_code=access_code,
         admin_code=admin_code,
         location=event.location,
@@ -198,6 +200,8 @@ def update_event(
         db_event.title = event_update.title
     if event_update.description is not None:
         db_event.description = event_update.description
+    if event_update.host_name is not None:
+        db_event.host_name = event_update.host_name
     if event_update.logo_url is not None:
         db_event.logo_url = event_update.logo_url
     if event_update.banner_url is not None:
@@ -669,7 +673,8 @@ async def bulk_create_users(access_code: str, background_tasks: BackgroundTasks,
 
         confirm_link = f"{FRONTEND_URL}/event/{access_code}?token={session_token}"
         decline_link = f"{FRONTEND_URL}/event/{access_code}/decline?token={session_token}&uid={db_user.id}"
-        background_tasks.add_task(send_bulk_invite, email, name, company, bio, db_event.title, db_event.host_email, confirm_link, decline_link)
+        sender_name = db_event.host_name or db_event.host_email
+        background_tasks.add_task(send_bulk_invite, email, name, company, bio, db_event.title, sender_name, confirm_link, decline_link)
         created.append(email)
 
     return {"created": len(created), "skipped": len(skipped), "errors": errors}

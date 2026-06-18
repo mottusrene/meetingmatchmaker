@@ -88,6 +88,7 @@ class EventBase(BaseModel):
     title: str
     description: Optional[str] = None
     host_email: str
+    host_name: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None
@@ -98,6 +99,7 @@ class EventBase(BaseModel):
 class EventUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
+    host_name: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None
@@ -126,6 +128,7 @@ class EventPublic(BaseModel):
     access_code: str
     title: str
     description: Optional[str] = None
+    host_name: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None

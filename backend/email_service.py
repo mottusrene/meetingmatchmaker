@@ -1,11 +1,35 @@
 # backend/email_service.py
+import html as _html
 import json
 import os
+import re
 import smtplib
 import ssl
 import urllib.error
 import urllib.request
+from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+
+# Matches http(s) URLs so they can be turned into real anchor tags. Plain-text
+# emails let the mail client auto-detect links, but long magic-link URLs get
+# broken across line wraps (the token after "?token=" is dropped), so we always
+# send an HTML alternative where the whole URL is a single, unbreakable <a>.
+_URL_RE = re.compile(r'(https?://[^\s<>"]+)')
+
+
+def _text_to_html(text: str) -> str:
+    """Render a plain-text email body as simple, safe HTML with clickable links."""
+    escaped = _html.escape(text)
+    linked = _URL_RE.sub(
+        lambda m: f'<a href="{m.group(1)}" style="color:#4f46e5;">{m.group(1)}</a>',
+        escaped,
+    )
+    return (
+        '<div style="font-family:Arial,Helvetica,sans-serif;font-size:15px;'
+        'line-height:1.6;color:#111827;">'
+        + linked.replace("\n", "<br>")
+        + "</div>"
+    )
 
 with open(os.path.join(os.path.dirname(__file__), "content", "en.json"), "r") as f:
     text_dict = json.load(f)["emails"]
@@ -20,12 +44,13 @@ SMTP_USER = os.environ.get("SMTP_USER")
 SMTP_PASS = os.environ.get("SMTP_PASS")
 FROM_EMAIL = os.environ.get("FROM_EMAIL", SMTP_USER)
 
-def _send_postmark(to: str, subject: str, body: str) -> bool:
+def _send_postmark(to: str, subject: str, body: str, html_body: str) -> bool:
     payload = json.dumps({
         "From": FROM_EMAIL,
         "To": to,
         "Subject": subject,
         "TextBody": body,
+        "HtmlBody": html_body,
         "MessageStream": POSTMARK_MESSAGE_STREAM,
     }).encode("utf-8")
     req = urllib.request.Request(
@@ -47,12 +72,14 @@ def _send_postmark(to: str, subject: str, body: str) -> bool:
         print(f"⚠️  Postmark request failed ({e})")
     return False
 
-def _send_smtp(to: str, subject: str, body: str) -> bool:
+def _send_smtp(to: str, subject: str, body: str, html_body: str) -> bool:
     try:
-        msg = MIMEText(body)
+        msg = MIMEMultipart("alternative")
         msg["Subject"] = subject
         msg["From"] = FROM_EMAIL
         msg["To"] = to
+        msg.attach(MIMEText(body, "plain"))
+        msg.attach(MIMEText(html_body, "html"))
         context = ssl.create_default_context()
         with smtplib.SMTP(SMTP_HOST, SMTP_PORT) as server:
             server.ehlo()
@@ -67,9 +94,10 @@ def _send_smtp(to: str, subject: str, body: str) -> bool:
 
 def _send(to: str, subject: str, body: str):
     """Send via Postmark; fall back to SMTP, then console, if not configured."""
-    if POSTMARK_SERVER_TOKEN and _send_postmark(to, subject, body):
+    html_body = _text_to_html(body)
+    if POSTMARK_SERVER_TOKEN and _send_postmark(to, subject, body, html_body):
         return
-    if not POSTMARK_SERVER_TOKEN and SMTP_USER and SMTP_PASS and _send_smtp(to, subject, body):
+    if not POSTMARK_SERVER_TOKEN and SMTP_USER and SMTP_PASS and _send_smtp(to, subject, body, html_body):
         return
     print("\n" + "="*50)
     print(f"📧 EMAIL (console fallback)")
@@ -129,7 +157,7 @@ def send_reinstated_notification(attendee_email: str, name: str, event_title: st
         template["body"].format(name=name, event_title=event_title),
     )
 
-def send_bulk_invite(attendee_email: str, name: str, company: str | None, bio: str | None, event_title: str, host_email: str, confirm_link: str, decline_link: str):
+def send_bulk_invite(attendee_email: str, name: str, company: str | None, bio: str | None, event_title: str, host_name: str, confirm_link: str, decline_link: str):
     template = text_dict["bulkInvite"]
     company_line = f"\n- Company: {company}" if company else ""
     bio_line = f"\n- Bio: {bio}" if bio else ""
@@ -139,7 +167,7 @@ def send_bulk_invite(attendee_email: str, name: str, company: str | None, bio: s
         template["body"].format(
             name=name,
             event_title=event_title,
-            host_email=host_email,
+            host_name=host_name,
             company_line=company_line,
             bio_line=bio_line,
             confirm_link=confirm_link,

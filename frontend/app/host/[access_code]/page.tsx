@@ -23,6 +23,7 @@ export default function HostDashboard() {
   
   const [isEditingEvent, setIsEditingEvent] = useState(false);
   const [editTitle, setEditTitle] = useState("");
+  const [editHostName, setEditHostName] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editLocation, setEditLocation] = useState("");
   const [editLogoUrl, setEditLogoUrl] = useState("");
@@ -144,6 +145,7 @@ export default function HostDashboard() {
         }
 
         setEditTitle(data.title || "");
+        setEditHostName(data.host_name || "");
         setEditDescription(data.description || "");
         setEditLocation(data.location || "");
         setEditLogoUrl(data.logo_url || "");
@@ -325,6 +327,7 @@ export default function HostDashboard() {
         },
         body: JSON.stringify({
             title: editTitle,
+            host_name: editHostName || null,
             description: editDescription,
             location: editLocation || null,
             logo_url: editLogoUrl,
@@ -992,7 +995,12 @@ export default function HostDashboard() {
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.eventTitleLabel')}</label>
                 <input type="text" required value={editTitle} onChange={e => setEditTitle(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" />
               </div>
-              
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.hostNameLabel')}</label>
+                <input type="text" value={editHostName} onChange={e => setEditHostName(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" />
+              </div>
+
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.descriptionLabel')}</label>
                 <textarea value={editDescription} onChange={e => setEditDescription(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" rows={3} />
