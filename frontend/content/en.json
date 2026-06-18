@@ -354,6 +354,11 @@
   },
   "declinePage": {
     "loading": "Processing...",
+    "confirmTitle": "Decline this invitation?",
+    "confirmMessage": "If you decline, your pre-filled profile and all associated data will be permanently deleted, and you will not appear in this event. This cannot be undone.",
+    "confirmBtn": "Yes, decline and delete my data",
+    "cancelBtn": "No, keep my registration",
+    "deleting": "Deleting your data...",
     "successTitle": "Data deleted",
     "successMessage": "Your data has been removed. You will not appear in this event.",
     "errorTitle": "Something went wrong",

@@ -412,13 +412,17 @@ def get_user(user_id: int, authorization: str = Header(None), db: Session = Depe
     return db_user
 
 @app.put("/users/{user_id}", response_model=schemas.User)
-def update_user(user_id: int, user_update: schemas.UserUpdate, authorization: str = Header(None), db: Session = Depends(get_db)):
+def update_user(user_id: int, user_update: schemas.UserUpdate, background_tasks: BackgroundTasks, authorization: str = Header(None), db: Session = Depends(get_db)):
     db_user = db.query(models.User).filter(models.User.id == user_id).first()
     if not db_user:
         raise HTTPException(status_code=404, detail="User not found")
-    
+
     if not authorization or db_user.session_token != authorization:
         raise HTTPException(status_code=403, detail="Forbidden")
+
+    # True only on the first confirmation (bulk-invited user completing their
+    # profile) so we email them their dashboard link exactly once.
+    was_unconfirmed = not db_user.is_confirmed
 
     if user_update.name is not None:
         db_user.name = user_update.name
@@ -444,6 +448,14 @@ def update_user(user_id: int, user_update: schemas.UserUpdate, authorization: st
 
     db.commit()
     db.refresh(db_user)
+
+    # On first confirmation, email the attendee their magic dashboard link.
+    if was_unconfirmed:
+        event = db.query(models.Event).filter(models.Event.id == db_user.event_id).first()
+        if event:
+            magic_link = f"{FRONTEND_URL}/event/{event.access_code}?token={db_user.session_token}"
+            background_tasks.add_task(send_attendee_magic_link, db_user.email, db_user.name, event.title, magic_link)
+
     return db_user
 
 @app.delete("/users/{user_id}")
