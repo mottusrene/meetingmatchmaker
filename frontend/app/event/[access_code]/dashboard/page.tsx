@@ -3,7 +3,7 @@
 import { getApiUrl, parseDate, copyToClipboard, safeUrl, imageToDataUrl } from '@/lib/api';
 import Logo from '@/components/Logo';
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { CheckCircle, XCircle, Clock, MapPin, ExternalLink, MessageSquare, Calendar, Copy, Heart } from "lucide-react";
@@ -70,7 +70,11 @@ export default function AttendeeDashboard() {
   const [activeChatMeeting, setActiveChatMeeting] = useState<any>(null);
   const [chatMessages, setChatMessages] = useState<any[]>([]);
   const [newChatMessage, setNewChatMessage] = useState("");
-  const [chatPollingInterval, setChatPollingInterval] = useState<NodeJS.Timeout | null>(null);
+  // Refs (not state) so the interval is cleared synchronously and the active meeting is
+  // readable inside async callbacks — prevents stale poll intervals from a previous chat
+  // writing another conversation's messages into the shared chatMessages state.
+  const chatPollingRef = useRef<NodeJS.Timeout | null>(null);
+  const activeChatMeetingIdRef = useRef<number | null>(null);
   const [unreadCounts, setUnreadCounts] = useState<Record<number, number>>({});
 
   // Polling unread messages
@@ -107,6 +111,11 @@ export default function AttendeeDashboard() {
     const interval = setInterval(pollUnread, 10000);
     return () => clearInterval(interval);
   }, [meetings, userId, accessCode]);
+
+  // Stop the chat poll if the dashboard unmounts while a chat is open
+  useEffect(() => {
+    return () => { if (chatPollingRef.current) clearInterval(chatPollingRef.current); };
+  }, []);
 
   // Auto-refresh meetings and directory every 30s
   useEffect(() => {
@@ -295,33 +304,39 @@ export default function AttendeeDashboard() {
     const res = await fetch(`${getApiUrl()}/meetings/${meetingId}/messages`, {
         headers: { "Authorization": token }
     });
-    if (res.ok) {
+    // Ignore a response that arrived after the user switched to a different chat,
+    // otherwise an in-flight request for the previous meeting overwrites the current one.
+    if (res.ok && activeChatMeetingIdRef.current === meetingId) {
         setChatMessages(await res.json());
     }
   };
 
   const openChat = (meeting: any) => {
+      // Always stop any previous poll first (synchronously, via ref) and clear stale messages
+      if (chatPollingRef.current) clearInterval(chatPollingRef.current);
+      activeChatMeetingIdRef.current = meeting.id;
+      setChatMessages([]);
       setActiveChatMeeting(meeting);
       setIsChatOpen(true);
       fetchChatMessages(meeting.id);
-      
+
       localStorage.setItem(`last_seen_msg_${meeting.id}`, new Date().toISOString());
       setUnreadCounts(prev => ({...prev, [meeting.id]: 0}));
-      
-      if (chatPollingInterval) clearInterval(chatPollingInterval);
-      const interval = setInterval(() => {
+
+      chatPollingRef.current = setInterval(() => {
           fetchChatMessages(meeting.id);
           localStorage.setItem(`last_seen_msg_${meeting.id}`, new Date().toISOString());
       }, 5000); // Poll every 5s
-      setChatPollingInterval(interval);
   };
 
   const closeChat = () => {
       setIsChatOpen(false);
       setActiveChatMeeting(null);
-      if (chatPollingInterval) {
-          clearInterval(chatPollingInterval);
-          setChatPollingInterval(null);
+      activeChatMeetingIdRef.current = null;
+      setChatMessages([]);
+      if (chatPollingRef.current) {
+          clearInterval(chatPollingRef.current);
+          chatPollingRef.current = null;
       }
   };
 
@@ -526,7 +541,7 @@ export default function AttendeeDashboard() {
                         )}
                       </div>
                       <div className="flex items-center"><Clock size={14} className="mr-2" />
-                        {parseDate(m.timeslot.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {parseDate(m.timeslot.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
+                        {parseDate(m.timeslot.start_time).toLocaleDateString([], {month: 'short', day: 'numeric'})}, {parseDate(m.timeslot.start_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})} - {parseDate(m.timeslot.end_time).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}
                       </div>
                     </div>
 

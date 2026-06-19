@@ -11,8 +11,19 @@ import uuid
 import os
 import csv
 import io
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
+from zoneinfo import ZoneInfo
 import asyncio
+
+# Timeslot datetimes are stored as naive UTC (the frontend sends new Date(...).toISOString()).
+# The web UI converts them to the viewer's local zone, but emails have no browser, so we convert
+# to the event's timezone here. Defaults to the venue zone; override per deployment via env.
+EVENT_TIMEZONE = ZoneInfo(os.environ.get("EVENT_TIMEZONE", "Europe/London"))
+
+
+def format_event_time(dt: datetime, fmt: str) -> str:
+    """Format a stored (naive UTC) datetime in the event's local timezone."""
+    return dt.replace(tzinfo=timezone.utc).astimezone(EVENT_TIMEZONE).strftime(fmt)
 import threading
 from fastapi import UploadFile, File
 
@@ -297,7 +308,8 @@ def delete_location(access_code: str, location_id: int, authorization: str = Hea
 @app.get("/events/{access_code}/timeslots/", response_model=List[schemas.TimeSlot])
 def list_timeslots(access_code: str, db: Session = Depends(get_db)):
     db_event = get_event(access_code, db)
-    return db_event.timeslots
+    # Chronological order so every UI list (signup availability, request dropdown) is sorted by day/time
+    return sorted(db_event.timeslots, key=lambda t: t.start_time)
 
 @app.delete("/events/{access_code}/timeslots/{timeslot_id}")
 def delete_timeslot(access_code: str, timeslot_id: int, authorization: str = Header(None), db: Session = Depends(get_db)):
@@ -812,8 +824,8 @@ def create_meeting(request: Request, access_code: str, meeting: schemas.MeetingC
     if requester and receiver:
         timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
         location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
-        start_str = timeslot.start_time.strftime("%d %b %Y, %H:%M") if timeslot else "TBD"
-        end_str = timeslot.end_time.strftime("%H:%M") if timeslot else "TBD"
+        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M") if timeslot else "TBD"
+        end_str = format_event_time(timeslot.end_time, "%H:%M") if timeslot else "TBD"
         location_name = location.name if location else "TBD"
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
         msg_block = f"\n\nMessage from {requester.name}:\n\"{db_meeting.request_message}\"" if db_meeting.request_message else ""
@@ -931,8 +943,8 @@ def update_meeting_status(meeting_id: int, status: str, body: MeetingStatusBody 
         db_event = db.query(models.Event).filter(models.Event.id == db_meeting.event_id).first()
         timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
         location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
-        start_str = timeslot.start_time.strftime("%d %b %Y, %H:%M") if timeslot else "TBD"
-        end_str = timeslot.end_time.strftime("%H:%M") if timeslot else "TBD"
+        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M") if timeslot else "TBD"
+        end_str = format_event_time(timeslot.end_time, "%H:%M") if timeslot else "TBD"
         location_name = location.name if location else "TBD"
         requester_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={requester.session_token}"
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"

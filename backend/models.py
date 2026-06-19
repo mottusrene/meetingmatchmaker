@@ -94,7 +94,7 @@ class Meeting(Base):
     receiver = relationship("User", foreign_keys=[receiver_id], back_populates="meetings_received")
     location = relationship("Location", back_populates="meetings")
     timeslot = relationship("TimeSlot", back_populates="meetings")
-    messages = relationship("Message", back_populates="meeting", cascade="all, delete-orphan")
+    messages = relationship("Message", back_populates="meeting", cascade="all, delete-orphan", order_by="Message.timestamp")
 
 class Message(Base):
     __tablename__ = "messages"
