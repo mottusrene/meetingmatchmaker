@@ -89,6 +89,7 @@ class EventBase(BaseModel):
     description: Optional[str] = None
     host_email: str
     host_name: Optional[str] = None
+    timezone: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None
@@ -100,6 +101,7 @@ class EventUpdate(BaseModel):
     title: Optional[str] = None
     description: Optional[str] = None
     host_name: Optional[str] = None
+    timezone: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None
@@ -129,6 +131,7 @@ class EventPublic(BaseModel):
     title: str
     description: Optional[str] = None
     host_name: Optional[str] = None
+    timezone: Optional[str] = None
     logo_url: Optional[str] = None
     banner_url: Optional[str] = None
     website: Optional[str] = None

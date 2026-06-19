@@ -68,6 +68,36 @@ export function imageToDataUrl(
 }
 
 /**
+ * Full list of IANA timezone names for the host's event-timezone picker.
+ * Uses the browser's built-in list when available (all modern browsers since
+ * 2022); falls back to a short common list otherwise.
+ */
+export function getTimezones(): string[] {
+  try {
+    const intl = Intl as unknown as { supportedValuesOf?: (k: string) => string[] };
+    if (typeof intl.supportedValuesOf === 'function') {
+      return intl.supportedValuesOf('timeZone');
+    }
+  } catch { /* fall through */ }
+  return [
+    'UTC', 'Europe/London', 'Europe/Dublin', 'Europe/Paris', 'Europe/Berlin',
+    'Europe/Madrid', 'Europe/Rome', 'Europe/Helsinki', 'Europe/Athens',
+    'America/New_York', 'America/Chicago', 'America/Denver', 'America/Los_Angeles',
+    'America/Sao_Paulo', 'Asia/Dubai', 'Asia/Kolkata', 'Asia/Shanghai',
+    'Asia/Tokyo', 'Australia/Sydney', 'Pacific/Auckland',
+  ];
+}
+
+/** The host browser's own timezone — a sensible default for a new event. */
+export function getBrowserTimezone(): string {
+  try {
+    return Intl.DateTimeFormat().resolvedOptions().timeZone || 'Europe/London';
+  } catch {
+    return 'Europe/London';
+  }
+}
+
+/**
  * Return the URL only if it is a safe http(s) link, otherwise undefined.
  * Defends against stored javascript:/data: values ending up in an href.
  */

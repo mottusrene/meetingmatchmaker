@@ -39,6 +39,7 @@ class Event(Base):
     admin_code = Column(String, unique=True, index=True)
     host_email = Column(String)
     host_name = Column(String, nullable=True)  # Organiser display name shown to attendees / in invites
+    timezone = Column(String, nullable=True)  # IANA name (e.g. Europe/London) for formatting times in emails
     passcode = Column(String)
     title = Column(String)
     description = Column(String)

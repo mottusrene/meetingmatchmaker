@@ -17,13 +17,18 @@ import asyncio
 
 # Timeslot datetimes are stored as naive UTC (the frontend sends new Date(...).toISOString()).
 # The web UI converts them to the viewer's local zone, but emails have no browser, so we convert
-# to the event's timezone here. Defaults to the venue zone; override per deployment via env.
-EVENT_TIMEZONE = ZoneInfo(os.environ.get("EVENT_TIMEZONE", "Europe/London"))
+# to the event's timezone here. Each event carries its own IANA timezone (set by the host);
+# DEFAULT_TIMEZONE is the fallback for events created before that field existed / left blank.
+DEFAULT_TIMEZONE = os.environ.get("EVENT_TIMEZONE", "Europe/London")
 
 
-def format_event_time(dt: datetime, fmt: str) -> str:
+def format_event_time(dt: datetime, fmt: str, tz_name: str | None = None) -> str:
     """Format a stored (naive UTC) datetime in the event's local timezone."""
-    return dt.replace(tzinfo=timezone.utc).astimezone(EVENT_TIMEZONE).strftime(fmt)
+    try:
+        tz = ZoneInfo(tz_name or DEFAULT_TIMEZONE)
+    except Exception:
+        tz = ZoneInfo(DEFAULT_TIMEZONE)
+    return dt.replace(tzinfo=timezone.utc).astimezone(tz).strftime(fmt)
 import threading
 from fastapi import UploadFile, File
 
@@ -73,6 +78,7 @@ async def startup_event():
             "ALTER TABLE events ADD COLUMN banner_url TEXT",
             "ALTER TABLE events ADD COLUMN website TEXT",
             "ALTER TABLE events ADD COLUMN host_name TEXT",
+            "ALTER TABLE events ADD COLUMN timezone TEXT",
             "ALTER TABLE meetings ADD COLUMN request_message TEXT",
             "ALTER TABLE meetings ADD COLUMN table_number INTEGER",
             # Prevent the same (lowercase) email registering twice for one event.
@@ -170,6 +176,7 @@ def create_event(request: Request, event: schemas.EventCreate, db: Session = Dep
         passcode=event.passcode,
         host_email=event.host_email,
         host_name=event.host_name,
+        timezone=event.timezone,
         access_code=access_code,
         admin_code=admin_code,
         location=event.location,
@@ -213,6 +220,8 @@ def update_event(
         db_event.description = event_update.description
     if event_update.host_name is not None:
         db_event.host_name = event_update.host_name
+    if event_update.timezone is not None:
+        db_event.timezone = event_update.timezone
     if event_update.logo_url is not None:
         db_event.logo_url = event_update.logo_url
     if event_update.banner_url is not None:
@@ -824,8 +833,8 @@ def create_meeting(request: Request, access_code: str, meeting: schemas.MeetingC
     if requester and receiver:
         timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
         location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
-        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M") if timeslot else "TBD"
-        end_str = format_event_time(timeslot.end_time, "%H:%M") if timeslot else "TBD"
+        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M", db_event.timezone) if timeslot else "TBD"
+        end_str = format_event_time(timeslot.end_time, "%H:%M", db_event.timezone) if timeslot else "TBD"
         location_name = location.name if location else "TBD"
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"
         msg_block = f"\n\nMessage from {requester.name}:\n\"{db_meeting.request_message}\"" if db_meeting.request_message else ""
@@ -943,8 +952,8 @@ def update_meeting_status(meeting_id: int, status: str, body: MeetingStatusBody 
         db_event = db.query(models.Event).filter(models.Event.id == db_meeting.event_id).first()
         timeslot = db.query(models.TimeSlot).filter(models.TimeSlot.id == db_meeting.timeslot_id).first()
         location = db.query(models.Location).filter(models.Location.id == db_meeting.location_id).first()
-        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M") if timeslot else "TBD"
-        end_str = format_event_time(timeslot.end_time, "%H:%M") if timeslot else "TBD"
+        start_str = format_event_time(timeslot.start_time, "%d %b %Y, %H:%M", db_event.timezone) if timeslot else "TBD"
+        end_str = format_event_time(timeslot.end_time, "%H:%M", db_event.timezone) if timeslot else "TBD"
         location_name = location.name if location else "TBD"
         requester_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={requester.session_token}"
         receiver_link = f"{FRONTEND_URL}/event/{db_event.access_code}?token={receiver.session_token}"

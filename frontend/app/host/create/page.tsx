@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, getTimezones, getBrowserTimezone } from '@/lib/api';
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
@@ -16,6 +16,7 @@ export default function CreateEvent() {
   const [location, setLocation] = useState("");
   const [hostEmail, setHostEmail] = useState("");
   const [hostName, setHostName] = useState("");
+  const [timezone, setTimezone] = useState(getBrowserTimezone());
   const [website, setWebsite] = useState("");
   const [startDate, setStartDate] = useState("");
   const [endDate, setEndDate] = useState("");
@@ -38,6 +39,7 @@ export default function CreateEvent() {
           location: location || null,
           host_email: hostEmail,
           host_name: hostName || null,
+          timezone: timezone || null,
           website: website || null,
           start_date: startDate ? new Date(startDate).toISOString() : null,
           end_date: endDate ? new Date(endDate).toISOString() : null
@@ -123,6 +125,19 @@ export default function CreateEvent() {
                 className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors"
                 placeholder={t('createEvent.hostNamePlaceholder')}
               />
+            </div>
+
+            <div>
+              <label htmlFor="timezone" className="block text-sm font-medium text-gray-700 mb-2">{t('createEvent.timezoneLabel')}</label>
+              <p className="text-sm text-gray-500 mb-2">{t('createEvent.timezoneDesc')}</p>
+              <select
+                id="timezone"
+                value={timezone}
+                onChange={(e) => setTimezone(e.target.value)}
+                className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-colors bg-white"
+              >
+                {getTimezones().map(tz => <option key={tz} value={tz}>{tz.replace(/_/g, ' ')}</option>)}
+              </select>
             </div>
 
             <div>

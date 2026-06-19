@@ -1,6 +1,6 @@
 "use client";
 
-import { getApiUrl, parseDate, copyToClipboard, safeUrl, imageToDataUrl } from '@/lib/api';
+import { getApiUrl, parseDate, copyToClipboard, safeUrl, imageToDataUrl, getTimezones, getBrowserTimezone } from '@/lib/api';
 import Logo from '@/components/Logo';
 
 import { useEffect, useState } from "react";
@@ -24,6 +24,7 @@ export default function HostDashboard() {
   const [isEditingEvent, setIsEditingEvent] = useState(false);
   const [editTitle, setEditTitle] = useState("");
   const [editHostName, setEditHostName] = useState("");
+  const [editTimezone, setEditTimezone] = useState("");
   const [editDescription, setEditDescription] = useState("");
   const [editLocation, setEditLocation] = useState("");
   const [editLogoUrl, setEditLogoUrl] = useState("");
@@ -146,6 +147,7 @@ export default function HostDashboard() {
 
         setEditTitle(data.title || "");
         setEditHostName(data.host_name || "");
+        setEditTimezone(data.timezone || getBrowserTimezone());
         setEditDescription(data.description || "");
         setEditLocation(data.location || "");
         setEditLogoUrl(data.logo_url || "");
@@ -328,6 +330,7 @@ export default function HostDashboard() {
         body: JSON.stringify({
             title: editTitle,
             host_name: editHostName || null,
+            timezone: editTimezone || null,
             description: editDescription,
             location: editLocation || null,
             logo_url: editLogoUrl,
@@ -999,6 +1002,13 @@ export default function HostDashboard() {
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.hostNameLabel')}</label>
                 <input type="text" value={editHostName} onChange={e => setEditHostName(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500" />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t('hostDashboard.editModal.timezoneLabel')}</label>
+                <select value={editTimezone} onChange={e => setEditTimezone(e.target.value)} className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-blue-500 bg-white">
+                  {getTimezones().map(tz => <option key={tz} value={tz}>{tz.replace(/_/g, ' ')}</option>)}
+                </select>
               </div>
 
               <div>
