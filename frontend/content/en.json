@@ -340,7 +340,8 @@
       "titlePrefix": "Chat with",
       "empty": "No messages yet. Say hi!",
       "inputPlaceholder": "Type a message...",
-      "sendBtn": "Send"
+      "sendBtn": "Send",
+      "sendError": "Your message could not be sent. Please refresh and try again."
     }
   },
   "bulkUpload": {

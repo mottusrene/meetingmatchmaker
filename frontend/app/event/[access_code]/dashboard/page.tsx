@@ -28,7 +28,7 @@ export default function AttendeeDashboard() {
   const [showFavouritesOnly, setShowFavouritesOnly] = useState(false);
   const [profileUser, setProfileUser] = useState<any>(null);
   const [profileUserShowRequest, setProfileUserShowRequest] = useState(true);
-  const PAGE_SIZE = 12;
+  const PAGE_SIZE = 50;
   
   // Selection state for meeting request modal
   const [selectedUser, setSelectedUser] = useState<any>(null);
@@ -356,6 +356,11 @@ export default function AttendeeDashboard() {
       if (res.ok) {
           setNewChatMessage("");
           fetchChatMessages(activeChatMeeting.id);
+      } else {
+          // Surface failures instead of silently dropping the message (e.g. the meeting
+          // was cancelled in another tab, or the session expired).
+          const err = await res.json().catch(() => null);
+          alert(err?.detail || t('attendeeDashboard.chatModal.sendError'));
       }
   };
 
@@ -692,7 +697,16 @@ export default function AttendeeDashboard() {
           </div>
           {(() => {
             const q = searchQuery.toLowerCase();
+            // Hide attendees you already have an active (pending/accepted) meeting with —
+            // you meet each person once, so they no longer belong in the "find people" list.
+            const uid = parseInt(userId || "0");
+            const engagedIds = new Set(
+              meetings
+                .filter(m => m.status === 'pending' || m.status === 'accepted')
+                .map(m => (m.requester_id === uid ? m.receiver_id : m.requester_id))
+            );
             const filtered = users.filter(u =>
+              !engagedIds.has(u.id) &&
               (u.name.toLowerCase().includes(q) || (u.bio && u.bio.toLowerCase().includes(q))) &&
               (!showFavouritesOnly || favourites.has(u.id))
             );

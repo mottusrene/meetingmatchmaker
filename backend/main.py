@@ -4,6 +4,7 @@ from fastapi.responses import PlainTextResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from sqlalchemy import text, func
+from sqlalchemy.exc import IntegrityError
 from slowapi import Limiter, _rate_limit_exceeded_handler
 from slowapi.errors import RateLimitExceeded
 from typing import List
@@ -37,6 +38,11 @@ from fastapi import UploadFile, File
 # person, table, or slot. Endpoints run in uvicorn's threadpool within one process,
 # so a process-level lock covers them.
 booking_lock = threading.Lock()
+
+# Serializes the read-email-then-insert in self-signup so two near-simultaneous
+# registrations with the same email cannot both pass the existence check and
+# create duplicate accounts. (The unique index below is the DB-level backstop.)
+signup_lock = threading.Lock()
 
 def get_real_ip(request: Request) -> str:
     # nginx sets X-Real-IP to $remote_addr, OVERWRITING any client-supplied value, so it is
@@ -81,15 +87,19 @@ async def startup_event():
             "ALTER TABLE events ADD COLUMN timezone TEXT",
             "ALTER TABLE meetings ADD COLUMN request_message TEXT",
             "ALTER TABLE meetings ADD COLUMN table_number INTEGER",
-            # Prevent the same (lowercase) email registering twice for one event.
-            # Created defensively; if legacy duplicates exist it is skipped (caught below).
-            "CREATE UNIQUE INDEX IF NOT EXISTS ix_user_event_email ON users (event_id, email)",
+            # Prevent the same email registering twice for one event, case-insensitively.
+            # Created defensively; if legacy duplicates exist the CREATE fails and is rolled
+            # back (the app-level check + signup_lock still guard new signups).
+            "CREATE UNIQUE INDEX IF NOT EXISTS ix_user_event_lower_email ON users (event_id, lower(email))",
         ]:
             try:
                 db.execute(text(migration))
                 db.commit()
             except Exception:
-                pass  # Column already exists
+                # e.g. the column/index already exists. Roll back so the failed statement
+                # doesn't poison the session and abort every later migration (which is why
+                # the unique index was silently never created before this fix).
+                db.rollback()
     finally:
         db.close()
     asyncio.create_task(cleanup_expired_events())
@@ -349,29 +359,38 @@ def create_user(request: Request, access_code: str, user: schemas.UserCreate, db
     # (bulk import and resend already lowercase; this keeps self-signup consistent.)
     email = user.email.strip().lower()
 
-    # We removed global unique email constraint so users can join multiple events with the same email.
-    # But check if they already joined THIS event.
-    db_user = db.query(models.User).filter(func.lower(models.User.email) == email, models.User.event_id == db_event.id).first()
-    if db_user:
-        raise HTTPException(status_code=400, detail="Email already registered for this event")
-
     session_token = str(uuid.uuid4())
     avatar_url = f"https://ui-avatars.com/api/?name={user.name.replace(' ', '+')}&background=random"
 
-    db_user = models.User(
-        event_id=db_event.id,
-        name=user.name,
-        email=email,
-        company=user.company,
-        bio=user.bio,
-        profile_link=user.profile_link,
-        avatar_url=avatar_url,
-        session_token=session_token,
-        is_host=user.is_host
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
+    # The existence check and the insert run under signup_lock so two concurrent
+    # signups (or a double-submit) with the same email can't both pass the check.
+    # We removed the global unique email constraint so users can join multiple
+    # events with the same email; this only blocks a second account in THIS event.
+    with signup_lock:
+        db_user = db.query(models.User).filter(func.lower(models.User.email) == email, models.User.event_id == db_event.id).first()
+        if db_user:
+            raise HTTPException(status_code=400, detail="Email already registered for this event")
+
+        db_user = models.User(
+            event_id=db_event.id,
+            name=user.name,
+            email=email,
+            company=user.company,
+            bio=user.bio,
+            profile_link=user.profile_link,
+            avatar_url=avatar_url,
+            session_token=session_token,
+            is_host=user.is_host
+        )
+        db.add(db_user)
+        try:
+            db.commit()
+        except IntegrityError:
+            # The unique index caught a duplicate that slipped past the check
+            # (e.g. raced in another worker). Surface it as a clean 400.
+            db.rollback()
+            raise HTTPException(status_code=400, detail="Email already registered for this event")
+        db.refresh(db_user)
     
     # Add initial availability if provided
     if user.available_timeslot_ids:
@@ -682,7 +701,7 @@ async def bulk_create_users(access_code: str, background_tasks: BackgroundTasks,
             errors.append(f"Row {i+2}: missing name or email")
             continue
 
-        existing = db.query(models.User).filter(models.User.email == email, models.User.event_id == db_event.id).first()
+        existing = db.query(models.User).filter(func.lower(models.User.email) == email, models.User.event_id == db_event.id).first()
         if existing:
             skipped.append(email)
             continue
@@ -701,7 +720,14 @@ async def bulk_create_users(access_code: str, background_tasks: BackgroundTasks,
             is_confirmed=False,
         )
         db.add(db_user)
-        db.commit()
+        try:
+            db.commit()
+        except IntegrityError:
+            # Duplicate (e.g. a legacy mixed-case row the check missed). Skip the row
+            # rather than letting one bad email abort the whole upload.
+            db.rollback()
+            skipped.append(email)
+            continue
         db.refresh(db_user)
 
         confirm_link = f"{FRONTEND_URL}/event/{access_code}?token={session_token}"
@@ -788,6 +814,18 @@ def create_meeting(request: Request, access_code: str, meeting: schemas.MeetingC
     # Conflict checks + insert run under the booking lock so concurrent requests
     # cannot both pass and double-book the same person/slot.
     with booking_lock:
+        # One meeting per pair: a given pair should meet once, so block a new request
+        # if any pending/accepted meeting already exists between them (either direction,
+        # any slot). This prevents duplicate threads between the same two people.
+        existing_pair = db.query(models.Meeting).filter(
+            models.Meeting.event_id == db_event.id,
+            models.Meeting.status.in_(["pending", "accepted"]),
+            ((models.Meeting.requester_id == requester_id) & (models.Meeting.receiver_id == receiver_user.id))
+            | ((models.Meeting.requester_id == receiver_user.id) & (models.Meeting.receiver_id == requester_id)),
+        ).first()
+        if existing_pair:
+            raise HTTPException(status_code=400, detail="You already have a meeting with this attendee.")
+
         # Check if requester is already busy (pending or accepted)
         requester_conflict = db.query(models.Meeting).filter(
             models.Meeting.timeslot_id == meeting.timeslot_id,

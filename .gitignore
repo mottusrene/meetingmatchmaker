@@ -15,6 +15,7 @@ venv/
 .env
 .env.local
 .env.*.local
+.resume.txt
 
 # Next.js / Node
 node_modules/
