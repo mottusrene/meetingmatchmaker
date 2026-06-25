@@ -495,7 +495,7 @@ export default function AttendeeDashboard() {
       <main className="flex-grow max-w-6xl mx-auto w-full p-4 sm:p-8 grid lg:grid-cols-3 gap-6 sm:gap-8 relative">
         
         {/* My Meetings — first in DOM so it appears first on mobile */}
-        <section className="lg:col-span-1 lg:col-start-3 bg-gray-100 rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-inner">
+        <section className="lg:col-span-1 lg:col-start-3 min-w-0 bg-gray-100 rounded-2xl p-6 sm:p-8 border border-gray-200 shadow-inner">
           <div className="border-b border-gray-300 pb-4 mb-6">
             <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.myMeetings.title')}</h2>
             <p className="text-sm text-gray-600 mt-1">{t('attendeeDashboard.myMeetings.subtitle')}</p>
@@ -525,9 +525,9 @@ export default function AttendeeDashboard() {
                 
                 return (
                   <div key={m.id} className={`bg-white border rounded-2xl p-5 shadow-sm ${m.status === 'accepted' ? 'border-green-300' : (m.status === 'declined' || m.status === 'cancelled') ? 'border-red-300 opacity-70' : 'border-gray-200'}`}>
-                    <div className="flex justify-between items-start mb-3">
-                      <h4 className="font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors" onClick={() => { setProfileUser(otherPerson); setProfileUserShowRequest(false); }}>{otherPerson.name}</h4>
-                      <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide ${
+                    <div className="flex justify-between items-start mb-3 gap-2">
+                      <h4 className="font-bold text-gray-900 cursor-pointer hover:text-blue-600 transition-colors min-w-0 truncate" onClick={() => { setProfileUser(otherPerson); setProfileUserShowRequest(false); }}>{otherPerson.name}</h4>
+                      <span className={`text-xs font-bold px-2 py-1 rounded-full uppercase tracking-wide flex-shrink-0 ${
                         m.status === 'accepted' ? 'bg-green-100 text-green-700' : 
                         (m.status === 'declined' || m.status === 'cancelled') ? 'bg-red-100 text-red-700' : 
                         'bg-yellow-100 text-yellow-700'
@@ -674,7 +674,7 @@ export default function AttendeeDashboard() {
         )}
 
         {/* Attendee Directory — second in DOM so it appears below My Meetings on mobile */}
-        <section className="lg:col-span-2 lg:col-start-1 lg:row-start-1 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+        <section className="lg:col-span-2 lg:col-start-1 lg:row-start-1 min-w-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
           <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-6 gap-4 border-b border-gray-100 pb-4">
             <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.directory.title')}</h2>
             <div className="flex gap-2 w-full sm:w-auto">
@@ -714,7 +714,7 @@ export default function AttendeeDashboard() {
             const safePage = Math.min(currentPage, totalPages);
             const paged = filtered.slice((safePage - 1) * PAGE_SIZE, safePage * PAGE_SIZE);
             return (<>
-          <div className="grid sm:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
             {filtered.length === 0 ? (
               <p className="text-gray-500 italic p-6">{showFavouritesOnly ? t('attendeeDashboard.directory.emptyFavourites') : t('attendeeDashboard.directory.empty')}</p>
             ) : (
@@ -802,12 +802,12 @@ export default function AttendeeDashboard() {
           );
           if (metPeople.length === 0) return null;
           return (
-            <section className="lg:col-span-3 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
+            <section className="lg:col-span-3 min-w-0 bg-white rounded-2xl shadow-sm border border-gray-200 p-6 sm:p-8">
               <div className="border-b border-gray-100 pb-4 mb-6">
                 <h2 className="text-2xl font-bold text-gray-800">{t('attendeeDashboard.metPeople.title')}</h2>
                 <p className="text-sm text-gray-500 mt-1">{t('attendeeDashboard.metPeople.subtitle')}</p>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {metPeople.map(m => {
                   const other = m.receiver_id === parseInt(userId || '0') ? m.requester : m.receiver;
                   return (
