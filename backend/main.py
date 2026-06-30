@@ -685,7 +685,13 @@ async def bulk_create_users(access_code: str, background_tasks: BackgroundTasks,
 
     content = await file.read()
     try:
-        reader = csv.DictReader(io.StringIO(content.decode("utf-8-sig")))
+        text = content.decode("utf-8-sig")
+    except UnicodeDecodeError:
+        # Not UTF-8 (e.g. Excel/Numbers export in Latin-1). latin-1 maps all 256
+        # byte values, so it never raises — safe last resort for accented names.
+        text = content.decode("latin-1")
+    try:
+        reader = csv.DictReader(io.StringIO(text))
     except Exception:
         raise HTTPException(status_code=400, detail="Could not parse CSV file")
 
