@@ -280,7 +280,7 @@
     },
     "directory": {
       "title": "Attendee Directory",
-      "searchPlaceholder": "Search by name...",
+      "searchPlaceholder": "Search ...",
       "favouritesBtn": "Favourites",
       "favouriteTitle": "Add to favourites",
       "unfavouriteTitle": "Remove from favourites",
