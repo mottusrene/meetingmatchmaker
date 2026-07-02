@@ -175,6 +175,22 @@ def send_bulk_invite(attendee_email: str, name: str, company: str | None, bio: s
         ),
     )
 
+def send_invite_reminder(attendee_email: str, name: str, event_title: str, host_name: str, confirm_link: str, decline_link: str, message: str | None = None):
+    template = text_dict["inviteReminder"]
+    message_block = f"\nMessage from {host_name}:\n\"{message}\"\n" if message else ""
+    _send(
+        attendee_email,
+        template["subject"].format(event_title=event_title),
+        template["body"].format(
+            name=name,
+            event_title=event_title,
+            host_name=host_name,
+            message_block=message_block,
+            confirm_link=confirm_link,
+            decline_link=decline_link,
+        ),
+    )
+
 def send_broadcast(attendee_email: str, name: str, event_title: str, message: str):
     template = text_dict["broadcast"]
     _send(

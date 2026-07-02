@@ -354,7 +354,15 @@
     "successCreated": "{{count}} invited",
     "successSkipped": "{{count}} already registered",
     "errorLabel": "Errors:",
-    "formatHint": "Required columns: name, email — Optional: company, bio"
+    "formatHint": "Required columns: name, email — Optional: company, bio",
+    "remindTitle": "{{count}} invitation(s) still pending",
+    "remindToggle": "Send a reminder",
+    "remindDesc": "Everyone who hasn't confirmed or declined yet will get a reminder email with their original confirmation link.",
+    "remindMessagePlaceholder": "Optional personal message to include in the reminder...",
+    "remindBtn": "Send reminder to all pending",
+    "remindSendingBtn": "Sending...",
+    "remindSuccess": "Reminder sent to {{count}} pending invitee(s).",
+    "remindError": "Could not send reminders: {{error}}"
   },
   "declinePage": {
     "loading": "Processing...",

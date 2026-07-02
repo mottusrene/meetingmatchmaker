@@ -63,7 +63,7 @@ FRONTEND_URL = os.environ.get("FRONTEND_URL", "http://localhost:3000")
 import models
 import schemas
 from database import SessionLocal, engine
-from email_service import send_host_welcome_email, send_attendee_magic_link, send_login_link_resend, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification, send_broadcast, send_bulk_invite
+from email_service import send_host_welcome_email, send_attendee_magic_link, send_login_link_resend, send_meeting_notification, send_removed_notification, send_suspended_notification, send_reinstated_notification, send_broadcast, send_bulk_invite, send_invite_reminder
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -756,6 +756,27 @@ def decline_invitation(token: str, db: Session = Depends(get_db)):
     db.delete(db_user)
     db.commit()
     return {"detail": "Your data has been deleted"}
+
+
+class InviteRemindBody(PydanticModel):
+    message: str | None = None
+
+@app.post("/events/{access_code}/invitations/remind")
+def remind_pending_invitations(access_code: str, body: InviteRemindBody, background_tasks: BackgroundTasks, authorization: str = Header(None), db: Session = Depends(get_db)):
+    db_event = require_admin(access_code, authorization, db)
+    pending = db.query(models.User).filter(
+        models.User.event_id == db_event.id,
+        models.User.is_host == False,
+        models.User.is_confirmed == False,
+    ).all()
+    sender_name = db_event.host_name or db_event.host_email
+    message = (body.message or "").strip() or None
+    for user in pending:
+        # Same session token as the original invite, so the links stay valid
+        confirm_link = f"{FRONTEND_URL}/event/{access_code}?token={user.session_token}"
+        decline_link = f"{FRONTEND_URL}/event/{access_code}/decline?token={user.session_token}&uid={user.id}"
+        background_tasks.add_task(send_invite_reminder, user.email, user.name, db_event.title, sender_name, confirm_link, decline_link, message)
+    return {"sent": len(pending)}
 
 
 class BroadcastBody(PydanticModel):

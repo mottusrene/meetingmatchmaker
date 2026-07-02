@@ -84,6 +84,33 @@ export default function HostDashboard() {
     }
   };
 
+  const [showRemind, setShowRemind] = useState(false);
+  const [remindMessage, setRemindMessage] = useState("");
+  const [remindSending, setRemindSending] = useState(false);
+  const [remindResult, setRemindResult] = useState<{ ok: boolean; text: string } | null>(null);
+
+  const handleSendReminders = async () => {
+    setRemindSending(true);
+    setRemindResult(null);
+    const adminCode = searchParams.get("token") || passcode;
+    try {
+      const res = await fetch(`${getApiUrl()}/events/${accessCode}/invitations/remind`, {
+        method: "POST",
+        headers: { "Authorization": adminCode || "", "Content-Type": "application/json" },
+        body: JSON.stringify({ message: remindMessage.trim() || null }),
+      });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.detail || "Failed to send reminders");
+      setRemindResult({ ok: true, text: t('bulkUpload.remindSuccess', { count: data.sent }) });
+      setRemindMessage("");
+      setShowRemind(false);
+    } catch (err: any) {
+      setRemindResult({ ok: false, text: t('bulkUpload.remindError', { error: err.message }) });
+    } finally {
+      setRemindSending(false);
+    }
+  };
+
   const [stats, setStats] = useState<any>(null);
   const [statsLoading, setStatsLoading] = useState(false);
 
@@ -897,6 +924,51 @@ export default function HostDashboard() {
                   </div>
                 )}
               </div>
+            )}
+            {attendees.some(a => !a.is_confirmed) && (
+              <div className="mt-4 pt-4 border-t border-gray-200">
+                <p className="text-sm font-medium text-amber-700">
+                  {t('bulkUpload.remindTitle', { count: attendees.filter(a => !a.is_confirmed).length })}
+                  {!showRemind && (
+                    <button
+                      onClick={() => { setShowRemind(true); setRemindResult(null); }}
+                      className="ml-2 text-sm font-medium text-green-700 underline hover:text-green-800"
+                    >
+                      {t('bulkUpload.remindToggle')}
+                    </button>
+                  )}
+                </p>
+                {showRemind && (
+                  <div className="mt-3">
+                    <p className="text-xs text-gray-500 mb-2">{t('bulkUpload.remindDesc')}</p>
+                    <textarea
+                      value={remindMessage}
+                      onChange={e => setRemindMessage(e.target.value)}
+                      placeholder={t('bulkUpload.remindMessagePlaceholder')}
+                      rows={3}
+                      className="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-green-500 mb-2"
+                    />
+                    <div className="flex items-center gap-3">
+                      <button
+                        onClick={handleSendReminders}
+                        disabled={remindSending}
+                        className="text-sm font-medium px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+                      >
+                        {remindSending ? t('bulkUpload.remindSendingBtn') : t('bulkUpload.remindBtn')}
+                      </button>
+                      <button
+                        onClick={() => { setShowRemind(false); setRemindMessage(""); }}
+                        className="text-sm text-gray-500 hover:text-gray-700"
+                      >
+                        {t('hostDashboard.broadcast.cancelBtn')}
+                      </button>
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+            {remindResult && (
+              <p className={`mt-3 text-sm font-medium ${remindResult.ok ? 'text-green-700' : 'text-red-600'}`}>{remindResult.text}</p>
             )}
           </div>
 

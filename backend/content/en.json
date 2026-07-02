@@ -50,6 +50,10 @@
       "subject": "You've been invited to {event_title}",
       "body": "Hi {name},\n\n{host_name} has added you as a participant in '{event_title}'.\n\nYour profile has been pre-filled with the details below. Please click the link to review, complete your profile, and confirm your participation — or decline to have your data deleted.\n\nPre-filled details:\n- Name: {name}{company_line}{bio_line}\n\n✅ Complete your profile:\n{confirm_link}\n\n❌ Decline and delete my data:\n{decline_link}\n\n---\nYou received this because {host_name} added you to '{event_title}' on MeetingMatches. If you did not expect this, you can safely ignore it or use the decline link above."
     },
+    "inviteReminder": {
+      "subject": "Reminder: confirm your participation in {event_title}",
+      "body": "Hi {name},\n\nA friendly reminder that {host_name} has added you as a participant in '{event_title}', and you haven't confirmed your participation yet.\n{message_block}\n✅ Complete your profile and confirm:\n{confirm_link}\n\n❌ Decline and delete my data:\n{decline_link}\n\n---\nYou received this because {host_name} added you to '{event_title}' on MeetingMatches. If you do not wish to take part, use the decline link above and your data will be deleted."
+    },
     "broadcast": {
       "subject": "Message from the host – {event_title}",
       "body": "Hi {name},\n\nThe organiser of '{event_title}' has sent you the following message:\n\n{message}\n\n---\nYou received this because you registered for '{event_title}'."

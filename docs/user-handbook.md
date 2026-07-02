@@ -44,6 +44,8 @@ Two ways, which you can combine:
 
   Imported people stay invisible to other attendees ("Pending") until they confirm. You must tick the consent checkbox confirming you have a lawful basis for uploading their data.
 
+- **Reminders:** While invitations are still pending, the Bulk Import box shows how many people haven't responded and a **Send a reminder** option. It emails everyone who hasn't confirmed or declined yet, with the same confirm and decline links as the original invitation, plus an optional personal message from you. You can send it as often as you like — only still-pending invitees receive it.
+
 ### 1.5 Following your event: the statistics panel
 
 The **Meeting Statistics** panel on the host dashboard shows, refreshed every 30 seconds (or on demand with *Refresh*):
@@ -153,6 +155,7 @@ Use the **Edit Availability** box (or Edit Profile) to change which slots you're
 | Host welcome + admin link | Host | Event created |
 | Personal login link | Attendee | After signing up |
 | Invitation (confirm/decline) | Attendee | Host bulk-imports them |
+| Invitation reminder | Attendee | Host sends a reminder to pending invitees (same confirm/decline links, optional host message) |
 | New meeting request | Receiver | Someone requests a meeting |
 | Request accepted (with table) | Requester | Receiver accepts |
 | Request declined (with reason) | Requester | Receiver declines |
