@@ -178,7 +178,7 @@
     },
     "attendees": {
       "title": "Attendees",
-      "searchPlaceholder": "Search by name or profile text...",
+      "searchPlaceholder": "Search ...",
       "flagTooltip": "Reported by an attendee",
       "suspendedBadge": "Suspended",
       "flaggedBadge": "Reported",
